@@ -16,6 +16,11 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
   {
+    path: "/canvas",
+    name: "canvas",
+    component: () => import("@/components/SignatureCanvas.vue"),
+  }, 
+  {
     path: "/fileUpload",
     name: "fileUpload",
     component: () => import("@/components/FileUpload.vue"),

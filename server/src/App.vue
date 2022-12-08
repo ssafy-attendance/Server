@@ -2,6 +2,7 @@
   <nav>
     <router-link to="/">출결소명확인서</router-link> |
     <router-link to="/about">About</router-link> |
+    <router-link to="/canvas">서명그리기</router-link> |
     <router-link to="/fileUpload">파일업로드</router-link>
   </nav>
   <router-view />
