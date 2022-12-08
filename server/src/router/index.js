@@ -15,6 +15,11 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
+  {
+    path: "/canvas",
+    name: "canvas",
+    component: () => import("@/components/SignatureCanvas.vue"),
+  },
 ];
 
 const router = createRouter({
