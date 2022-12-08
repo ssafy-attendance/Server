@@ -152,13 +152,22 @@
         />
       </div>
     </div>
+    <FileUpload :pictureUrl="pictureUrl" />
+    <SignatureCanvas :signatureUrl="signatureUrl" />
     <button class="submit-button" @click="verifyValidation">만들기</button>
     <button class="submit-button" @click="resetInput">리셋</button>
   </div>
 </template>
 
 <script>
+import FileUpload from "@/components/FileUpload";
+import SignatureCanvas from "@/components/SignatureCanvas";
+
 export default {
+  components: {
+    FileUpload,
+    SignatureCanvas,
+  },
   data() {
     return {
       userInput: {
@@ -176,6 +185,8 @@ export default {
         currentMonth: "",
         currentDay: "",
       },
+      pictureUrl: [],
+      signatureUrl: "",
     };
   },
   methods: {
@@ -195,6 +206,8 @@ export default {
         currentMonth: "",
         currentDay: "",
       };
+      this.pictureUrl = [];
+      this.signatureUrl = "";
     },
     verifyValidation() {
       if (
