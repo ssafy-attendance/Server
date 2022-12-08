@@ -7,9 +7,9 @@ const routes = [
     component: () => import("@/views/AttendanceVersionOne"),
   },
   {
-    path: "/canvas",
-    name: "canvas",
-    component: () => import("@/components/SignatureCanvas.vue"),
+    path: "/preview",
+    name: "preview",
+    component: () => import("@/components/PreView.vue"),
   },
   {
     path: "/fileUpload",
