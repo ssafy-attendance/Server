@@ -34,6 +34,8 @@ export default {
     this.context = context;
     canvas.width = window.innerWidth;
     canvas.height = (window.innerWidth * 4) / 3;
+    this.canvasWidth = canvas.width;
+    this.canvasHeight = canvas.height;
     console.log(canvas.width);
     console.log(canvas.height);
     const canvasImg2 = new Image();
@@ -50,10 +52,9 @@ export default {
   methods: {
     saveImg() {
       html2canvas(document.querySelector("#container")).then(function (canvas) {
-        var imgData = canvas.toDataURL("image/png");
-        var imgWidth = 190;
+        var imgData = canvas.toDataURL("image/png", 1.0);
+        var imgWidth = 210;
         var imgHeight = (canvas.height * imgWidth) / canvas.width;
-        // var pageHeight = (canvas.height * imgWidth) / canvas.width;
 
         var doc = new jsPDF("p", "mm", "a4");
 
@@ -65,17 +66,18 @@ export default {
       console.log("들어왔다");
       const image = this.$refs["image"].files[0];
       const url = URL.createObjectURL(image);
+      // const canvas = document.querySelector("#container");
       this.image = url;
       console.log("url");
       console.log(url);
 
       const material = new Image();
       material.src = this.image;
-      material.onload = () => {
+      material.onload = function () {
         let nowWidth = material.width;
         let nowHeight = material.height;
-        const maxWidth = window.innerWidth - 200;
-        const maxHeight = window.innerHeight - 200;
+        const maxWidth = 1000;
+        const maxHeight = 1200;
         if (nowWidth > maxWidth) {
           nowHeight = (nowHeight * maxWidth) / nowWidth;
           nowWidth = maxWidth;
