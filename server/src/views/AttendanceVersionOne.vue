@@ -177,6 +177,7 @@
 
 <script>
 import FileUpload from "@/components/FileUpload";
+import { mapMutations } from "vuex";
 
 export default {
   components: {
@@ -220,6 +221,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations(["SET_USER_INFO"]),
     resetInput() {
       this.userInput = {
         name: "",
@@ -260,7 +262,25 @@ export default {
       ) {
         alert("모든 정보를 입력해주세요.");
       } else {
-        console.log("good");
+        const userInput = {
+          name: this.userInput.name,
+          birthday: this.userInput.birthday,
+          absentYear: this.userInput.absentYear,
+          absentMonth: this.userInput.absentMonth,
+          absentDay: this.userInput.absentDay,
+          absentTime: this.userInput.absentTime,
+          absentCategory: this.userInput.absentCategory,
+          absentReason: this.userInput.absentReason,
+          absentDetail: this.userInput.absentDetail,
+          absentPlace: this.userInput.absentPlace,
+          currentYear: this.userInput.currentYear,
+          currentMonth: this.userInput.currentMonth,
+          currentDay: this.userInput.currentDay,
+        };
+        this.SET_USER_INFO(userInput);
+        this.$router.push({
+          name: "preview",
+        });
       }
     },
 
