@@ -22,8 +22,6 @@ export default {
   data() {
     return {
       image: "",
-      widthpercent: "100%",
-      heightpercent: "100%",
     };
   },
 
