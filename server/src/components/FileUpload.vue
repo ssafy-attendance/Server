@@ -26,6 +26,10 @@ export default {
       heightpercent: "100%",
     };
   },
+
+  props: {
+    uploadPicture: Array,
+  },
   methods: {
     uploadImg() {
       console.log("들어왔다");
@@ -39,6 +43,7 @@ export default {
 
       console.log(url);
       console.log(this.image);
+      this.$emit("uploadPicture", [this.image]);
     },
   },
 };
