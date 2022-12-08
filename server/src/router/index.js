@@ -15,6 +15,11 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
+  {
+    path: "/fileUpload",
+    name: "fileUpload",
+    component: () => import("@/components/FileUpload.vue"),
+  },
 ];
 
 const router = createRouter({
