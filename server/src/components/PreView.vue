@@ -1,14 +1,29 @@
 <template>
   <canvas id="container" width="600" height="800" />
+  <div>
+    {{ userInput }}
+  </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
+  created() {
+    this.userInput = this.getUserInput;
+  },
+
   data() {
     return {
       context: null,
+      userInput: {},
     };
   },
+
+  computed: {
+    ...mapGetters(["getUserInput"]),
+  },
+
   mounted() {
     const canvas = document.querySelector("#container");
     const context = canvas.getContext("2d");
