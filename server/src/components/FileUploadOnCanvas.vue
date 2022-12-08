@@ -26,10 +26,12 @@ export default {
     return {
       context: null,
       image: "",
+      canvas: null,
     };
   },
   mounted() {
     const canvas = document.querySelector("#container");
+    this.canvas = canvas;
     const context = canvas.getContext("2d");
     this.context = context;
     canvas.width = window.innerWidth;
@@ -73,11 +75,11 @@ export default {
 
       const material = new Image();
       material.src = this.image;
-      material.onload = function () {
+      material.onload = () => {
         let nowWidth = material.width;
         let nowHeight = material.height;
-        const maxWidth = 1000;
-        const maxHeight = 1200;
+        const maxWidth = this.canvas.width * 0.8;
+        const maxHeight = this.canvas.height * 0.8;
         if (nowWidth > maxWidth) {
           nowHeight = (nowHeight * maxWidth) / nowWidth;
           nowWidth = maxWidth;
@@ -88,10 +90,10 @@ export default {
         }
         this.context.drawImage(
           material,
-          200,
-          200,
-          200 + nowWidth,
-          200 + nowHeight
+          this.canvas.width * 0.1,
+          this.canvas.height * 0.15,
+          nowWidth,
+          nowHeight
         );
       };
       console.log(this.context);
