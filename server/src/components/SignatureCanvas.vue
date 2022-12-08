@@ -1,10 +1,10 @@
 <template>
   <div id="canvas-container">
-    <h1>서명 그려보기</h1>
+    <h3>서명 그려보기</h3>
     <canvas
       id="signature"
-      width="300"
-      height="400"
+      width="166"
+      height="90"
       v-on="{
         mousemove: move,
         mouseup: up,
@@ -12,6 +12,8 @@
         mouseout: out,
       }"
     ></canvas>
+    <button @click="makeImage">서명 완료</button>
+    <button @click="reset">서명 다시그리기</button>
   </div>
 </template>
 
@@ -21,6 +23,7 @@ export default {
     return {
       canvas: null,
       context: null,
+      baseURL: null,
       startX: 0,
       startY: 0,
       drawing: false, // 드로깅 여부를 판단하는 변수
@@ -67,6 +70,14 @@ export default {
     out() {
       this.drawing = false;
     },
+
+    makeImage() {
+      this.baseURL = this.canvas.toDataURL();
+    },
+
+    reset() {
+      this.context.clearRect(0, 0, 166, 90);
+    },
   },
 };
 </script>
@@ -74,13 +85,13 @@ export default {
 <style scoped>
 #canvas-container {
   background: tomato;
-  width: 300px;
-  height: 500px;
+  width: 200px;
+  height: 300px;
   border: 2px solid black;
-  justify-content: center;
 }
 
 canvas {
   background: white;
+  border: 3px solid black;
 }
 </style>
