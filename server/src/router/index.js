@@ -19,6 +19,11 @@ const routes = [
     path: "/canvas",
     name: "canvas",
     component: () => import("@/components/SignatureCanvas.vue"),
+  }, 
+  {
+    path: "/fileUpload",
+    name: "fileUpload",
+    component: () => import("@/components/FileUpload.vue"),
   },
 ];
 
