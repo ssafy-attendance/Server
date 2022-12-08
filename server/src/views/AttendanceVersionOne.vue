@@ -152,7 +152,7 @@
         />
       </div>
     </div>
-    <FileUpload :pictureUrl="pictureUrl" />
+    <FileUpload :pictureUrl="pictureUrl" @uploadPicture="uploadPicture" />
     <SignatureCanvas :signatureUrl="signatureUrl" />
     <button class="submit-button" @click="verifyValidation">만들기</button>
     <button class="submit-button" @click="resetInput">리셋</button>
@@ -208,6 +208,9 @@ export default {
       };
       this.pictureUrl = [];
       this.signatureUrl = "";
+    },
+    uploadPicture(pictureUrls) {
+      this.pictureUrl = pictureUrls;
     },
     verifyValidation() {
       if (
