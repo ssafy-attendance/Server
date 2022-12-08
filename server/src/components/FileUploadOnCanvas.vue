@@ -14,10 +14,13 @@
       />
     </form>
     <canvas id="container" />
+    <button @click="saveImg()">save</button>
   </div>
 </template>
 
 <script>
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 export default {
   data() {
     return {
@@ -30,11 +33,11 @@ export default {
     const context = canvas.getContext("2d");
     this.context = context;
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = (window.innerWidth * 4) / 3;
     console.log(canvas.width);
     console.log(canvas.height);
     const canvasImg2 = new Image();
-    canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지-2.png");
+    canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지3.svg");
     console.log(canvasImg2.src);
     canvasImg2.onload = function () {
       context.drawImage(canvasImg2, 0, 0, canvas.width, canvas.height);
@@ -45,6 +48,19 @@ export default {
     uploadPicture: Array,
   },
   methods: {
+    saveImg() {
+      html2canvas(document.querySelector("#container")).then(function (canvas) {
+        var imgData = canvas.toDataURL("image/png");
+        var imgWidth = 190;
+        var imgHeight = (canvas.height * imgWidth) / canvas.width;
+        // var pageHeight = (canvas.height * imgWidth) / canvas.width;
+
+        var doc = new jsPDF("p", "mm", "a4");
+
+        doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+        doc.save("sample.pdf");
+      });
+    },
     uploadImg() {
       console.log("들어왔다");
       const image = this.$refs["image"].files[0];
@@ -58,8 +74,8 @@ export default {
       material.onload = () => {
         let nowWidth = material.width;
         let nowHeight = material.height;
-        const maxWidth = 420;
-        const maxHeight = 520;
+        const maxWidth = window.innerWidth - 200;
+        const maxHeight = window.innerHeight - 200;
         if (nowWidth > maxWidth) {
           nowHeight = (nowHeight * maxWidth) / nowWidth;
           nowWidth = maxWidth;
@@ -70,10 +86,10 @@ export default {
         }
         this.context.drawImage(
           material,
-          50,
-          100,
-          50 + nowWidth,
-          100 + nowHeight
+          200,
+          200,
+          200 + nowWidth,
+          200 + nowHeight
         );
       };
       console.log(this.context);
