@@ -13,7 +13,7 @@
         accept="image/*"
       />
     </form>
-    <img :src="image" alt="" />
+    <img id="uploaded-image" :src="image" alt="" />
   </div>
 </template>
 
@@ -22,18 +22,30 @@ export default {
   data() {
     return {
       image: "",
+      widthpercent: "100%",
+      heightpercent: "100%",
     };
   },
   methods: {
     uploadImg() {
       console.log("들어왔다");
-      var image = this.$refs["image"].files[0];
-
+      const image = this.$refs["image"].files[0];
       const url = URL.createObjectURL(image);
       this.image = url;
+
+      const imageContent = document.querySelector("#uploaded-image");
+      imageContent.style.width = "100%";
+      imageContent.style.height = "90%";
+
       console.log(url);
       console.log(this.image);
     },
   },
 };
 </script>
+<style>
+/* #uploaded-image {
+  width: this.widthpercent;
+  height: this.heightpercent;
+} */
+</style>
