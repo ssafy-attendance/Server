@@ -12,9 +12,9 @@ const routes = [
     component: () => import("@/components/PreView.vue"),
   },
   {
-    path: "/fileUpload",
-    name: "fileUpload",
-    component: () => import("@/components/FileUpload.vue"),
+    path: "/fileUploadOnCanvas",
+    name: "fileUploadOnCanvas",
+    component: () => import("@/components/FileUploadOnCanvas.vue"),
   },
 ];
 
