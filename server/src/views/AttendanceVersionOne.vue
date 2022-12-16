@@ -273,6 +273,7 @@ export default {
           absentReason: this.userInput.absentReason,
           absentDetail: this.userInput.absentDetail,
           absentPlace: this.userInput.absentPlace,
+          signature: this.userInput.name,
           currentYear: this.userInput.currentYear,
           currentMonth: this.userInput.currentMonth,
           currentDay: this.userInput.currentDay,
