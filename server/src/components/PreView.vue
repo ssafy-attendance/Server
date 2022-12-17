@@ -1,12 +1,6 @@
 <template>
   <button @click="saveImg()">save</button>
-
-  <canvas
-    id="container"
-    width="793.76001"
-    height="1122.5601"
-    @click="findCoord"
-  />
+  <canvas id="container" @click="findCoord" />
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -51,14 +45,19 @@ export default {
     const canvas = document.querySelector("#container");
     const context = canvas.getContext("2d");
     this.context = context;
+    canvas.width = window.innerWidth;
+    canvas.height = (window.innerWidth * 4) / 3;
 
     const img = new Image();
+    const signatureImage = new Image();
     img.src = require("@/assets/AttendVersion1_Image/출결이미지.svg");
+    signatureImage.src = this.userInput.signatureUrl;
+    console.log(this.userInput.signatureUrl);
     img.onload = () => {
-      context.drawImage(img, 0, 0, 793.76001, 1122.5601);
+      context.drawImage(img, 0, 0, canvas.width, canvas.height);
+      context.drawImage(signatureImage, 240, 648);
 
       context.font = this.fontStyleOne;
-
       for (let key in this.fontStyleOneCoordinate) {
         context.fillText(
           this.userInput[key],
@@ -67,15 +66,12 @@ export default {
       }
 
       context.font = this.fontStyleTwo;
-
       for (let key in this.fontStyleTwoCoordinate) {
         context.fillText(
           this.userInput[key],
           ...this.fontStyleTwoCoordinate[key]
         );
       }
-
-      // context.fillText("사유", 236, 490); // 사유
     };
   },
 
@@ -101,4 +97,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#container {
+  max-width: 600px;
+  max-height: 900px;
+}
+</style>
