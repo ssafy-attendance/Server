@@ -16,23 +16,23 @@ export default {
     return {
       context: null,
       userInput: {},
-      fontStyleOne: "14pt sans-serif",
-      fontStyleTwo: "20pt sans-serif",
+      fontStyleOne: "",
+      fontStyleTwo: "",
       fontStyleTwoCoordinate: {
-        currentYear: [303, 947],
-        currentMonth: [386, 947],
-        currentDay: [465, 947],
+        currentYear: [0.38, 0.844],
+        currentMonth: [0.485, 0.844],
+        currentDay: [0.585, 0.844],
       },
       fontStyleOneCoordinate: {
-        name: [262, 258],
-        birthday: [530, 258],
-        absentYear: [280, 306],
-        absentMonth: [355, 306],
-        absentDay: [418, 306],
-        absentReason: [236, 466],
-        absentDetail: [266, 575],
-        absentPlace: [240, 612],
-        signature: [240, 648],
+        name: [0.32, 0.2293],
+        birthday: [0.66, 0.229],
+        absentYear: [0.352, 0.273],
+        absentMonth: [0.45, 0.273],
+        absentDay: [0.53, 0.273],
+        absentReason: [0.296, 0.415],
+        absentDetail: [0.329, 0.513],
+        absentPlace: [0.295, 0.545],
+        signature: [0.295, 0.576],
       },
     };
   },
@@ -44,9 +44,11 @@ export default {
   mounted() {
     const canvas = document.querySelector("#container");
     const context = canvas.getContext("2d");
-    this.context = context;
     canvas.width = window.innerWidth;
     canvas.height = (window.innerWidth * 4) / 3;
+
+    this.fontStyleOne = `${window.innerWidth / 46}px san-serif`;
+    this.fontStyleTwo = `bold ${window.innerWidth / 32}px san-serif`;
 
     const img = new Image();
     const signatureImage = new Image();
@@ -54,14 +56,22 @@ export default {
     signatureImage.src = this.userInput.signatureUrl;
     console.log(this.userInput.signatureUrl);
     img.onload = () => {
+      const imageWidth = canvas.width * 0.76;
+      const imageHeight = canvas.height * 0.526;
       context.drawImage(img, 0, 0, canvas.width, canvas.height);
-      context.drawImage(signatureImage, 240, 648);
+      context.drawImage(signatureImage, imageWidth, imageHeight);
 
       context.font = this.fontStyleOne;
       for (let key in this.fontStyleOneCoordinate) {
         context.fillText(
           this.userInput[key],
-          ...this.fontStyleOneCoordinate[key]
+          this.fontStyleOneCoordinate[key][0] * canvas.width,
+          this.fontStyleOneCoordinate[key][1] * canvas.height
+        );
+        console.log(
+          `${key} : ${this.fontStyleOneCoordinate[key][0] * canvas.width} : ${
+            this.fontStyleOneCoordinate[key][1] * canvas.height
+          }`
         );
       }
 
@@ -69,7 +79,8 @@ export default {
       for (let key in this.fontStyleTwoCoordinate) {
         context.fillText(
           this.userInput[key],
-          ...this.fontStyleTwoCoordinate[key]
+          this.fontStyleTwoCoordinate[key][0] * canvas.width,
+          this.fontStyleTwoCoordinate[key][1] * canvas.height
         );
       }
     };
@@ -97,9 +108,4 @@ export default {
 };
 </script>
 
-<style>
-#container {
-  max-width: 600px;
-  max-height: 900px;
-}
-</style>
+<style></style>
