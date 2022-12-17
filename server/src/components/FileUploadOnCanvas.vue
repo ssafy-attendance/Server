@@ -65,7 +65,10 @@ export default {
     },
     uploadImg() {
       const image = this.$refs["image"].files[0];
+      console.log(image);
       const url = URL.createObjectURL(image);
+      console.log("url");
+      console.log(url);
       // const canvas = document.querySelector("#container");
       this.image = url;
       const material = new Image();

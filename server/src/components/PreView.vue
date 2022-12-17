@@ -1,12 +1,15 @@
 <template>
-  <button @click="saveImg()">save</button>
-
+  <div>
+    <button @click="saveImg()">save</button>
+  </div>
   <canvas
     id="container"
     width="793.76001"
     height="1122.5601"
     @click="findCoord"
   />
+
+  <canvas id="pictureContainer" width="793.76001" height="1122.5601" />
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -20,7 +23,6 @@ export default {
 
   data() {
     return {
-      context: null,
       userInput: {},
       fontStyleOne: "14pt sans-serif",
       fontStyleTwo: "20pt sans-serif",
@@ -48,28 +50,28 @@ export default {
   },
 
   mounted() {
-    const canvas = document.querySelector("#container");
-    const context = canvas.getContext("2d");
-    this.context = context;
+    //첫 번째 장
+    const canvasFirst = document.querySelector("#container");
+    const contextFirst = canvasFirst.getContext("2d");
 
     const img = new Image();
     img.src = require("@/assets/AttendVersion1_Image/출결이미지.svg");
     img.onload = () => {
-      context.drawImage(img, 0, 0, 793.76001, 1122.5601);
+      contextFirst.drawImage(img, 0, 0, 793.76001, 1122.5601);
 
-      context.font = this.fontStyleOne;
+      contextFirst.font = this.fontStyleOne;
 
       for (let key in this.fontStyleOneCoordinate) {
-        context.fillText(
+        contextFirst.fillText(
           this.userInput[key],
           ...this.fontStyleOneCoordinate[key]
         );
       }
 
-      context.font = this.fontStyleTwo;
+      contextFirst.font = this.fontStyleTwo;
 
       for (let key in this.fontStyleTwoCoordinate) {
-        context.fillText(
+        contextFirst.fillText(
           this.userInput[key],
           ...this.fontStyleTwoCoordinate[key]
         );
@@ -77,6 +79,44 @@ export default {
 
       // context.fillText("사유", 236, 490); // 사유
     };
+
+    //두 번째 장
+    const canvasSecond = document.querySelector("#pictureContainer");
+    const contextSecond = canvasSecond.getContext("2d");
+
+    const canvasImg2 = new Image();
+    canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지3.svg");
+    canvasImg2.onload = function () {
+      contextSecond.drawImage(canvasImg2, 0, 0, 793.76001, 1122.5601);
+    };
+
+    if (this.userInput.pictureUrl) {
+      const image = this.userInput.pictureUrl[0];
+      const material = new Image();
+
+      material.src = image;
+      material.onload = () => {
+        let nowWidth = material.width;
+        let nowHeight = material.height;
+        const maxWidth = 1000;
+        const maxHeight = 1200;
+        if (nowWidth > maxWidth) {
+          nowHeight = (nowHeight * maxWidth) / nowWidth;
+          nowWidth = maxWidth;
+        }
+        if (nowHeight > maxHeight) {
+          nowWidth = (nowWidth * maxHeight) / nowHeight;
+          nowHeight = maxHeight;
+        }
+        contextSecond.drawImage(
+          material,
+          200,
+          200,
+          200 + nowWidth,
+          200 + nowHeight
+        );
+      };
+    }
   },
 
   methods: {
@@ -98,6 +138,35 @@ export default {
           doc.save("sample.pdf");
         }
       );
+    },
+    uploadImg() {
+      const image = this.userInput.pictureUrl[0];
+      console.log(image);
+      const material = new Image();
+
+      material.src = this.image;
+      material.onload = () => {
+        let nowWidth = material.width;
+        let nowHeight = material.height;
+        const maxWidth = 1000;
+        const maxHeight = 1200;
+        if (nowWidth > maxWidth) {
+          nowHeight = (nowHeight * maxWidth) / nowWidth;
+          nowWidth = maxWidth;
+        }
+        if (nowHeight > maxHeight) {
+          nowWidth = (nowWidth * maxHeight) / nowHeight;
+          nowHeight = maxHeight;
+        }
+        this.context.drawImage(
+          material,
+          200,
+          200,
+          200 + nowWidth,
+          200 + nowHeight
+        );
+      };
+      this.$emit("uploadPicture", [this.image]);
     },
   },
 };
