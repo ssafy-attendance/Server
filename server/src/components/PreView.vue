@@ -86,16 +86,18 @@ export default {
       console.log(`X 좌표 : ${x}  Y좌표 : ${y}`);
     },
     saveImg() {
-      html2canvas(document.querySelector("#container")).then(function (canvas) {
-        var imgData = canvas.toDataURL("image/png", 1.0);
-        var imgWidth = 210;
-        var imgHeight = (canvas.height * imgWidth) / canvas.width;
+      html2canvas(document.querySelector("#container"), { scale: 2 }).then(
+        function (canvas) {
+          var imgData = canvas.toDataURL("image/png", 1.0);
+          var imgWidth = 210;
+          var imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-        var doc = new jsPDF("p", "mm", "a4");
+          var doc = new jsPDF("p", "mm", "a4");
 
-        doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-        doc.save("sample.pdf");
-      });
+          doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+          doc.save("sample.pdf");
+        }
+      );
     },
   },
 };

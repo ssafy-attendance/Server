@@ -32,6 +32,7 @@ export default {
     const canvas = document.querySelector("#container");
     const context = canvas.getContext("2d");
     this.context = context;
+
     canvas.width = window.innerWidth;
     canvas.height = (window.innerWidth * 4) / 3;
     this.canvasWidth = canvas.width;
@@ -63,17 +64,14 @@ export default {
       });
     },
     uploadImg() {
-      console.log("들어왔다");
       const image = this.$refs["image"].files[0];
       const url = URL.createObjectURL(image);
       // const canvas = document.querySelector("#container");
       this.image = url;
-      console.log("url");
-      console.log(url);
-
       const material = new Image();
+
       material.src = this.image;
-      material.onload = function () {
+      material.onload = () => {
         let nowWidth = material.width;
         let nowHeight = material.height;
         const maxWidth = 1000;
