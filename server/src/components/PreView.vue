@@ -2,10 +2,7 @@
   <div>
     <button @click="saveImg()">save</button>
   </div>
-  <canvas
-    id="container"
-    @click="findCoord"
-  />
+  <canvas id="container" @click="findCoord" />
 
   <canvas id="pictureContainer" />
 </template>
@@ -62,7 +59,6 @@ export default {
     signatureImage.src = this.userInput.signatureUrl;
     console.log(this.userInput.signatureUrl);
     img.onload = () => {
-    
       const imageWidth = canvasFirst.width * 0.76;
       const imageHeight = canvasFirst.height * 0.526;
       contextFirst.drawImage(img, 0, 0, canvasFirst.width, canvasFirst.height);
@@ -72,13 +68,8 @@ export default {
       for (let key in this.fontStyleOneCoordinate) {
         contextFirst.fillText(
           this.userInput[key],
-          this.fontStyleOneCoordinate[key][0] * canvas.width,
-          this.fontStyleOneCoordinate[key][1] * canvas.height
-        );
-        console.log(
-          `${key} : ${this.fontStyleOneCoordinate[key][0] * canvas.width} : ${
-            this.fontStyleOneCoordinate[key][1] * canvas.height
-          }`
+          this.fontStyleOneCoordinate[key][0] * canvasFirst.width,
+          this.fontStyleOneCoordinate[key][1] * canvasFirst.height
         );
       }
 
@@ -87,8 +78,8 @@ export default {
       for (let key in this.fontStyleTwoCoordinate) {
         contextFirst.fillText(
           this.userInput[key],
-          this.fontStyleTwoCoordinate[key][0] * canvas.width,
-          this.fontStyleTwoCoordinate[key][1] * canvas.height
+          this.fontStyleTwoCoordinate[key][0] * canvasFirst.width,
+          this.fontStyleTwoCoordinate[key][1] * canvasFirst.height
         );
       }
     };
