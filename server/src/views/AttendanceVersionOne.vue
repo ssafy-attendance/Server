@@ -199,6 +199,7 @@ export default {
         currentYear: "",
         currentMonth: "",
         currentDay: "",
+        signatureUrl: "",
       },
       pictureUrl: [],
       // signature
@@ -237,14 +238,15 @@ export default {
         currentYear: "",
         currentMonth: "",
         currentDay: "",
+        signatureUrl: "",
       };
       this.pictureUrl = [];
-      this.signatureUrl = "";
     },
     uploadPicture(pictureUrls) {
       this.pictureUrl = pictureUrls;
     },
     verifyValidation() {
+      this.userInput.signatureUrl = this.canvas.toDataURL();
       if (
         !(
           this.userInput.name &&
@@ -257,7 +259,8 @@ export default {
           this.userInput.absentPlace &&
           this.userInput.currentYear &&
           this.userInput.currentMonth &&
-          this.userInput.currentDay
+          this.userInput.currentDay &&
+          this.userInput.signatureUrl
         )
       ) {
         alert("모든 정보를 입력해주세요.");
@@ -277,6 +280,7 @@ export default {
           currentYear: this.userInput.currentYear,
           currentMonth: this.userInput.currentMonth,
           currentDay: this.userInput.currentDay,
+          signatureUrl: this.userInput.signatureUrl,
           pictureUrl: this.pictureUrl,
         };
         this.SET_USER_INFO(userInput);
