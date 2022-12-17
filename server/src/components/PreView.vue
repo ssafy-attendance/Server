@@ -45,10 +45,13 @@ export default {
   },
 
   mounted() {
+    const finalInnerWidth = window.innerWidth;
+    const finalInnerHeight = (window.innerWidth * 4) / 3;
+
     const canvasFirst = document.querySelector("#container");
     const contextFirst = canvasFirst.getContext("2d");
-    canvasFirst.width = window.innerWidth;
-    canvasFirst.height = (window.innerWidth * 4) / 3;
+    canvasFirst.width = finalInnerWidth;
+    canvasFirst.height = finalInnerHeight;
 
     this.fontStyleOne = `${window.innerWidth / 46}px san-serif`;
     this.fontStyleTwo = `bold ${window.innerWidth / 32}px san-serif`;
@@ -57,7 +60,6 @@ export default {
     const signatureImage = new Image();
     img.src = require("@/assets/AttendVersion1_Image/출결이미지.svg");
     signatureImage.src = this.userInput.signatureUrl;
-    console.log(this.userInput.signatureUrl);
     img.onload = () => {
       const imageWidth = canvasFirst.width * 0.76;
       const imageHeight = canvasFirst.height * 0.526;
@@ -87,13 +89,19 @@ export default {
     //두 번째 장
     const canvasSecond = document.querySelector("#pictureContainer");
     const contextSecond = canvasSecond.getContext("2d");
-    canvasSecond.width = window.innerWidth;
-    canvasSecond.height = (window.innerWidth * 4) / 3;
+    canvasSecond.width = finalInnerWidth;
+    canvasSecond.height = finalInnerHeight;
 
     const canvasImg2 = new Image();
     canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지3.svg");
     canvasImg2.onload = function () {
-      contextSecond.drawImage(canvasImg2, 0, 0, 793.76001, 1122.5601);
+      contextSecond.drawImage(
+        canvasImg2,
+        0,
+        0,
+        canvasSecond.width,
+        canvasSecond.height
+      );
     };
 
     if (this.userInput.pictureUrl) {
@@ -145,37 +153,12 @@ export default {
         }
       );
     },
-    uploadImg() {
-      const image = this.userInput.pictureUrl[0];
-      console.log(image);
-      const material = new Image();
-
-      material.src = this.image;
-      material.onload = () => {
-        let nowWidth = material.width;
-        let nowHeight = material.height;
-        const maxWidth = 1000;
-        const maxHeight = 1200;
-        if (nowWidth > maxWidth) {
-          nowHeight = (nowHeight * maxWidth) / nowWidth;
-          nowWidth = maxWidth;
-        }
-        if (nowHeight > maxHeight) {
-          nowWidth = (nowWidth * maxHeight) / nowHeight;
-          nowHeight = maxHeight;
-        }
-        this.context.drawImage(
-          material,
-          200,
-          200,
-          200 + nowWidth,
-          200 + nowHeight
-        );
-      };
-      this.$emit("uploadPicture", [this.image]);
-    },
   },
 };
 </script>
 
-<style></style>
+<style>
+* {
+  margin: 0;
+}
+</style>
