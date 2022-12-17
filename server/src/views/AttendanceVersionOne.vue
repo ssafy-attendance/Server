@@ -281,6 +281,7 @@ export default {
           currentMonth: this.userInput.currentMonth,
           currentDay: this.userInput.currentDay,
           signatureUrl: this.userInput.signatureUrl,
+          pictureUrl: this.pictureUrl,
         };
         this.SET_USER_INFO(userInput);
         this.$router.push({

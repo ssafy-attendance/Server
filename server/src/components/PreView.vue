@@ -1,6 +1,13 @@
 <template>
-  <button @click="saveImg()">save</button>
-  <canvas id="container" @click="findCoord" />
+  <div>
+    <button @click="saveImg()">save</button>
+  </div>
+  <canvas
+    id="container"
+    @click="findCoord"
+  />
+
+  <canvas id="pictureContainer" />
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -14,7 +21,6 @@ export default {
 
   data() {
     return {
-      context: null,
       userInput: {},
       fontStyleOne: "",
       fontStyleTwo: "",
@@ -42,10 +48,10 @@ export default {
   },
 
   mounted() {
-    const canvas = document.querySelector("#container");
-    const context = canvas.getContext("2d");
-    canvas.width = window.innerWidth;
-    canvas.height = (window.innerWidth * 4) / 3;
+    const canvasFirst = document.querySelector("#container");
+    const contextFirst = canvasFirst.getContext("2d");
+    canvasFirst.width = window.innerWidth;
+    canvasFirst.height = (window.innerWidth * 4) / 3;
 
     this.fontStyleOne = `${window.innerWidth / 46}px san-serif`;
     this.fontStyleTwo = `bold ${window.innerWidth / 32}px san-serif`;
@@ -56,14 +62,15 @@ export default {
     signatureImage.src = this.userInput.signatureUrl;
     console.log(this.userInput.signatureUrl);
     img.onload = () => {
-      const imageWidth = canvas.width * 0.76;
-      const imageHeight = canvas.height * 0.526;
-      context.drawImage(img, 0, 0, canvas.width, canvas.height);
-      context.drawImage(signatureImage, imageWidth, imageHeight);
+    
+      const imageWidth = canvasFirst.width * 0.76;
+      const imageHeight = canvasFirst.height * 0.526;
+      contextFirst.drawImage(img, 0, 0, canvasFirst.width, canvasFirst.height);
+      contextFirst.drawImage(signatureImage, imageWidth, imageHeight);
+      contextFirst.font = this.fontStyleOne;
 
-      context.font = this.fontStyleOne;
       for (let key in this.fontStyleOneCoordinate) {
-        context.fillText(
+        contextFirst.fillText(
           this.userInput[key],
           this.fontStyleOneCoordinate[key][0] * canvas.width,
           this.fontStyleOneCoordinate[key][1] * canvas.height
@@ -75,15 +82,56 @@ export default {
         );
       }
 
-      context.font = this.fontStyleTwo;
+      contextFirst.font = this.fontStyleTwo;
+
       for (let key in this.fontStyleTwoCoordinate) {
-        context.fillText(
+        contextFirst.fillText(
           this.userInput[key],
           this.fontStyleTwoCoordinate[key][0] * canvas.width,
           this.fontStyleTwoCoordinate[key][1] * canvas.height
         );
       }
     };
+
+    //두 번째 장
+    const canvasSecond = document.querySelector("#pictureContainer");
+    const contextSecond = canvasSecond.getContext("2d");
+    canvasSecond.width = window.innerWidth;
+    canvasSecond.height = (window.innerWidth * 4) / 3;
+
+    const canvasImg2 = new Image();
+    canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지3.svg");
+    canvasImg2.onload = function () {
+      contextSecond.drawImage(canvasImg2, 0, 0, 793.76001, 1122.5601);
+    };
+
+    if (this.userInput.pictureUrl) {
+      const image = this.userInput.pictureUrl[0];
+      const material = new Image();
+
+      material.src = image;
+      material.onload = () => {
+        let nowWidth = material.width;
+        let nowHeight = material.height;
+        const maxWidth = 1000;
+        const maxHeight = 1200;
+        if (nowWidth > maxWidth) {
+          nowHeight = (nowHeight * maxWidth) / nowWidth;
+          nowWidth = maxWidth;
+        }
+        if (nowHeight > maxHeight) {
+          nowWidth = (nowWidth * maxHeight) / nowHeight;
+          nowHeight = maxHeight;
+        }
+        contextSecond.drawImage(
+          material,
+          200,
+          200,
+          200 + nowWidth,
+          200 + nowHeight
+        );
+      };
+    }
   },
 
   methods: {
@@ -93,16 +141,47 @@ export default {
       console.log(`X 좌표 : ${x}  Y좌표 : ${y}`);
     },
     saveImg() {
-      html2canvas(document.querySelector("#container")).then(function (canvas) {
-        var imgData = canvas.toDataURL("image/png", 1.0);
-        var imgWidth = 210;
-        var imgHeight = (canvas.height * imgWidth) / canvas.width;
+      html2canvas(document.querySelector("#container"), { scale: 2 }).then(
+        function (canvas) {
+          var imgData = canvas.toDataURL("image/png", 1.0);
+          var imgWidth = 210;
+          var imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-        var doc = new jsPDF("p", "mm", "a4");
+          var doc = new jsPDF("p", "mm", "a4");
 
-        doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-        doc.save("sample.pdf");
-      });
+          doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+          doc.save("sample.pdf");
+        }
+      );
+    },
+    uploadImg() {
+      const image = this.userInput.pictureUrl[0];
+      console.log(image);
+      const material = new Image();
+
+      material.src = this.image;
+      material.onload = () => {
+        let nowWidth = material.width;
+        let nowHeight = material.height;
+        const maxWidth = 1000;
+        const maxHeight = 1200;
+        if (nowWidth > maxWidth) {
+          nowHeight = (nowHeight * maxWidth) / nowWidth;
+          nowWidth = maxWidth;
+        }
+        if (nowHeight > maxHeight) {
+          nowWidth = (nowWidth * maxHeight) / nowHeight;
+          nowHeight = maxHeight;
+        }
+        this.context.drawImage(
+          material,
+          200,
+          200,
+          200 + nowWidth,
+          200 + nowHeight
+        );
+      };
+      this.$emit("uploadPicture", [this.image]);
     },
   },
 };
