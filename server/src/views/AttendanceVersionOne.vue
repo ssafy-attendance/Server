@@ -277,6 +277,7 @@ export default {
           currentYear: this.userInput.currentYear,
           currentMonth: this.userInput.currentMonth,
           currentDay: this.userInput.currentDay,
+          pictureUrl: this.pictureUrl,
         };
         this.SET_USER_INFO(userInput);
         this.$router.push({
