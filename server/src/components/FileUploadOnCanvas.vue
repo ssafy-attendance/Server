@@ -30,29 +30,31 @@ export default {
     };
   },
   mounted() {
-    const canvas = document.querySelector("#container");
-    this.canvas = canvas;
-    const context = canvas.getContext("2d");
-    this.context = context;
-
-    canvas.width = window.innerWidth;
-    canvas.height = (window.innerWidth * 4) / 3;
-    this.canvasWidth = canvas.width;
-    this.canvasHeight = canvas.height;
-    console.log(canvas.width);
-    console.log(canvas.height);
-    const canvasImg2 = new Image();
-    canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지3.svg");
-    console.log(canvasImg2.src);
-    canvasImg2.onload = function () {
-      context.drawImage(canvasImg2, 0, 0, canvas.width, canvas.height);
-    };
+    this.initCanvas();
   },
 
   props: {
     uploadPicture: Array,
   },
   methods: {
+    initCanvas() {
+      const canvas = document.querySelector("#container");
+      this.canvas = canvas;
+      const context = canvas.getContext("2d");
+      this.context = context;
+      canvas.width = window.innerWidth;
+      canvas.height = (window.innerWidth * 4) / 3;
+      this.canvasWidth = canvas.width;
+      this.canvasHeight = canvas.height;
+      console.log(canvas.width);
+      console.log(canvas.height);
+      const canvasImg2 = new Image();
+      canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지3.svg");
+      console.log(canvasImg2.src);
+      canvasImg2.onload = function () {
+        context.drawImage(canvasImg2, 0, 0, canvas.width, canvas.height);
+      };
+    },
     saveImg() {
       html2canvas(document.querySelector("#container")).then(function (canvas) {
         var imgData = canvas.toDataURL("image/png", 1.0);
@@ -66,15 +68,16 @@ export default {
       });
     },
     uploadImg() {
+      this.initCanvas();
+      console.log("들어왔다");
       const image = this.$refs["image"].files[0];
-      console.log(image);
       const url = URL.createObjectURL(image);
-      console.log("url");
-      console.log(url);
       // const canvas = document.querySelector("#container");
       this.image = url;
-      const material = new Image();
+      console.log("url");
+      console.log(url);
 
+      const material = new Image();
       material.src = this.image;
       material.onload = () => {
         console.log("material.onload!!");
@@ -114,7 +117,7 @@ export default {
       };
       console.log(this.context);
       console.log(material);
-      // console.log(material.src);
+      console.log(material.src);
       this.$emit("uploadPicture", [this.image]);
     },
   },
