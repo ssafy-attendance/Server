@@ -176,7 +176,7 @@
 </template>
 
 <script>
-import FileUpload from "@/components/FileUpload";
+import FileUpload from "@/components/FileUploadOnCanvas";
 import { mapMutations } from "vuex";
 
 export default {
