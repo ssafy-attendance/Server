@@ -76,10 +76,25 @@ export default {
       const material = new Image();
       material.src = this.image;
       material.onload = () => {
+        console.log("material.onload!!");
+        const maxWidth = this.canvas.width * 0.8;
+        const maxHeight = this.canvas.height * 0.7;
         let nowWidth = material.width;
         let nowHeight = material.height;
-        const maxWidth = this.canvas.width * 0.8;
-        const maxHeight = this.canvas.height * 0.8;
+        const minWidth = 500;
+        const minHeight = 700;
+        console.log(nowWidth);
+        console.log(nowHeight);
+        console.log(minWidth);
+        console.log(minHeight);
+        if (nowWidth < minWidth) {
+          nowHeight = (nowHeight * minWidth) / nowWidth;
+          nowWidth = minWidth;
+        }
+        if (nowHeight < minHeight) {
+          nowWidth = (nowWidth * minHeight) / nowHeight;
+          nowHeight = minHeight;
+        }
         if (nowWidth > maxWidth) {
           nowHeight = (nowHeight * maxWidth) / nowWidth;
           nowWidth = maxWidth;
@@ -98,7 +113,7 @@ export default {
       };
       console.log(this.context);
       console.log(material);
-      console.log(material.src);
+      // console.log(material.src);
       this.$emit("uploadPicture", [this.image]);
     },
   },
