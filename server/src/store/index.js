@@ -1,19 +1,14 @@
-import { createStore } from "vuex";
+import Vuex from "vuex";
 
-export default createStore({
-  state: {
-    userInput: {},
-  },
-  getters: {
-    getUserInput: (state) => {
-      return state.userInput;
-    },
-  },
-  mutations: {
-    SET_USER_INFO(state, userInput) {
-      state.userInput = userInput;
-    },
-  },
-  actions: {},
-  modules: {},
+import AttendanceVersionOneStore from "@/store/modules/AttendanceVersionOneStore";
+import { createVuexPersistedState } from "vue-persistedstate";
+
+export default new Vuex.Store({
+  plugins: [
+    createVuexPersistedState({
+      storage: window.sessionStorage,
+    }),
+  ],
+
+  modules: { AttendanceVersionOneStore },
 });
