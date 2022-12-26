@@ -13,8 +13,8 @@
         accept="image/*"
       />
     </form>
-    <canvas id="container" />
-    <button @click="saveImg()">save</button>
+    <!-- <canvas id="container" /> -->
+    <!-- <button @click="saveImg()">save</button> -->
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
     };
   },
   mounted() {
-    this.initCanvas();
+    // this.initCanvas();
   },
 
   props: {
@@ -69,7 +69,7 @@ export default {
       });
     },
     uploadImg() {
-      this.initCanvas();
+      // this.initCanvas();
       console.log("들어왔다");
       const image = this.$refs["image"].files[0];
       const url = URL.createObjectURL(image);
@@ -81,40 +81,40 @@ export default {
       const material = new Image();
       material.src = this.image;
       material.onload = () => {
-        console.log("material.onload!!");
-        const maxWidth = this.canvas.width * 0.8;
-        const maxHeight = this.canvas.height * 0.7;
-        let nowWidth = material.width;
-        let nowHeight = material.height;
-        const minWidth = 500;
-        const minHeight = 700;
-        console.log(nowWidth);
-        console.log(nowHeight);
-        console.log(minWidth);
-        console.log(minHeight);
-        if (nowWidth < minWidth) {
-          nowHeight = (nowHeight * minWidth) / nowWidth;
-          nowWidth = minWidth;
-        }
-        if (nowHeight < minHeight) {
-          nowWidth = (nowWidth * minHeight) / nowHeight;
-          nowHeight = minHeight;
-        }
-        if (nowWidth > maxWidth) {
-          nowHeight = (nowHeight * maxWidth) / nowWidth;
-          nowWidth = maxWidth;
-        }
-        if (nowHeight > maxHeight) {
-          nowWidth = (nowWidth * maxHeight) / nowHeight;
-          nowHeight = maxHeight;
-        }
-        this.context.drawImage(
-          material,
-          this.canvas.width * 0.1,
-          this.canvas.height * 0.15,
-          nowWidth,
-          nowHeight
-        );
+        // console.log("material.onload!!");
+        // const maxWidth = this.canvas.width * 0.8;
+        // const maxHeight = this.canvas.height * 0.7;
+        // let nowWidth = material.width;
+        // let nowHeight = material.height;
+        // const minWidth = 500;
+        // const minHeight = 700;
+        // console.log(nowWidth);
+        // console.log(nowHeight);
+        // console.log(minWidth);
+        // console.log(minHeight);
+        // if (nowWidth < minWidth) {
+        //   nowHeight = (nowHeight * minWidth) / nowWidth;
+        //   nowWidth = minWidth;
+        // }
+        // if (nowHeight < minHeight) {
+        //   nowWidth = (nowWidth * minHeight) / nowHeight;
+        //   nowHeight = minHeight;
+        // }
+        // if (nowWidth > maxWidth) {
+        //   nowHeight = (nowHeight * maxWidth) / nowWidth;
+        //   nowWidth = maxWidth;
+        // }
+        // if (nowHeight > maxHeight) {
+        //   nowWidth = (nowWidth * maxHeight) / nowHeight;
+        //   nowHeight = maxHeight;
+        // }
+        // this.context.drawImage(
+        //   material,
+        //   this.canvas.width * 0.1,
+        //   this.canvas.height * 0.15,
+        //   nowWidth,
+        //   nowHeight
+        // );
       };
       console.log(this.context);
       console.log(material);
