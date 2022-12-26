@@ -64,6 +64,7 @@ export default {
         var doc = new jsPDF("p", "mm", "a4");
 
         doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+
         doc.save("sample.pdf");
       });
     },
