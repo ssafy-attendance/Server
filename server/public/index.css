@@ -7,10 +7,5 @@
 
 * {
   font-family: var(--font);
-  background-color: var(--background-color)
-
-}
-
-body {
-  background-color: var(--background-color)
+  background-color: var(--background-color);
 }

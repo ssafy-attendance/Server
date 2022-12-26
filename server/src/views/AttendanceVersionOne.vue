@@ -8,6 +8,7 @@
           id="name"
           class="user-input-value"
           v-model="userInput.name"
+          placeholder="예) 김OO"
         />
       </div>
       <div class="user-input">
@@ -17,33 +18,16 @@
           id="birthday"
           class="user-input-value"
           v-model="userInput.birthday"
+          placeholder="예) 90.02.09"
         />
       </div>
       <div class="user-input">
-        <label for="absent-year" class="user-input-label">년</label>
+        <label for="absent-date" class="user-input-label">결석 일시</label>
         <input
-          type="text"
-          id="absent-year"
+          type="date"
+          id="absent-date"
           class="user-input-value"
-          v-model="userInput.absentYear"
-        />
-      </div>
-      <div class="user-input">
-        <label for="absent-month" class="user-input-label">월</label>
-        <input
-          type="text"
-          id="absent-month"
-          class="user-input-value"
-          v-model="userInput.absentMonth"
-        />
-      </div>
-      <div class="user-input">
-        <label for="absent-day" class="user-input-label">일</label>
-        <input
-          type="text"
-          id="absent-day"
-          class="user-input-value"
-          v-model="userInput.absentDay"
+          v-model="absentDate"
         />
       </div>
       <div class="user-input">
@@ -99,20 +83,21 @@
       </div>
       <div class="user-input">
         <label for="absent-reason" class="user-input-label">사유</label>
-        <input
-          type="text"
+        <textarea
           id="absent-reason"
           class="user-input-value"
           v-model="userInput.absentReason"
+          placeholder="예) SSAFY 면접으로 인한 결석"
         />
       </div>
       <div class="user-input">
         <label for="absent-detail" class="user-input-label">세부내용</label>
-        <input
+        <textarea
           type="text"
           id="absent-detail"
           class="user-input-value"
           v-model="userInput.absentDetail"
+          placeholder="예) 멀티캠퍼스 서울에서 진행된 SSAFY 면접으로 인하여 결석 소명 제출합니다."
         />
       </div>
       <div class="user-input">
@@ -122,33 +107,6 @@
           id="absent-place"
           class="user-input-value"
           v-model="userInput.absentPlace"
-        />
-      </div>
-      <div class="user-input">
-        <label for="current-year" class="user-input-label">년</label>
-        <input
-          type="text"
-          id="current-year"
-          class="user-input-value"
-          v-model="userInput.currentYear"
-        />
-      </div>
-      <div class="user-input">
-        <label for="current-month" class="user-input-label">월</label>
-        <input
-          type="text"
-          id="current-month"
-          class="user-input-value"
-          v-model="userInput.currentMonth"
-        />
-      </div>
-      <div class="user-input">
-        <label for="current-day" class="user-input-label">일</label>
-        <input
-          type="text"
-          id="current-day"
-          class="user-input-value"
-          v-model="userInput.currentDay"
         />
       </div>
     </div>
@@ -201,6 +159,8 @@ export default {
         currentDay: "",
         signatureUrl: "",
       },
+      absentDate: null,
+      currentDate: null,
       pictureUrl: [],
       // signature
       canvas: null,
@@ -227,7 +187,7 @@ export default {
       this.userInput = {
         name: "",
         birthday: "",
-        absentYear: "",
+        absentDate: "",
         absentMonth: "",
         absentDay: "",
         absentTime: "0",
@@ -240,6 +200,8 @@ export default {
         currentDay: "",
         signatureUrl: "",
       };
+      this.absentDate = null;
+      this.currentDate = null;
       this.pictureUrl = [];
     },
     uploadPicture(pictureUrls) {
@@ -251,36 +213,39 @@ export default {
         !(
           this.userInput.name &&
           this.userInput.birthday &&
-          this.userInput.absentYear &&
-          this.userInput.absentMonth &&
-          this.userInput.absentDay &&
+          this.absentDate &&
           this.userInput.absentReason &&
           this.userInput.absentDetail &&
           this.userInput.absentPlace &&
-          this.userInput.currentYear &&
-          this.userInput.currentMonth &&
-          this.userInput.currentDay &&
           this.userInput.signatureUrl &&
           this.pictureUrl
         )
       ) {
         alert("모든 정보를 입력해주세요.");
       } else {
+        let absentDate = this.absentDate.split("-");
+        let currentDate = new Date();
+
+        let currentYear = currentDate.getFullYear() + "";
+        console.log(currentYear);
+        let currentMonth = currentDate.getMonth() + 1;
+        let currentDay = currentDate.getDate();
+
         const userInput = {
           name: this.userInput.name,
           birthday: this.userInput.birthday,
-          absentYear: this.userInput.absentYear,
-          absentMonth: this.userInput.absentMonth,
-          absentDay: this.userInput.absentDay,
+          absentYear: absentDate[0].slice(2),
+          absentMonth: absentDate[1],
+          absentDay: absentDate[2],
           absentTime: this.userInput.absentTime,
           absentCategory: this.userInput.absentCategory,
           absentReason: this.userInput.absentReason,
           absentDetail: this.userInput.absentDetail,
           absentPlace: this.userInput.absentPlace,
           signature: this.userInput.name,
-          currentYear: this.userInput.currentYear,
-          currentMonth: this.userInput.currentMonth,
-          currentDay: this.userInput.currentDay,
+          currentYear: currentYear.slice(2),
+          currentMonth: currentMonth,
+          currentDay: currentDay,
           signatureUrl: this.userInput.signatureUrl,
           pictureUrl: this.pictureUrl,
         };
