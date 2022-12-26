@@ -16,7 +16,7 @@
     <button @click="saveImg()">save</button>
     <canvas id="container" @click="findCoord" />
 
-    <canvas id="pictureContainer" />
+    <canvas id="pictureContainer" @click="findCoord" />
   </div>
 </template>
 <script>
@@ -138,13 +138,7 @@ export default {
           nowWidth = (nowWidth * maxHeight) / nowHeight;
           nowHeight = maxHeight;
         }
-        contextSecond.drawImage(
-          material,
-          200,
-          200,
-          200 + nowWidth,
-          200 + nowHeight
-        );
+        contextSecond.drawImage(material, 0, 250, nowWidth, nowHeight);
       };
     }
   },
@@ -177,8 +171,7 @@ export default {
       html2canvas(document.querySelector("#container")).then((canvas) => {
         var imgData = canvas.toDataURL("image/png", 1.0);
         var imgWidth = 210;
-        var imgHeight = (canvas.height * imgWidth) / canvas.width;
-
+        var imgHeight = 297;
         var doc = new jsPDF("p", "mm", "a4");
 
         doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
@@ -236,8 +229,8 @@ export default {
         }
         this.context.drawImage(
           material,
-          this.canvas.width * 0.1,
-          this.canvas.height * 0.15,
+          this.canvas.width * 0.075,
+          this.canvas.height * 0.12,
           nowWidth,
           nowHeight
         );
