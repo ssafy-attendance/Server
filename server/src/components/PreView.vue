@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form method="post" enctype="multipart/form-data">
+    <!-- <form method="post" enctype="multipart/form-data">
       <div>
         <label for="chooseFile"> Click </label>
       </div>
@@ -12,7 +12,7 @@
         name="chooseFile"
         accept="image/*"
       />
-    </form>
+    </form> -->
     <button @click="saveImg()">save</button>
     <canvas id="container" @click="findCoord" />
 
@@ -119,17 +119,34 @@ export default {
       );
     };
     // this.canvasSecond
-
+    console.log("this.userInput.pictureUrl", this.userInput.pictureUrl);
     if (this.userInput.pictureUrl) {
+      this.initCanvas();
       const image = this.userInput.pictureUrl[0];
+      console.log(image);
       const material = new Image();
 
       material.src = image;
       material.onload = () => {
+        console.log("material.onload!!");
+        const maxWidth = this.canvas.width * 0.8;
+        const maxHeight = this.canvas.height * 0.7;
         let nowWidth = material.width;
         let nowHeight = material.height;
-        const maxWidth = 1000;
-        const maxHeight = 1200;
+        const minWidth = 500;
+        const minHeight = 700;
+        console.log(nowWidth);
+        console.log(nowHeight);
+        console.log(minWidth);
+        console.log(minHeight);
+        if (nowWidth < minWidth) {
+          nowHeight = (nowHeight * minWidth) / nowWidth;
+          nowWidth = minWidth;
+        }
+        if (nowHeight < minHeight) {
+          nowWidth = (nowWidth * minHeight) / nowHeight;
+          nowHeight = minHeight;
+        }
         if (nowWidth > maxWidth) {
           nowHeight = (nowHeight * maxWidth) / nowWidth;
           nowWidth = maxWidth;
@@ -138,7 +155,13 @@ export default {
           nowWidth = (nowWidth * maxHeight) / nowHeight;
           nowHeight = maxHeight;
         }
-        contextSecond.drawImage(material, 0, 250, nowWidth, nowHeight);
+        this.context.drawImage(
+          material,
+          this.canvas.width * 0.075,
+          this.canvas.height * 0.12,
+          nowWidth,
+          nowHeight
+        );
       };
     }
   },

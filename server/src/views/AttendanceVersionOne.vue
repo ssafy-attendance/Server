@@ -260,7 +260,8 @@ export default {
           this.userInput.currentYear &&
           this.userInput.currentMonth &&
           this.userInput.currentDay &&
-          this.userInput.signatureUrl
+          this.userInput.signatureUrl &&
+          this.pictureUrl
         )
       ) {
         alert("모든 정보를 입력해주세요.");
