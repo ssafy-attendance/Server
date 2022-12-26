@@ -222,7 +222,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(["SET_USER_INFO"]),
+    ...mapMutations("AttendanceVersionOneStore", ["SET_USER_INFO"]),
     resetInput() {
       this.userInput = {
         name: "",

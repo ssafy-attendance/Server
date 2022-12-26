@@ -41,7 +41,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["getUserInput"]),
+    ...mapGetters("AttendanceVersionOneStore", ["getUserInput"]),
   },
 
   mounted() {
