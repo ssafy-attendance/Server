@@ -218,7 +218,7 @@ export default {
           this.userInput.absentDetail &&
           this.userInput.absentPlace &&
           this.userInput.signatureUrl &&
-          this.pictureUrl
+          this.pictureUrl.lenth
         )
       ) {
         alert("모든 정보를 입력해주세요.");
