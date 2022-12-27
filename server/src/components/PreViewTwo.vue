@@ -1,9 +1,10 @@
 <template>
+  <div class="button-container-preview">
+    <button class="make-button" @click="saveImg()">만들기</button>
+  </div>
+
   <div id="canvas">
     <canvas id="container" @click="findCoord" />
-  </div>
-  <div>
-    <button @click="saveImg()">save</button>
   </div>
 </template>
 
@@ -127,5 +128,21 @@ export default {
 #canvas {
   display: flex;
   justify-content: center;
+}
+
+.button-container-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 1.5rem 0;
+}
+
+.make-button {
+  background: var(--preview-button-background);
+  width: var(--preview-button-width);
+  height: var(--preview-button-height);
+  color: var(--preview-button-color);
+  border-radius: var(--preview-button-radius);
+  border: 0;
 }
 </style>

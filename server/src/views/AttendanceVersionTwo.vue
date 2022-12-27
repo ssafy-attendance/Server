@@ -44,8 +44,18 @@
     <div class="user-input">
       <label for="reasonRadio" class="user-input-label">사유</label>
       <div class="user-input-radio">
-        <span id="reasonRadio" v-for="(item, index) in reasons" :key="item + index">
-          <label :class="selected == index ? 'radio-label-button-checked' : 'radio-label-button'">
+        <span
+          id="reasonRadio"
+          v-for="(item, index) in reasons"
+          :key="item + index"
+        >
+          <label
+            :class="
+              selected == index
+                ? 'radio-label-button-checked'
+                : 'radio-label-button'
+            "
+          >
             <input
               type="radio"
               name="reason"
@@ -69,7 +79,13 @@
         v-model="attendanceDate"
       />
       <br />
-      <input type="time" name="atime" class="user-input-value" required v-model="attendanceTime" />
+      <input
+        type="time"
+        name="atime"
+        class="user-input-value"
+        required
+        v-model="attendanceTime"
+      />
     </div>
     <div class="user-input">
       <label for="chday" class="user-input-label">변경 일시</label>
@@ -100,12 +116,12 @@
         rows="5"
       />
     </div>
-    <div id="canvas-container">
-      <h3>서명 그려보기</h3>
+    <div class="user-input">
+      <label for="signature" class="user-input-label">서명</label>
       <canvas
         id="signature"
-        width="166"
-        height="90"
+        width="248"
+        height="110"
         v-on="{
           mousemove: move,
           mouseup: up,
@@ -113,7 +129,9 @@
           mouseout: out,
         }"
       ></canvas>
-      <button @click="reset">서명 다시그리기</button>
+      <div class="reset-button-container">
+        <button class="reset-button" @click="reset">다시 그리기</button>
+      </div>
     </div>
     <div class="button-container">
       <button class="submit-button" @click="verifyValidation">만들기</button>
@@ -141,13 +159,13 @@ export default {
       startX: 0,
       startY: 0,
       drawing: false, // 드로깅 여부를 판단하는 변수
-      selected: -1,
+      selected: 0,
       userInput: {
         campus: "", // 캠퍼스 명
         class: "", // 반
         name: "", // 이름
         birth: "", // 생년월일(yyMMdd)
-        reason: "", // 시스템 변경 요청 사유 [0, 1, 2, 3]
+        reason: 0, // 시스템 변경 요청 사유 [0, 1, 2, 3]
         attendanceYear: "", // 출결 일시 년
         attendanceMonth: "", // 출결 일시 월
         attendanceDay: "", // 출결 일시 일
@@ -257,13 +275,13 @@ export default {
       this.chAttendanceDate = "";
       this.attendanceTime = "";
       this.chAttendanceTime = "";
-      this.selected = -1;
+      this.selected = 0;
       this.userInput = {
         campus: "",
         class: "",
         name: "",
         birth: "",
-        reason: "",
+        reason: 0,
         attendanceYear: "",
         attendanceMonth: "",
         attendanceDay: "",

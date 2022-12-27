@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="button-container">
+    <div class="button-container-preview">
       <button class="make-button" @click="saveImg()">만들기</button>
     </div>
 
@@ -278,11 +278,11 @@ export default {
 </script>
 
 <style scoped>
-.button-container {
+.button-container-preview {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin: 0 0 1.5rem 0;
 }
 
 .make-button {
