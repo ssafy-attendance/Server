@@ -97,6 +97,7 @@
         class="user-input-textarea"
         v-model="userInput.absentReason"
         placeholder="예) SSAFY 면접으로 인한 결석"
+        rows="3"
       />
     </div>
     <div class="user-input">
@@ -107,6 +108,7 @@
         class="user-input-textarea"
         v-model="userInput.absentDetail"
         placeholder="예) 멀티캠퍼스 서울에서 진행된 SSAFY 면접으로 인하여 결석 소명 제출합니다."
+        rows="5"
       />
     </div>
     <div class="user-input">
@@ -137,8 +139,10 @@
       <button @click="reset">서명 다시그리기</button>
     </div>
     <FileUpload :pictureUrl="pictureUrl" @uploadPicture="uploadPicture" />
-    <button class="submit-button" @click="verifyValidation">만들기</button>
-    <button class="submit-button" @click="resetInput">리셋</button>
+    <div class="button-container">
+      <button class="submit-button" @click="verifyValidation">만들기</button>
+      <button class="submit-button" @click="resetInput">리셋</button>
+    </div>
   </div>
 </template>
 

@@ -8,16 +8,15 @@
   --input-border: 2px solid #1BB0E7;
   --input-background: white;
   --input-border-radius: 7px;
-  --input-textarea-width: 12rem;
+  --input-textarea-width: 15rem;
   --input-height: 1.5rem;
-  --textarea-height: 3rem;
 
   --button-background: #1BB0E7;
   --button-border-radius : 7px;
   --button-border: 0px;
   --button-font-color: white;
   --button-width: 7rem;
-  --button-height: 1.5rem;
+  --button-height: 2rem;
 
   --input-label-width: 4rem;
 }
@@ -25,6 +24,14 @@
 * {
   font-family: var(--font);
   background-color: var(--background-color);
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
 }
 
 .user-input-value, .user-input-textarea {
@@ -46,7 +53,6 @@
 
 .user-input-textarea {
   width: var(--input-textarea-width);
-  height: var(--textarea-height);
   resize: none;
 }
 
@@ -62,22 +68,33 @@
 
 .user-input-label {
   width: var(--input-label-width);
-  text-align: right;
-  padding: 0 .5rem;
+  display: block;
+  text-align: left;
+  margin-bottom: .5rem;
 }
 
 .user-input {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   margin: 1rem;
+  width: var(--input-textarea-width);
 }
 
 .program-title-word {
   font: var(--title);
+  font-weight: 800;
 }
 
 .program-title {
   margin: 1.5rem 0;
 }
 
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}
