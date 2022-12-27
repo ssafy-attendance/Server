@@ -1,10 +1,5 @@
 <template>
-  <div class="program-icon">
-    <img src="@/assets/logo.png" alt="icon" />
-  </div>
-  <div class="program-title">
-    <h2 class="program-title-word">SSAFY 출결 생성기</h2>
-  </div>
+  <HeaderVue />
   <div class="input-container">
     <div class="user-input">
       <label for="name" class="user-input-label">성명</label>
@@ -144,15 +139,21 @@
       <button class="submit-button" @click="resetInput">리셋</button>
     </div>
   </div>
+  <FooterVue />
 </template>
 
 <script>
 import FileUpload from "@/components/FileUploadOnCanvas";
+import HeaderVue from "@/components/HeaderVue";
+import FooterVue from "@/components/FooterVue";
+
 import { mapMutations } from "vuex";
 
 export default {
   components: {
     FileUpload,
+    HeaderVue,
+    FooterVue,
   },
   data() {
     return {
