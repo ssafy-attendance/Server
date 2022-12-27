@@ -1,12 +1,16 @@
 <template>
   <div class="input-container">
-    <HeaderVue />
     <div class="user-input">
       <label for="areaRadio" class="user-input-label">지역</label>
       <div>
         <span id="areaRadio" v-for="(item, index) in areas" :key="item + index">
           <label>
-            <input type="radio" name="area" :value="item" v-model="userInput.campus" />
+            <input
+              type="radio"
+              name="area"
+              :value="item"
+              v-model="userInput.campus"
+            />
             {{ item }}
           </label>
         </span>
@@ -46,9 +50,18 @@
     <div class="user-input">
       <label for="reasonRadio" class="user-input-label">사유</label>
       <div>
-        <span id="reasonRadio" v-for="(item, index) in reasons" :key="item + index">
+        <span
+          id="reasonRadio"
+          v-for="(item, index) in reasons"
+          :key="item + index"
+        >
           <label>
-            <input type="radio" name="reason" :value="index" v-model="userInput.reason" />
+            <input
+              type="radio"
+              name="reason"
+              :value="index"
+              v-model="userInput.reason"
+            />
             {{ item }}
           </label>
         </span>
@@ -64,7 +77,14 @@
         pattern="\d{4}-\d{2}-\d{2}"
         v-model="attendanceDate"
       />
-      <input type="time" name="atime" class="user-input-value" required v-model="attendanceTime" />
+      <br />
+      <input
+        type="time"
+        name="atime"
+        class="user-input-value"
+        required
+        v-model="attendanceTime"
+      />
     </div>
     <div class="user-input">
       <label for="chday" class="user-input-label">변경 일시</label>
@@ -76,6 +96,7 @@
         pattern="\d{4}-\d{2}-\d{2}"
         v-model="chAttendanceDate"
       />
+      <br />
       <input
         type="time"
         name="ctime"
@@ -113,20 +134,13 @@
       <button class="submit-button" @click="verifyValidation">만들기</button>
       <button class="submit-button" @click="resetInput">리셋</button>
     </div>
-    <FooterVue />
   </div>
 </template>
 
 <script>
 import { mapMutations } from "vuex";
-import HeaderVue from "@/components/HeaderVue.vue";
-import FooterVue from "@/components/FooterVue.vue";
 
 export default {
-  components: {
-    HeaderVue,
-    FooterVue,
-  },
   data() {
     return {
       areas: ["서울", "대전", "구미", "광주", "부울경"],
