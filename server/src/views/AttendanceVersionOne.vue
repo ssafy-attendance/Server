@@ -33,7 +33,7 @@
     <div class="user-input">
       <label for="absent-time" class="user-input-label">분류</label>
       <div class="user-input-radio">
-        <label
+        <label class="radio-label-button"
           ><input
             type="radio"
             name="absent-time"
@@ -42,7 +42,7 @@
           />
           오전</label
         >
-        <label
+        <label class="radio-label-button"
           ><input
             type="radio"
             name="absent-time"
@@ -51,7 +51,7 @@
           />
           오후</label
         >
-        <label
+        <label class="radio-label-button"
           ><input
             type="radio"
             name="absent-time"
@@ -65,7 +65,7 @@
     <div class="user-input">
       <label for="absent-category" class="user-input-label">공가사유</label>
       <div class="user-input-radio">
-        <label
+        <label class="radio-label-button"
           ><input
             type="radio"
             name="absent-category"
@@ -74,7 +74,7 @@
           />
           공가</label
         >
-        <label
+        <label class="radio-label-button"
           ><input
             type="radio"
             name="absent-category"

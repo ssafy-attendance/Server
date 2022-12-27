@@ -1,9 +1,11 @@
 <template>
   <HeaderVue />
   <div>
-    <button @click="saveImg()">save</button>
-    <canvas id="container" @click="findCoord" />
+    <div class="button-container">
+      <button class="make-button" @click="saveImg()">만들기</button>
+    </div>
 
+    <canvas id="container" @click="findCoord" />
     <canvas id="pictureContainer" @click="findCoord" />
   </div>
   <FooterVue />
@@ -144,27 +146,24 @@ export default {
         canvasSecond.height
       );
     };
+
     // this.canvasSecond
-    console.log("this.userInput.pictureUrl", this.userInput.pictureUrl);
     if (this.userInput.pictureUrl) {
       this.initCanvas();
       const image = this.userInput.pictureUrl[0];
-      console.log(image);
       const material = new Image();
 
       material.src = image;
       material.onload = () => {
-        console.log("material.onload!!");
         const maxWidth = this.canvas.width * 0.8;
         const maxHeight = this.canvas.height * 0.7;
+
         let nowWidth = material.width;
         let nowHeight = material.height;
+
         const minWidth = 500;
         const minHeight = 700;
-        console.log(nowWidth);
-        console.log(nowHeight);
-        console.log(minWidth);
-        console.log(minHeight);
+
         if (nowWidth < minWidth) {
           nowHeight = (nowHeight * minWidth) / nowWidth;
           nowWidth = minWidth;
@@ -181,6 +180,7 @@ export default {
           nowWidth = (nowWidth * maxHeight) / nowHeight;
           nowHeight = maxHeight;
         }
+
         this.context.drawImage(
           material,
           this.canvas.width * 0.075,
@@ -193,11 +193,10 @@ export default {
   },
 
   methods: {
-    findCoord(event) {
-      const x = event.offsetX;
-      const y = event.offsetY;
-      console.log(`X 좌표 : ${x}  Y좌표 : ${y}`);
-    },
+    // findCoord(event) {
+    //   const x = event.offsetX;
+    //   const y = event.offsetY;
+    // },
     initCanvas() {
       const canvas = document.querySelector("#pictureContainer");
       this.canvas = canvas;
@@ -207,11 +206,10 @@ export default {
       canvas.height = (window.innerWidth * 4) / 3;
       this.canvasWidth = canvas.width;
       this.canvasHeight = canvas.height;
-      console.log(canvas.width);
-      console.log(canvas.height);
+
       const canvasImg2 = new Image();
       canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지3.svg");
-      console.log(canvasImg2.src);
+
       canvasImg2.onload = function () {
         context.drawImage(canvasImg2, 0, 0, canvas.width, canvas.height);
       };
@@ -238,28 +236,24 @@ export default {
     },
     uploadImg() {
       this.initCanvas();
-      console.log("들어왔다");
+
       const image = this.$refs["image"].files[0];
       const url = URL.createObjectURL(image);
-      // const canvas = document.querySelector("#container");
+
       this.image = url;
-      console.log("url");
-      console.log(url);
 
       const material = new Image();
       material.src = this.image;
       material.onload = () => {
-        console.log("material.onload!!");
         const maxWidth = this.canvas.width * 0.8;
         const maxHeight = this.canvas.height * 0.7;
+
         let nowWidth = material.width;
         let nowHeight = material.height;
+
         const minWidth = 500;
         const minHeight = 700;
-        console.log(nowWidth);
-        console.log(nowHeight);
-        console.log(minWidth);
-        console.log(minHeight);
+
         if (nowWidth < minWidth) {
           nowHeight = (nowHeight * minWidth) / nowWidth;
           nowWidth = minWidth;
@@ -284,17 +278,27 @@ export default {
           nowHeight
         );
       };
-      console.log(this.context);
-      console.log(material);
-      console.log(material.src);
+
       this.$emit("uploadPicture", [this.image]);
     },
   },
 };
 </script>
 
-<style>
-* {
-  margin: 0;
+<style scoped>
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.make-button {
+  background: var(--preview-button-background);
+  width: var(--preview-button-width);
+  height: var(--preview-button-height);
+  color: var(--preview-button-color);
+  border-radius: var(--preview-button-radius);
+  border: 0;
 }
 </style>
