@@ -45,7 +45,8 @@ button {
   cursor: pointer;
 }
 
-input, textarea {
+input,
+textarea {
   box-sizing: border-box;
 }
 
@@ -137,5 +138,18 @@ input[type="radio"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: .2rem;
+  margin-right: 0.2rem;
+}
+
+.radio-label-button-checked {
+  background-color: var(--input-radio-label-background-checked);
+  color: var(--input-radio-label-font-color-checked);
+  border-radius: var(--input-radio-label-radius);
+  border: var(--input-radio-lable-border);
+  width: 5rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.2rem;
 }
