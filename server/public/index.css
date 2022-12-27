@@ -10,8 +10,8 @@
   --input-border: 2px solid #1bb0e7;
   --input-background: white;
   --input-border-radius: 7px;
-  --input-textarea-width: 15rem;
-  --input-height: 1.5rem;
+  --input-textarea-width: 330px;
+  --input-height: 2rem;
 
   --button-background: #1bb0e7;
   --button-border-radius: 7px;
@@ -39,6 +39,10 @@
 * {
   font-family: var(--font);
   background-color: var(--background-color);
+}
+
+input, textarea {
+  box-sizing: border-box;
 }
 
 .input-container {
@@ -124,7 +128,7 @@ input[type="radio"] {
   color: var(--input-radio-label-font-color);
   border-radius: var(--input-radio-label-radius);
   border: var(--input-radio-lable-border);
-  width: 4.7rem;
+  width: 5rem;
   height: 2rem;
   display: flex;
   justify-content: center;

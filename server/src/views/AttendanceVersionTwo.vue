@@ -1,20 +1,14 @@
 <template>
   <div class="input-container">
     <div class="user-input">
-      <label for="areaRadio" class="user-input-label">지역</label>
-      <div>
-        <span id="areaRadio" v-for="(item, index) in areas" :key="item + index">
-          <label>
-            <input
-              type="radio"
-              name="area"
-              :value="item"
-              v-model="userInput.campus"
-            />
-            {{ item }}
-          </label>
-        </span>
-      </div>
+      <label for="class" class="user-input-label">지역</label>
+      <input
+        type="number"
+        id="class"
+        class="user-input-value"
+        v-model="userInput.campus"
+        placeholder="예) 서울"
+      />
     </div>
 
     <div class="user-input">
@@ -49,13 +43,13 @@
     </div>
     <div class="user-input">
       <label for="reasonRadio" class="user-input-label">사유</label>
-      <div>
+      <div class="user-input-radio">
         <span
           id="reasonRadio"
           v-for="(item, index) in reasons"
           :key="item + index"
         >
-          <label>
+          <label class="radio-label-button">
             <input
               type="radio"
               name="reason"
