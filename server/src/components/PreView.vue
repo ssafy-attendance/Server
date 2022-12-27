@@ -1,5 +1,4 @@
 <template>
-  <HeaderVue />
   <div>
     <div class="button-container">
       <button class="make-button" @click="saveImg()">만들기</button>
@@ -8,20 +7,13 @@
     <canvas id="container" @click="findCoord" />
     <canvas id="pictureContainer" @click="findCoord" />
   </div>
-  <FooterVue />
 </template>
 <script>
 import { mapGetters } from "vuex";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import HeaderVue from "@/components/HeaderVue";
-import FooterVue from "@/components/FooterVue";
 
 export default {
-  components: {
-    HeaderVue,
-    FooterVue,
-  },
   created() {
     this.userInput = this.getUserInput;
   },
