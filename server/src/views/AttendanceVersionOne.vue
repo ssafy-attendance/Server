@@ -1,37 +1,40 @@
 <template>
+  <div class="program-title">
+    <h2 class="program-title-word">SSAFY 출결 생성기</h2>
+  </div>
   <div class="input-container">
-    <div class="input-container">
-      <div class="user-input">
-        <label for="name" class="user-input-label">성명</label>
-        <input
-          type="text"
-          id="name"
-          class="user-input-value"
-          v-model="userInput.name"
-          placeholder="예) 김OO"
-        />
-      </div>
-      <div class="user-input">
-        <label for="birthday" class="user-input-label">생년월일</label>
-        <input
-          type="text"
-          id="birthday"
-          class="user-input-value"
-          v-model="userInput.birthday"
-          placeholder="예) 90.02.09"
-        />
-      </div>
-      <div class="user-input">
-        <label for="absent-date" class="user-input-label">결석 일시</label>
-        <input
-          type="date"
-          id="absent-date"
-          class="user-input-value"
-          v-model="absentDate"
-        />
-      </div>
-      <div class="user-input">
-        <label for="absent-time" class="user-input-label">분류</label>
+    <div class="user-input">
+      <label for="name" class="user-input-label">성명</label>
+      <input
+        type="text"
+        id="name"
+        class="user-input-value"
+        v-model="userInput.name"
+        placeholder="예) 김OO"
+      />
+    </div>
+    <div class="user-input">
+      <label for="birthday" class="user-input-label">생년월일</label>
+      <input
+        type="text"
+        id="birthday"
+        class="user-input-value"
+        v-model="userInput.birthday"
+        placeholder="예) 90.02.09"
+      />
+    </div>
+    <div class="user-input">
+      <label for="absent-date" class="user-input-label">결석일시</label>
+      <input
+        type="date"
+        id="absent-date"
+        class="user-input-value"
+        v-model="absentDate"
+      />
+    </div>
+    <div class="user-input">
+      <label for="absent-time" class="user-input-label">분류</label>
+      <div class="user-input-radio">
         <label
           ><input
             type="radio"
@@ -60,8 +63,10 @@
           종일</label
         >
       </div>
-      <div class="user-input">
-        <label for="absent-category" class="user-input-label">공가 사유</label>
+    </div>
+    <div class="user-input">
+      <label for="absent-category" class="user-input-label">공가사유</label>
+      <div class="user-input-radio">
         <label
           ><input
             type="radio"
@@ -81,34 +86,35 @@
           사유</label
         >
       </div>
-      <div class="user-input">
-        <label for="absent-reason" class="user-input-label">사유</label>
-        <textarea
-          id="absent-reason"
-          class="user-input-value"
-          v-model="userInput.absentReason"
-          placeholder="예) SSAFY 면접으로 인한 결석"
-        />
-      </div>
-      <div class="user-input">
-        <label for="absent-detail" class="user-input-label">세부내용</label>
-        <textarea
-          type="text"
-          id="absent-detail"
-          class="user-input-value"
-          v-model="userInput.absentDetail"
-          placeholder="예) 멀티캠퍼스 서울에서 진행된 SSAFY 면접으로 인하여 결석 소명 제출합니다."
-        />
-      </div>
-      <div class="user-input">
-        <label for="absent-place" class="user-input-label">장소</label>
-        <input
-          type="text"
-          id="absent-place"
-          class="user-input-value"
-          v-model="userInput.absentPlace"
-        />
-      </div>
+    </div>
+    <div class="user-input">
+      <label for="absent-reason" class="user-input-label">사유</label>
+      <textarea
+        id="absent-reason"
+        class="user-input-textarea"
+        v-model="userInput.absentReason"
+        placeholder="예) SSAFY 면접으로 인한 결석"
+      />
+    </div>
+    <div class="user-input">
+      <label for="absent-detail" class="user-input-label">세부내용</label>
+      <textarea
+        type="text"
+        id="absent-detail"
+        class="user-input-textarea"
+        v-model="userInput.absentDetail"
+        placeholder="예) 멀티캠퍼스 서울에서 진행된 SSAFY 면접으로 인하여 결석 소명 제출합니다."
+      />
+    </div>
+    <div class="user-input">
+      <label for="absent-place" class="user-input-label">장소</label>
+      <input
+        type="text"
+        id="absent-place"
+        class="user-input-value"
+        v-model="userInput.absentPlace"
+        placeholder="예) 서울 멀티캠퍼스"
+      />
     </div>
     <!-- Signature component -->
     <div id="canvas-container">
