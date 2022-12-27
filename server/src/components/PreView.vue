@@ -1,18 +1,5 @@
 <template>
   <div>
-    <!-- <form method="post" enctype="multipart/form-data">
-      <div>
-        <label for="chooseFile"> Click </label>
-      </div>
-      <input
-        ref="image"
-        @change="uploadImg()"
-        type="file"
-        id="chooseFile"
-        name="chooseFile"
-        accept="image/*"
-      />
-    </form> -->
     <button @click="saveImg()">save</button>
     <canvas id="container" @click="findCoord" />
 
