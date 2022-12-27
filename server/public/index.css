@@ -3,6 +3,7 @@
 :root {
   --background-color: #EFEFEF;
   --font: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  --font-weight: 800;
   --title: 1.6rem bold;
 
   --input-border: 2px solid #1BB0E7;
@@ -71,6 +72,7 @@
   display: block;
   text-align: left;
   margin-bottom: .5rem;
+  font-weight: var(--font-weight);
 }
 
 .user-input {
@@ -84,7 +86,7 @@
 
 .program-title-word {
   font: var(--title);
-  font-weight: 800;
+  font-weight: var(--font-weight);
 }
 
 .program-title {
