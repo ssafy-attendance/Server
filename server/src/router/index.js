@@ -11,6 +11,16 @@ const routes = [
     name: "preview",
     component: () => import("@/components/PreView.vue"),
   },
+  {
+    path: "/attendanceChange",
+    name: "attendanceChange",
+    component: () => import("@/views/AttendanceVersionTwo"),
+  },
+  {
+    path: "/previewTwo",
+    name: "previewTwo",
+    component: () => import("@/components/PreViewTwo.vue"),
+  },
 ];
 
 const router = createRouter({
