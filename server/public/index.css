@@ -1,24 +1,26 @@
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
 :root {
-  --background-color: #EFEFEF;
-  --font: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  --background-color: #efefef;
+  --font: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue",
+    "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   --title: 1.6rem bold;
 
-  --input-border: 2px solid #1BB0E7;
+  --input-border: 2px solid #1bb0e7;
   --input-background: white;
   --input-border-radius: 7px;
   --input-textarea-width: 15rem;
   --input-height: 1.5rem;
 
-  --button-background: #1BB0E7;
-  --button-border-radius : 7px;
+  --button-background: #1bb0e7;
+  --button-border-radius: 7px;
   --button-border: 0px;
   --button-font-color: white;
   --button-width: 7rem;
   --button-height: 2rem;
 
-  --input-label-width: 4rem;
+  --input-label-width: 5rem;
 }
 
 * {
@@ -34,13 +36,15 @@
   margin-bottom: 3rem;
 }
 
-.user-input-value, .user-input-textarea {
+.user-input-value,
+.user-input-textarea {
   border: var(--input-border);
   border-radius: var(--input-border-radius);
   background: var(--input-background);
 }
 
-.user-input-value, .user-input-radio {
+.user-input-value,
+.user-input-radio {
   width: var(--input-textarea-width);
   height: var(--input-height);
 }
@@ -63,14 +67,14 @@
   border: var(--button-border);
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
-  margin: 0 .5rem;
+  margin: 0 0.5rem;
 }
 
 .user-input-label {
   width: var(--input-label-width);
   display: block;
   text-align: left;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .user-input {

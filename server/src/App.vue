@@ -6,7 +6,7 @@
     <br />
     <router-link to="/attendanceChange">출결변경요청서</router-link> |
     <router-link to="/previewTwo">미리보기</router-link> |
-    <router-link to="/preview2">미리보기2</router-link> 
+    <router-link to="/preview2">미리보기2</router-link>
   </nav>
   <router-view />
 </template>
