@@ -3,6 +3,10 @@
     <router-link to="/">출결소명확인서</router-link> |
     <router-link to="/preview">미리보기</router-link> |
     <router-link to="/fileUploadOnCanvas">파일업로드</router-link>
+    <br />
+    <br />
+    <router-link to="/attendanceChange">출결변경요청서</router-link> |
+    <router-link to="/previewTwo">미리보기</router-link>
   </nav>
   <router-view />
 </template>
