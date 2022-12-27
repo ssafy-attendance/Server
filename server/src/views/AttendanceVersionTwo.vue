@@ -3,7 +3,7 @@
     <div class="user-input">
       <label for="class" class="user-input-label">지역</label>
       <input
-        type="number"
+        type="text"
         id="class"
         class="user-input-value"
         v-model="userInput.campus"
