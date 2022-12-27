@@ -116,12 +116,12 @@
       />
     </div>
     <!-- Signature component -->
-    <div id="canvas-container">
-      <h3>서명 그려보기</h3>
+    <div class="user-input">
+      <label for="signature" class="user-input-label">서명</label>
       <canvas
         id="signature"
-        width="166"
-        height="90"
+        width="248"
+        height="110"
         v-on="{
           mousemove: move,
           mouseup: up,
@@ -129,8 +129,9 @@
           mouseout: out,
         }"
       ></canvas>
-      <button @click="makeImage">서명 완료</button>
-      <button @click="reset">서명 다시그리기</button>
+      <div class="reset-button-container">
+        <button class="reset-button" @click="reset">다시 그리기</button>
+      </div>
     </div>
     <FileUpload :pictureUrl="pictureUrl" @uploadPicture="uploadPicture" />
     <div class="button-container">
@@ -211,6 +212,7 @@ export default {
       this.absentDate = null;
       this.currentDate = null;
       this.pictureUrl = [];
+      this.reset();
     },
     uploadPicture(pictureUrls) {
       this.pictureUrl = pictureUrls;
@@ -307,15 +309,24 @@ export default {
 </script>
 
 <style scoped>
-#canvas-container {
-  background: tomato;
-  width: 200px;
-  height: 300px;
-  border: 2px solid black;
-}
-
 canvas {
+  margin-top: 10px;
   background: white;
-  border: 3px solid black;
+  border: 1px solid #b4b4b4;
+}
+.reset-button-container {
+  width: 15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reset-button {
+  margin-top: 10px;
+  background: white;
+  width: 120px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  font: 18px;
 }
 </style>

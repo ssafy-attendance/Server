@@ -76,8 +76,8 @@ export default {
     img.src = require("@/assets/AttendVersion1_Image/출결이미지-1.png");
     signatureImage.src = this.userInput.signatureUrl;
     img.onload = () => {
-      const imageWidth = canvasFirst.width * 0.76;
-      const imageHeight = canvasFirst.height * 0.526;
+      const imageWidth = canvasFirst.width * 0.77;
+      const imageHeight = canvasFirst.height * 0.535;
       const checkSize = canvasFirst.width * 0.018;
       const absentTimeCoord = this.absentTime[this.userInput.absentTime];
       const absentCategoryCoord =

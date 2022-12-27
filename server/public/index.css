@@ -5,6 +5,7 @@
   --font: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue",
     "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  --font-weight: 800;
   --title: 1.6rem bold;
 
   --input-border: 2px solid #1bb0e7;
@@ -94,7 +95,8 @@ input, textarea {
   width: var(--input-label-width);
   display: block;
   text-align: left;
-  margin-bottom: 0.5rem;
+  margin-bottom: .5rem;
+  font-weight: var(--font-weight);
 }
 
 .user-input {
@@ -108,7 +110,7 @@ input, textarea {
 
 .program-title-word {
   font: var(--title);
-  font-weight: 800;
+  font-weight: var(--font-weight);
 }
 
 .program-title {
