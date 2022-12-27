@@ -20,7 +20,20 @@
   --button-width: 7rem;
   --button-height: 2rem;
 
-  --input-label-width: 5rem;
+  --input-label-width: 4rem;
+
+  --preview-button-background: #1bb0e7;
+  --preview-button-width: 10rem;
+  --preview-button-height: 2rem;
+  --preview-button-color: white;
+  --preview-button-radius: 7px;
+
+  --input-radio-label-background: white;
+  --input-radio-label-background-checked: #1bb0e7;
+  --input-radio-label-font-color: #1bb0e7;
+  --input-radio-label-font-color-checked: white;
+  --input-radio-label-radius: 7px;
+  --input-radio-lable-border: 0px;
 }
 
 * {
@@ -51,7 +64,7 @@
 
 .user-input-radio {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -100,4 +113,21 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.radio-label-button {
+  background-color: var(--input-radio-label-background);
+  color: var(--input-radio-label-font-color);
+  border-radius: var(--input-radio-label-radius);
+  border: var(--input-radio-lable-border);
+  width: 4.7rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: .2rem;
 }
