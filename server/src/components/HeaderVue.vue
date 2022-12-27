@@ -1,10 +1,10 @@
 <template>
   <header>
     <div class="program-icon">
-      <img src="@/assets/logo.png" alt="icon" />
+      <a href="/"> <img src="@/assets/logo.png" alt="icon" /></a>
     </div>
     <div class="program-title">
-      <h2 class="program-title-word">SSAFY 출결 생성기</h2>
+      <a href="/"> <h2 class="program-title-word">SSAFY 출결 생성기</h2></a>
     </div>
   </header>
 </template>
@@ -13,4 +13,9 @@
 export default {};
 </script>
 
-<style></style>
+<style scoped>
+a {
+  text-decoration: none;
+  color: black;
+}
+</style>
