@@ -1,17 +1,25 @@
 <template>
+  <HeaderVue />
   <div>
     <button @click="saveImg()">save</button>
     <canvas id="container" @click="findCoord" />
 
     <canvas id="pictureContainer" @click="findCoord" />
   </div>
+  <FooterVue />
 </template>
 <script>
 import { mapGetters } from "vuex";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import HeaderVue from "@/components/HeaderVue";
+import FooterVue from "@/components/FooterVue";
 
 export default {
+  components: {
+    HeaderVue,
+    FooterVue,
+  },
   created() {
     this.userInput = this.getUserInput;
   },
