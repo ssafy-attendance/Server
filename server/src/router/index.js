@@ -11,11 +11,6 @@ const routes = [
     name: "preview",
     component: () => import("@/components/PreView.vue"),
   },
-  {
-    path: "/fileUploadOnCanvas",
-    name: "fileUploadOnCanvas",
-    component: () => import("@/components/FileUploadOnCanvas.vue"),
-  },
 ];
 
 const router = createRouter({
