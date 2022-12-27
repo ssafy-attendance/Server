@@ -5,7 +5,12 @@
         <label for="areaRadio" class="user-input-label">지역</label>
         <span id="areaRadio" v-for="(item, index) in areas" :key="item + index">
           <label>
-            <input type="radio" name="area" :value="item" v-model="userInput.campus" />
+            <input
+              type="radio"
+              name="area"
+              :value="item"
+              v-model="userInput.campus"
+            />
             {{ item }}</label
           >
         </span>
@@ -43,9 +48,18 @@
       </div>
       <div class="user-input">
         <label for="reasonRadio" class="user-input-label">사유</label>
-        <span id="reasonRadio" v-for="(item, index) in reasons" :key="item + index">
+        <span
+          id="reasonRadio"
+          v-for="(item, index) in reasons"
+          :key="item + index"
+        >
           <label>
-            <input type="radio" name="reason" :value="index" v-model="userInput.reason" />
+            <input
+              type="radio"
+              name="reason"
+              :value="index"
+              v-model="userInput.reason"
+            />
             {{ item }}
           </label>
         </span>
