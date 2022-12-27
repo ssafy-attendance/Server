@@ -44,17 +44,14 @@
     <div class="user-input">
       <label for="reasonRadio" class="user-input-label">사유</label>
       <div class="user-input-radio">
-        <span
-          id="reasonRadio"
-          v-for="(item, index) in reasons"
-          :key="item + index"
-        >
-          <label class="radio-label-button">
+        <span id="reasonRadio" v-for="(item, index) in reasons" :key="item + index">
+          <label :class="selected == index ? 'radio-label-button-checked' : 'radio-label-button'">
             <input
               type="radio"
               name="reason"
               :value="index"
               v-model="userInput.reason"
+              @change="change(index)"
             />
             {{ item }}
           </label>
@@ -72,13 +69,7 @@
         v-model="attendanceDate"
       />
       <br />
-      <input
-        type="time"
-        name="atime"
-        class="user-input-value"
-        required
-        v-model="attendanceTime"
-      />
+      <input type="time" name="atime" class="user-input-value" required v-model="attendanceTime" />
     </div>
     <div class="user-input">
       <label for="chday" class="user-input-label">변경 일시</label>
@@ -150,6 +141,7 @@ export default {
       startX: 0,
       startY: 0,
       drawing: false, // 드로깅 여부를 판단하는 변수
+      selected: -1,
       userInput: {
         campus: "", // 캠퍼스 명
         class: "", // 반
@@ -176,6 +168,9 @@ export default {
   },
   methods: {
     ...mapMutations("AttendanceVersionTwoStore", ["SET_USER_INFO"]),
+    change(radio) {
+      this.selected = radio; //리셋 처리 해야합니다.
+    },
     draw(curX, curY) {
       this.context.beginPath();
       this.context.moveTo(this.startX, this.startY);
@@ -262,6 +257,7 @@ export default {
       this.chAttendanceDate = "";
       this.attendanceTime = "";
       this.chAttendanceTime = "";
+      this.selected = -1;
       this.userInput = {
         campus: "",
         class: "",
