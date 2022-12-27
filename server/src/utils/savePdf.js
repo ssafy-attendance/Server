@@ -7,8 +7,6 @@ const initCanvas = (canvas, context) => {
   this.context = context;
   canvas.width = window.innerWidth;
   canvas.height = (window.innerWidth * 4) / 3;
-  this.canvasWidth = canvas.width;
-  this.canvasHeight = canvas.height;
   const canvasImg2 = new Image();
   canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지3.svg");
   canvasImg2.onload = function () {
