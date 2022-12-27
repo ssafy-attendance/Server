@@ -1,4 +1,5 @@
 <template>
+  <HeaderVue />
   <nav>
     <router-link to="/">출결소명확인서</router-link> |
     <router-link to="/preview">미리보기</router-link> |
@@ -9,7 +10,20 @@
     <router-link to="/preview2">미리보기2</router-link>
   </nav>
   <router-view />
+  <FooterVue />
 </template>
+
+<script>
+import HeaderVue from "@/components/HeaderVue";
+import FooterVue from "@/components/FooterVue";
+
+export default {
+  components: {
+    HeaderVue,
+    FooterVue,
+  },
+};
+</script>
 
 <style>
 #app {
@@ -29,6 +43,6 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #1bb0e7;
 }
 </style>

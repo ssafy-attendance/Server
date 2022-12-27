@@ -17,11 +17,6 @@ const routes = [
     component: () => import("@/components/PreViewTwo.vue"),
   },
   {
-    path: "/preview2",
-    name: "preview2",
-    component: () => import("@/components/PreView2.vue"),
-  },
-  {
     path: "/attendanceChange",
     name: "attendanceChange",
     component: () => import("@/views/AttendanceVersionTwo"),

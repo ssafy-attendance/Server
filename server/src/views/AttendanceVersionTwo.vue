@@ -1,59 +1,55 @@
 <template>
   <div class="input-container">
-    <div class="input-container">
-      <div class="user-input">
-        <label for="areaRadio" class="user-input-label">지역</label>
-        <span id="areaRadio" v-for="(item, index) in areas" :key="item + index">
-          <label>
-            <input
-              type="radio"
-              name="area"
-              :value="item"
-              v-model="userInput.campus"
-            />
-            {{ item }}</label
-          >
-        </span>
-      </div>
+    <div class="user-input">
+      <label for="class" class="user-input-label">지역</label>
+      <input
+        type="text"
+        id="class"
+        class="user-input-value"
+        v-model="userInput.campus"
+        placeholder="예) 서울"
+      />
+    </div>
 
-      <div class="user-input">
-        <label for="class" class="user-input-label">반</label>
-        <input
-          type="number"
-          id="class"
-          class="user-input-value"
-          v-model="userInput.class"
-          placeholder="예) 7"
-        />
-      </div>
-      <div class="user-input">
-        <label for="name" class="user-input-label">이름</label>
-        <input
-          type="text"
-          id="name"
-          class="user-input-value"
-          v-model="userInput.name"
-          placeholder="예) 김OO"
-        />
-      </div>
-      <div class="user-input">
-        <label for="birthday" class="user-input-label">생년월일</label>
-        <input
-          type="text"
-          id="birthday"
-          class="user-input-value"
-          v-model="userInput.birth"
-          placeholder="예) 900209"
-        />
-      </div>
-      <div class="user-input">
-        <label for="reasonRadio" class="user-input-label">사유</label>
+    <div class="user-input">
+      <label for="class" class="user-input-label">반</label>
+      <input
+        type="number"
+        id="class"
+        class="user-input-value"
+        v-model="userInput.class"
+        placeholder="예) 7"
+      />
+    </div>
+    <div class="user-input">
+      <label for="name" class="user-input-label">이름</label>
+      <input
+        type="text"
+        id="name"
+        class="user-input-value"
+        v-model="userInput.name"
+        placeholder="예) 김OO"
+      />
+    </div>
+    <div class="user-input">
+      <label for="birthday" class="user-input-label">생년월일</label>
+      <input
+        type="text"
+        id="birthday"
+        class="user-input-value"
+        v-model="userInput.birth"
+        placeholder="예) 900209"
+      />
+    </div>
+    <div class="user-input">
+      <label for="reasonRadio" class="user-input-label">사유</label>
+      <div class="user-input-radio">
         <span
           id="reasonRadio"
           v-for="(item, index) in reasons"
           :key="item + index"
         >
-          <label>
+          <label class="radio-label-button">
             <input
               type="radio"
               name="reason"
@@ -64,55 +60,74 @@
           </label>
         </span>
       </div>
-      <div class="user-input">
-        <label for="aday" class="user-input-label">출결 일시</label>
-        <input
-          type="date"
-          name="aday"
-          required
-          pattern="\d{4}-\d{2}-\d{2}"
-          v-model="attendanceDate"
-        />
-        <input type="time" name="atime" required v-model="attendanceTime" />
-      </div>
-      <div class="user-input">
-        <label for="chday" class="user-input-label">변경 일시</label>
-        <input
-          type="date"
-          name="chday"
-          required
-          pattern="\d{4}-\d{2}-\d{2}"
-          v-model="chAttendanceDate"
-        />
-        <input type="time" name="ctime" required v-model="chAttendanceTime" />
-      </div>
-      <div class="user-input">
-        <label for="absent-reason" class="user-input-label">변경사유</label>
-        <textarea
-          id="absent-reason"
-          class="user-input-value"
-          v-model="userInput.detailReason"
-          placeholder="예) 마우스 고장으로 인한 입실 미클릭"
-        />
-      </div>
-      <div id="canvas-container">
-        <h3>서명 그려보기</h3>
-        <canvas
-          id="signature"
-          width="166"
-          height="90"
-          v-on="{
-            mousemove: move,
-            mouseup: up,
-            mousedown: down,
-            mouseout: out,
-          }"
-        ></canvas>
-        <button @click="reset">서명 다시그리기</button>
-      </div>
     </div>
-    <button class="submit-button" @click="verifyValidation">만들기</button>
-    <button class="submit-button" @click="resetInput">리셋</button>
+    <div class="user-input">
+      <label for="aday" class="user-input-label">출결 일시</label>
+      <input
+        type="date"
+        name="aday"
+        class="user-input-value"
+        required
+        pattern="\d{4}-\d{2}-\d{2}"
+        v-model="attendanceDate"
+      />
+      <br />
+      <input
+        type="time"
+        name="atime"
+        class="user-input-value"
+        required
+        v-model="attendanceTime"
+      />
+    </div>
+    <div class="user-input">
+      <label for="chday" class="user-input-label">변경 일시</label>
+      <input
+        type="date"
+        name="chday"
+        class="user-input-value"
+        required
+        pattern="\d{4}-\d{2}-\d{2}"
+        v-model="chAttendanceDate"
+      />
+      <br />
+      <input
+        type="time"
+        name="ctime"
+        class="user-input-value"
+        required
+        v-model="chAttendanceTime"
+      />
+    </div>
+    <div class="user-input">
+      <label for="absent-reason" class="user-input-label">변경사유</label>
+      <textarea
+        id="absent-reason"
+        class="user-input-textarea"
+        v-model="userInput.detailReason"
+        placeholder="예) 마우스 고장으로 인한 입실 미클릭"
+        rows="5"
+      />
+    </div>
+    <div id="canvas-container">
+      <h3>서명 그려보기</h3>
+      <canvas
+        id="signature"
+        width="166"
+        height="90"
+        v-on="{
+          mousemove: move,
+          mouseup: up,
+          mousedown: down,
+          mouseout: out,
+        }"
+      ></canvas>
+      <button @click="reset">서명 다시그리기</button>
+    </div>
+    <div class="button-container">
+      <button class="submit-button" @click="verifyValidation">만들기</button>
+      <button class="submit-button" @click="resetInput">리셋</button>
+    </div>
   </div>
 </template>
 
