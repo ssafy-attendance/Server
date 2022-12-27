@@ -12,11 +12,6 @@ const routes = [
     component: () => import("@/components/PreView.vue"),
   },
   {
-    path: "/fileUploadOnCanvas",
-    name: "fileUploadOnCanvas",
-    component: () => import("@/components/FileUploadOnCanvas.vue"),
-  },
-  {
     path: "/attendanceChange",
     name: "attendanceChange",
     component: () => import("@/views/AttendanceVersionTwo"),

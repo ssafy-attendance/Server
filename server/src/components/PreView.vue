@@ -1,30 +1,25 @@
 <template>
+  <HeaderVue />
   <div>
-    <!-- <form method="post" enctype="multipart/form-data">
-      <div>
-        <label for="chooseFile"> Click </label>
-      </div>
-      <input
-        ref="image"
-        @change="uploadImg()"
-        type="file"
-        id="chooseFile"
-        name="chooseFile"
-        accept="image/*"
-      />
-    </form> -->
     <button @click="saveImg()">save</button>
     <canvas id="container" @click="findCoord" />
 
     <canvas id="pictureContainer" @click="findCoord" />
   </div>
+  <FooterVue />
 </template>
 <script>
 import { mapGetters } from "vuex";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import HeaderVue from "@/components/HeaderVue";
+import FooterVue from "@/components/FooterVue";
 
 export default {
+  components: {
+    HeaderVue,
+    FooterVue,
+  },
   created() {
     this.userInput = this.getUserInput;
   },
@@ -51,6 +46,15 @@ export default {
         signature: [0.295, 0.576],
       },
       canvas2: null,
+      absentTime: {
+        0: [0.6075, 0.26],
+        1: [0.7, 0.26],
+        2: [0.7915, 0.26],
+      },
+      absentCategory: {
+        0: [0.205, 0.401],
+        1: [0.205, 0.423],
+      },
     };
   },
 
@@ -70,15 +74,37 @@ export default {
     this.fontStyleOne = `${window.innerWidth / 46}px san-serif`;
     this.fontStyleTwo = `bold ${window.innerWidth / 32}px san-serif`;
 
+    const imgCheck = new Image();
+    imgCheck.src = require("@/assets/AttendVersion1_Image/체크.png");
+
     const img = new Image();
     const signatureImage = new Image();
-    img.src = require("@/assets/AttendVersion1_Image/출결이미지.svg");
+    img.src = require("@/assets/AttendVersion1_Image/출결이미지-1.png");
     signatureImage.src = this.userInput.signatureUrl;
     img.onload = () => {
       const imageWidth = canvasFirst.width * 0.76;
       const imageHeight = canvasFirst.height * 0.526;
+      const checkSize = canvasFirst.width * 0.018;
+      const absentTimeCoord = this.absentTime[this.userInput.absentTime];
+      const absentCategoryCoord =
+        this.absentCategory[this.userInput.absentCategory];
+
       contextFirst.drawImage(img, 0, 0, canvasFirst.width, canvasFirst.height);
       contextFirst.drawImage(signatureImage, imageWidth, imageHeight);
+      contextFirst.drawImage(
+        imgCheck,
+        absentTimeCoord[0] * canvasFirst.width,
+        absentTimeCoord[1] * canvasFirst.height,
+        checkSize,
+        checkSize
+      );
+      contextFirst.drawImage(
+        imgCheck,
+        absentCategoryCoord[0] * canvasFirst.width,
+        absentCategoryCoord[1] * canvasFirst.height,
+        checkSize,
+        checkSize
+      );
       contextFirst.font = this.fontStyleOne;
 
       for (let key in this.fontStyleOneCoordinate) {
@@ -108,7 +134,7 @@ export default {
     canvasSecond.height = finalInnerHeight;
 
     const canvasImg2 = new Image();
-    canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지3.svg");
+    canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지-2.png");
     canvasImg2.onload = () => {
       contextSecond.drawImage(
         canvasImg2,
