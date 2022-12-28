@@ -10,8 +10,8 @@
 
 <script>
 import { mapGetters } from "vuex";
-// import jsPDF from "jspdf";
-// import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 export default {
   created() {
     this.userInput = this.getUserInput;
@@ -65,6 +65,19 @@ export default {
       const x = event.offsetX;
       const y = event.offsetY;
       console.log(`X 좌표 : ${x}  Y좌표 : ${y}`);
+    },
+    saveImg() {
+      html2canvas(document.querySelector("#container")).then(function (canvas) {
+        var imgData = canvas.toDataURL("image/png", 1.0);
+        var imgWidth = 210;
+        var imgHeight = (canvas.height * imgWidth) / canvas.width;
+        console.log(imgData);
+        var doc = new jsPDF("p", "mm", "a4");
+
+        doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+
+        doc.save("sample.pdf");
+      });
     },
   },
   mounted() {
