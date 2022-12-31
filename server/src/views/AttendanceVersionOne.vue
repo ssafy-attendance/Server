@@ -302,7 +302,7 @@ export default {
     },
 
     reset() {
-      this.context.clearRect(0, 0, 166, 90);
+      this.context.clearRect(0, 0, 248, 110);
     },
   },
 };
