@@ -7,7 +7,7 @@
         id="name"
         class="user-input-value"
         v-model="userInput.name"
-        placeholder="예) 김OO"
+        placeholder="이름"
       />
     </div>
     <div class="user-input">
@@ -17,7 +17,7 @@
         id="birthday"
         class="user-input-value"
         v-model="userInput.birthday"
-        placeholder="예) 90.02.09"
+        placeholder="YY/MM/DD"
       />
     </div>
     <div class="user-input">

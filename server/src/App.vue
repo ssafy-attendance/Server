@@ -34,7 +34,7 @@ export default {
     },
     rightClick() {
       const btn = document.getElementById("btn");
-      btn.style.left = "140px";
+      btn.style.left = "150px";
     },
   },
 };
@@ -48,16 +48,16 @@ export default {
   color: #2c3e50;
 }
 
-/* nav a {
+nav a {
   font-weight: bold;
   color: #2c3e50;
-} */
+}
 
 router-link {
   background: #fff;
 }
 .button-box {
-  width: 280px;
+  width: 300px;
   margin: 35px auto;
   position: relative;
   border-radius: 30px;
@@ -78,7 +78,7 @@ router-link {
   left: 0;
   top: 0;
   position: absolute;
-  width: 140px;
+  width: 150px;
   height: 100%;
   background: #1ea1e1;
   border-radius: 30px;
