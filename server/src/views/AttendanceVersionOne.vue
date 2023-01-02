@@ -133,7 +133,10 @@
         <button class="reset-button" @click="reset">다시 그리기</button>
       </div>
     </div>
-    <FileUpload :pictureUrl="pictureUrl" @uploadPicture="uploadPicture" />
+    <div class="user-input">
+      <label for="absent-category" class="user-input-label">증빙서류</label>
+      <FileUpload :pictureUrl="pictureUrl" @uploadPicture="uploadPicture" />
+    </div>
     <div class="button-container">
       <button class="submit-button" @click="verifyValidation">만들기</button>
       <button class="submit-button" @click="resetInput">리셋</button>

@@ -1,9 +1,9 @@
 <template>
   <div>
     <form method="post" enctype="multipart/form-data">
-      <div>
-        <label for="chooseFile"> Click </label>
-      </div>
+      <!-- <div>
+        <label for="chooseFile"> 증빙서류를 업로드해주세요</label>
+      </div> -->
       <input
         ref="image"
         @change="uploadImg()"
@@ -80,45 +80,6 @@ export default {
 
       const material = new Image();
       material.src = this.image;
-      material.onload = () => {
-        // console.log("material.onload!!");
-        // const maxWidth = this.canvas.width * 0.8;
-        // const maxHeight = this.canvas.height * 0.7;
-        // let nowWidth = material.width;
-        // let nowHeight = material.height;
-        // const minWidth = 500;
-        // const minHeight = 700;
-        // console.log(nowWidth);
-        // console.log(nowHeight);
-        // console.log(minWidth);
-        // console.log(minHeight);
-        // if (nowWidth < minWidth) {
-        //   nowHeight = (nowHeight * minWidth) / nowWidth;
-        //   nowWidth = minWidth;
-        // }
-        // if (nowHeight < minHeight) {
-        //   nowWidth = (nowWidth * minHeight) / nowHeight;
-        //   nowHeight = minHeight;
-        // }
-        // if (nowWidth > maxWidth) {
-        //   nowHeight = (nowHeight * maxWidth) / nowWidth;
-        //   nowWidth = maxWidth;
-        // }
-        // if (nowHeight > maxHeight) {
-        //   nowWidth = (nowWidth * maxHeight) / nowHeight;
-        //   nowHeight = maxHeight;
-        // }
-        // this.context.drawImage(
-        //   material,
-        //   this.canvas.width * 0.1,
-        //   this.canvas.height * 0.15,
-        //   nowWidth,
-        //   nowHeight
-        // );
-      };
-      console.log(this.context);
-      console.log(material);
-      console.log(material.src);
       this.$emit("uploadPicture", [this.image]);
     },
   },
