@@ -137,10 +137,78 @@ export default {
         canvasSecond.width,
         canvasSecond.height
       );
+      this.drawMaterial();
     };
 
     // this.canvasSecond
-    if (this.userInput.pictureUrl) {
+    // if (this.userInput.pictureUrl) {
+    //   this.initCanvas();
+    //   const image = this.userInput.pictureUrl[0];
+    //   const material = new Image();
+
+    //   material.src = image;
+    //   material.onload = () => {
+    //     const maxWidth = this.canvas.width * 0.8;
+    //     const maxHeight = this.canvas.height * 0.7;
+
+    //     let nowWidth = material.width;
+    //     let nowHeight = material.height;
+
+    //     const minWidth = 500;
+    //     const minHeight = 700;
+
+    //     if (nowWidth < minWidth) {
+    //       nowHeight = (nowHeight * minWidth) / nowWidth;
+    //       nowWidth = minWidth;
+    //     }
+    //     if (nowHeight < minHeight) {
+    //       nowWidth = (nowWidth * minHeight) / nowHeight;
+    //       nowHeight = minHeight;
+    //     }
+    //     if (nowWidth > maxWidth) {
+    //       nowHeight = (nowHeight * maxWidth) / nowWidth;
+    //       nowWidth = maxWidth;
+    //     }
+    //     if (nowHeight > maxHeight) {
+    //       nowWidth = (nowWidth * maxHeight) / nowHeight;
+    //       nowHeight = maxHeight;
+    //     }
+
+    //     this.context.drawImage(
+    //       material,
+    //       this.canvas.width * 0.075,
+    //       this.canvas.height * 0.12,
+    //       nowWidth,
+    //       nowHeight
+    //     );
+    //   };
+    // }
+  },
+
+  methods: {
+    // findCoord(event) {
+    //   const x = event.offsetX;
+    //   const y = event.offsetY;
+    // },
+    initCanvas() {
+      const canvas = document.querySelector("#pictureContainer");
+      this.canvas = canvas;
+      const context = canvas.getContext("2d");
+      this.context = context;
+      canvas.width = window.innerWidth;
+      canvas.height = (window.innerWidth * 4) / 3;
+      this.canvasWidth = canvas.width;
+      this.canvasHeight = canvas.height;
+
+      const canvasImg2 = new Image();
+      canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지3.svg");
+
+      canvasImg2.onload = function () {
+        context.drawImage(canvasImg2, 0, 0, canvas.width, canvas.height);
+      };
+    },
+    drawMaterial() {
+      // if (this.userInput.pictureUrl) {
       this.initCanvas();
       const image = this.userInput.pictureUrl[0];
       const material = new Image();
@@ -180,30 +248,6 @@ export default {
           nowWidth,
           nowHeight
         );
-      };
-    }
-  },
-
-  methods: {
-    // findCoord(event) {
-    //   const x = event.offsetX;
-    //   const y = event.offsetY;
-    // },
-    initCanvas() {
-      const canvas = document.querySelector("#pictureContainer");
-      this.canvas = canvas;
-      const context = canvas.getContext("2d");
-      this.context = context;
-      canvas.width = window.innerWidth;
-      canvas.height = (window.innerWidth * 4) / 3;
-      this.canvasWidth = canvas.width;
-      this.canvasHeight = canvas.height;
-
-      const canvasImg2 = new Image();
-      canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지3.svg");
-
-      canvasImg2.onload = function () {
-        context.drawImage(canvasImg2, 0, 0, canvas.width, canvas.height);
       };
     },
     saveImg() {
