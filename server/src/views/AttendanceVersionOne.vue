@@ -312,24 +312,5 @@ export default {
 </script>
 
 <style scoped>
-canvas {
-  margin-top: 10px;
-  background: white;
-  border: 1px solid #b4b4b4;
-}
-.reset-button-container {
-  width: 15rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.reset-button {
-  margin-top: 10px;
-  background: white;
-  width: 120px;
-  height: 30px;
-  border: none;
-  border-radius: 6px;
-  font: 18px;
-}
+@import "@/assets/css/canvas.css";
 </style>
