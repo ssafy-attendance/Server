@@ -19,6 +19,7 @@ export default {
   },
   data() {
     return {
+      img: "",
       userInput: {
         signature: "",
       },
@@ -93,11 +94,22 @@ export default {
     this.fontStyleOne = `25px san-serif`;
     this.fontStyleTwo = `bold 37px serif`;
     const img = new Image();
+
     const signatureImage = new Image();
     const checkSize = canvasFirst.width * 0.015;
     const reasonCoord = this.Reason[this.userInput.reason];
     signatureImage.src = this.userInput.signatureUrl;
-    img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-1.png");
+    // 변경 사유 길어질 시 이미지 변경
+    // 이미지 별 좌표 설정 필요
+    if (this.userInput.detailReason.length < 28) {
+      img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-1.png");
+    } else if (this.userInput.detailReason.length < 56) {
+      img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-2.png");
+    } else if (this.userInput.detailReason.length < 84) {
+      img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-3.png");
+    } else {
+      img.src = require("@/assets/AttendVersion2_Image/체크.png");
+    }
     img.onload = () => {
       //   const imageWidth = canvasFirst.width;
       //   const imageHeight = canvasFirst.height;
