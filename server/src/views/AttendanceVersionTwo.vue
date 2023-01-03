@@ -69,7 +69,7 @@
       </div>
     </div>
     <div class="user-input">
-      <label for="aday" class="user-input-label">출결 일시</label>
+      <label for="aday" class="user-input-label">출결일시</label>
       <input
         type="date"
         name="aday"
@@ -88,7 +88,7 @@
       />
     </div>
     <div class="user-input">
-      <label for="chday" class="user-input-label">변경 일시</label>
+      <label for="chday" class="user-input-label">변경일시</label>
       <input
         type="date"
         name="chday"
