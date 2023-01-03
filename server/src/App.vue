@@ -3,12 +3,20 @@
   <div class="button-box">
     <div id="btn"></div>
     <router-link to="/"
-      ><button type="button" class="toggle-btn" @click="leftClick">
+      ><button
+        type="button"
+        :class="selected == 0 ? 'toggle-btn selected-font' : 'toggle-btn'"
+        @click="leftClick"
+      >
         소명확인서
       </button>
     </router-link>
     <router-link to="/attendanceChange"
-      ><button type="button" class="toggle-btn" @click="rightClick">
+      ><button
+        type="button"
+        :class="selected == 1 ? 'toggle-btn selected-font' : 'toggle-btn'"
+        @click="rightClick"
+      >
         변경요청서
       </button>
     </router-link>
@@ -22,6 +30,12 @@ import HeaderVue from "@/components/HeaderVue";
 import FooterVue from "@/components/FooterVue";
 
 export default {
+  data() {
+    return {
+      selected: 0,
+    };
+  },
+
   components: {
     HeaderVue,
     FooterVue,
@@ -31,10 +45,12 @@ export default {
     leftClick() {
       const btn = document.getElementById("btn");
       btn.style.left = "0";
+      this.selected = 0;
     },
     rightClick() {
       const btn = document.getElementById("btn");
       btn.style.left = "150px";
+      this.selected = 1;
     },
   },
 };
@@ -90,5 +106,9 @@ router-link {
 a {
   border-radius: 30px;
   background: #fff;
+}
+
+.selected-font {
+  color: white;
 }
 </style>
