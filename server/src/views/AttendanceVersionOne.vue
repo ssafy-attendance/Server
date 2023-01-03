@@ -32,30 +32,48 @@
     <div class="user-input">
       <label for="absent-time" class="user-input-label">분류</label>
       <div class="user-input-radio">
-        <label class="radio-label-button"
+        <label
+          :class="
+            selectTime == 0
+              ? 'radio-label-button-checked'
+              : 'radio-label-button'
+          "
           ><input
             type="radio"
             name="absent-time"
             value="0"
             v-model="userInput.absentTime"
+            @change="changeTime(0)"
           />
           오전</label
         >
-        <label class="radio-label-button"
+        <label
+          :class="
+            selectTime == 1
+              ? 'radio-label-button-checked'
+              : 'radio-label-button'
+          "
           ><input
             type="radio"
             name="absent-time"
             value="1"
             v-model="userInput.absentTime"
+            @change="changeTime(1)"
           />
           오후</label
         >
-        <label class="radio-label-button"
+        <label
+          :class="
+            selectTime == 2
+              ? 'radio-label-button-checked'
+              : 'radio-label-button'
+          "
           ><input
             type="radio"
             name="absent-time"
             value="2"
             v-model="userInput.absentTime"
+            @change="changeTime(2)"
           />
           종일</label
         >
@@ -64,21 +82,33 @@
     <div class="user-input">
       <label for="absent-category" class="user-input-label">공가사유</label>
       <div class="user-input-radio">
-        <label class="radio-label-button"
+        <label
+          :class="
+            selectCategory == 0
+              ? 'radio-label-button-checked'
+              : 'radio-label-button'
+          "
           ><input
             type="radio"
             name="absent-category"
             value="0"
             v-model="userInput.absentCategory"
+            @change="changeCategory(0)"
           />
           공가</label
         >
-        <label class="radio-label-button"
+        <label
+          :class="
+            selectCategory == 1
+              ? 'radio-label-button-checked'
+              : 'radio-label-button'
+          "
           ><input
             type="radio"
             name="absent-category"
             value="1"
             v-model="userInput.absentCategory"
+            @change="changeCategory(1)"
           />
           사유</label
         >
@@ -161,8 +191,8 @@ export default {
         absentYear: "",
         absentMonth: "",
         absentDay: "",
-        absentTime: "0",
-        absentCategory: "0",
+        absentTime: 0,
+        absentCategory: 0,
         absentReason: "",
         absentDetail: "",
         absentPlace: "",
@@ -171,6 +201,8 @@ export default {
         currentDay: "",
         signatureUrl: "",
       },
+      selectTime: 0,
+      selectCategory: 0,
       absentDate: null,
       currentDate: null,
       pictureUrl: [],
@@ -195,6 +227,12 @@ export default {
 
   methods: {
     ...mapMutations("AttendanceVersionOneStore", ["SET_USER_INFO"]),
+    changeTime(radio) {
+      this.selectTime = radio;
+    },
+    changeCategory(radio) {
+      this.selectCategory = radio;
+    },
     resetInput() {
       this.userInput = {
         name: "",
@@ -202,8 +240,8 @@ export default {
         absentDate: "",
         absentMonth: "",
         absentDay: "",
-        absentTime: "0",
-        absentCategory: "0",
+        absentTime: 0,
+        absentCategory: 0,
         absentReason: "",
         absentDetail: "",
         absentPlace: "",
@@ -212,6 +250,8 @@ export default {
         currentDay: "",
         signatureUrl: "",
       };
+      this.selectTime = 0;
+      this.selectCategory = 0;
       this.absentDate = null;
       this.currentDate = null;
       this.pictureUrl = [];
@@ -240,7 +280,6 @@ export default {
         let currentDate = new Date();
 
         let currentYear = currentDate.getFullYear() + "";
-        console.log(currentYear);
         let currentMonth = currentDate.getMonth() + 1;
         let currentDay = currentDate.getDate();
 
