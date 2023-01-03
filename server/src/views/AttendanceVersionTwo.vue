@@ -315,15 +315,5 @@ export default {
 </script>
 
 <style scoped>
-#canvas-container {
-  background: tomato;
-  width: 200px;
-  height: 300px;
-  border: 2px solid black;
-}
-
-canvas {
-  background: white;
-  border: 3px solid black;
-}
+@import "@/assets/css/canvas.css";
 </style>
