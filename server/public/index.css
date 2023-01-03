@@ -1,18 +1,26 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
+@font-face {
+  font-family: "NotoSansKRBold";
+  src: url("@/assets/fonts/Noto_Sans_KR/NotoSansKR-Bold.otf");
+}
+
 :root {
   --background-color: #efefef;
-  --font: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue",
+  --font: "NotoSansKRBold" Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue",
     "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   --font-weight: 800;
   --title: 1.6rem bold;
 
-  --input-border: 2px solid #1bb0e7;
+  --input-border: 2px solid #B4B4B4;
   --input-background: white;
-  --input-border-radius: 7px;
-  --input-textarea-width: 330px;
-  --input-height: 2rem;
+  --input-border-radius: 5px;
+  --input-textarea-width: 400px;
+  --input-height: 2.5rem;
+  --input-padding: 5px 10px;
+  --input-font-color: #DADADA;
+  --input-font-size: 0.8rem;
 
   --button-background: #1bb0e7;
   --button-border-radius: 7px;
@@ -64,6 +72,13 @@ textarea {
   border: var(--input-border);
   border-radius: var(--input-border-radius);
   background: var(--input-background);
+  padding: var(--input-padding);
+  font-size: var(--input-font-size);
+}
+
+.user-input-value::placeholder,
+.user-input-textarea::placeholder {
+  color: var(--input-font-color);
 }
 
 .user-input-value,
@@ -114,8 +129,10 @@ textarea {
   font-weight: var(--font-weight);
 }
 
-.program-title {
-  margin: 1.5rem 0;
+.program-title, .program-icon {
+  display: flex;
+  justify-content: center;
+  margin: .5rem 0;
 }
 
 .button-container {
