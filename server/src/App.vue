@@ -62,6 +62,8 @@ router-link {
   position: relative;
   border-radius: 30px;
   background: #fff;
+  display: flex;
+  justify-content: space-around;
 }
 
 .toggle-btn {
