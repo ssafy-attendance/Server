@@ -222,13 +222,15 @@ export default {
     },
     verifyValidation() {
       this.userInput.signatureUrl = this.canvas.toDataURL();
+
       if (
         !(
           this.userInput.campus &&
           this.userInput.class &&
           this.userInput.name &&
           this.userInput.birth &&
-          this.userInput.reason &&
+          this.userInput.reason >= 0 &&
+          this.userInput.reason < 4 &&
           this.userInput.detailReason &&
           this.userInput.signatureUrl &&
           this.attendanceDate &&
