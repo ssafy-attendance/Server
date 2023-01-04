@@ -1,6 +1,28 @@
 <template>
   <div class="input-container">
     <div class="user-input">
+      <label for="class" class="user-input-label">지역</label>
+      <input
+        type="text"
+        id="class"
+        class="user-input-value"
+        v-model="userInput.campus"
+        placeholder="예) 서울"
+      />
+    </div>
+
+    <div class="user-input">
+      <label for="class" class="user-input-label">반</label>
+      <input
+        type="number"
+        id="class"
+        class="user-input-value"
+        v-model="userInput.class"
+        placeholder="예) 7"
+      />
+    </div>
+
+    <div class="user-input">
       <label for="name" class="user-input-label">성명</label>
       <input
         type="text"
@@ -17,7 +39,7 @@
         id="birthday"
         class="user-input-value"
         v-model="userInput.birthday"
-        placeholder="YY/MM/DD"
+        placeholder="YY.MM.DD"
       />
     </div>
     <div class="user-input">
@@ -186,6 +208,8 @@ export default {
   data() {
     return {
       userInput: {
+        campus: "",
+        class: "",
         name: "",
         birthday: "",
         absentYear: "",
@@ -236,6 +260,8 @@ export default {
     resetInput() {
       this.userInput = {
         name: "",
+        class: "",
+        campus: "",
         birthday: "",
         absentDate: "",
         absentMonth: "",
@@ -264,6 +290,8 @@ export default {
       this.userInput.signatureUrl = this.canvas.toDataURL();
       if (
         !(
+          this.userInput.class &&
+          this.userInput.campus &&
           this.userInput.name &&
           this.userInput.birthday &&
           this.absentDate &&
@@ -284,6 +312,8 @@ export default {
         let currentDay = currentDate.getDate();
 
         const userInput = {
+          campus: this.userInput.campus,
+          class: this.userInput.class,
           name: this.userInput.name,
           birthday: this.userInput.birthday,
           absentYear: absentDate[0].slice(2),
