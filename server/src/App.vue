@@ -41,6 +41,12 @@ export default {
     FooterVue,
   },
 
+  watch: {
+    $route(from, to) {
+      if (to.name === undefined) this.$router.push("/");
+    },
+  },
+
   methods: {
     leftClick() {
       const btn = document.getElementById("btn");
