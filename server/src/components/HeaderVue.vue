@@ -18,4 +18,12 @@ a {
   text-decoration: none;
   color: black;
 }
+
+img {
+  width: 250px;
+}
+
+.program-icon {
+  margin: 3rem 0;
+}
 </style>
