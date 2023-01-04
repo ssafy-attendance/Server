@@ -22,22 +22,12 @@
     </div>
     <div class="user-input">
       <label for="absent-date" class="user-input-label">결석일시</label>
-      <input
-        type="date"
-        id="absent-date"
-        class="user-input-value"
-        v-model="absentDate"
-      />
+      <input type="date" id="absent-date" class="user-input-value" v-model="absentDate" />
     </div>
     <div class="user-input">
       <label for="absent-time" class="user-input-label">분류</label>
       <div class="user-input-radio">
-        <label
-          :class="
-            selectTime == 0
-              ? 'radio-label-button-checked'
-              : 'radio-label-button'
-          "
+        <label :class="selectTime == 0 ? 'radio-label-button-checked' : 'radio-label-button'"
           ><input
             type="radio"
             name="absent-time"
@@ -47,12 +37,7 @@
           />
           오전</label
         >
-        <label
-          :class="
-            selectTime == 1
-              ? 'radio-label-button-checked'
-              : 'radio-label-button'
-          "
+        <label :class="selectTime == 1 ? 'radio-label-button-checked' : 'radio-label-button'"
           ><input
             type="radio"
             name="absent-time"
@@ -62,12 +47,7 @@
           />
           오후</label
         >
-        <label
-          :class="
-            selectTime == 2
-              ? 'radio-label-button-checked'
-              : 'radio-label-button'
-          "
+        <label :class="selectTime == 2 ? 'radio-label-button-checked' : 'radio-label-button'"
           ><input
             type="radio"
             name="absent-time"
@@ -82,12 +62,7 @@
     <div class="user-input">
       <label for="absent-category" class="user-input-label">공가사유</label>
       <div class="user-input-radio">
-        <label
-          :class="
-            selectCategory == 0
-              ? 'radio-label-button-checked'
-              : 'radio-label-button'
-          "
+        <label :class="selectCategory == 0 ? 'radio-label-button-checked' : 'radio-label-button'"
           ><input
             type="radio"
             name="absent-category"
@@ -97,12 +72,7 @@
           />
           공가</label
         >
-        <label
-          :class="
-            selectCategory == 1
-              ? 'radio-label-button-checked'
-              : 'radio-label-button'
-          "
+        <label :class="selectCategory == 1 ? 'radio-label-button-checked' : 'radio-label-button'"
           ><input
             type="radio"
             name="absent-category"
@@ -117,22 +87,28 @@
     <div class="user-input">
       <label for="absent-reason" class="user-input-label">사유</label>
       <textarea
+        ref="reason"
         id="absent-reason"
         class="user-input-textarea"
         v-model="userInput.absentReason"
         placeholder="예) SSAFY 면접으로 인한 결석"
-        rows="3"
+        rows="2"
+        maxlength="46"
+        @input="absentLimit"
       />
     </div>
     <div class="user-input">
       <label for="absent-detail" class="user-input-label">세부내용</label>
       <textarea
+        ref="reasonDetail"
         type="text"
         id="absent-detail"
         class="user-input-textarea"
         v-model="userInput.absentDetail"
         placeholder="예) 멀티캠퍼스 서울에서 진행된 SSAFY 면접으로 인하여 결석 소명 제출합니다."
-        rows="5"
+        rows="4"
+        maxlength="69"
+        @input="absentDetailLimit"
       />
     </div>
     <div class="user-input">
@@ -227,6 +203,21 @@ export default {
 
   methods: {
     ...mapMutations("AttendanceVersionOneStore", ["SET_USER_INFO"]),
+    absentLimit() {
+      let h = this.$refs.reason.scrollHeight;
+      if (h > 40) {
+        let lng = this.userInput.absentReason.length;
+        this.userInput.absentReason = this.userInput.absentReason.substring(0, lng - 1);
+      }
+    },
+    absentDetailLimit() {
+      let h = this.$refs.reasonDetail.scrollHeight;
+
+      if (h > 70) {
+        let lng = this.userInput.absentDetail.length;
+        this.userInput.absentDetail = this.userInput.absentDetail.substring(0, lng - 1);
+      }
+    },
     changeTime(radio) {
       this.selectTime = radio;
     },
