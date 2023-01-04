@@ -16,6 +16,7 @@ import html2canvas from "html2canvas";
 export default {
   created() {
     this.userInput = this.getUserInput;
+    console.log(this.userInput);
   },
 
   data() {
@@ -76,15 +77,25 @@ export default {
     img.src = require("@/assets/AttendVersion1_Image/출결이미지-1.png");
     signatureImage.src = this.userInput.signatureUrl;
     img.onload = () => {
-      const imageWidth = canvasFirst.width * 0.77;
-      const imageHeight = canvasFirst.height * 0.535;
+      // const imageWidth = canvasFirst.width * 0.77;
+      // const imageHeight = canvasFirst.height * 0.535;
       const checkSize = canvasFirst.width * 0.018;
+      var signature_x = canvasFirst.width * 0.84;
+      var signature_y = canvasFirst.height * 0.557;
+      const signature_width = 0.07 * window.innerWidth;
+      const signature_height = 0.035 * ((window.innerWidth * 4) / 3);
+
       const absentTimeCoord = this.absentTime[this.userInput.absentTime];
-      const absentCategoryCoord =
-        this.absentCategory[this.userInput.absentCategory];
+      const absentCategoryCoord = this.absentCategory[this.userInput.absentCategory];
 
       contextFirst.drawImage(img, 0, 0, canvasFirst.width, canvasFirst.height);
-      contextFirst.drawImage(signatureImage, imageWidth, imageHeight);
+      contextFirst.drawImage(
+        signatureImage,
+        signature_x,
+        signature_y,
+        signature_width,
+        signature_height
+      );
       contextFirst.drawImage(
         imgCheck,
         absentTimeCoord[0] * canvasFirst.width,
@@ -130,66 +141,12 @@ export default {
     const canvasImg2 = new Image();
     canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지-2.png");
     canvasImg2.onload = () => {
-      contextSecond.drawImage(
-        canvasImg2,
-        0,
-        0,
-        canvasSecond.width,
-        canvasSecond.height
-      );
+      contextSecond.drawImage(canvasImg2, 0, 0, canvasSecond.width, canvasSecond.height);
       this.drawMaterial();
     };
-
-    // this.canvasSecond
-    // if (this.userInput.pictureUrl) {
-    //   this.initCanvas();
-    //   const image = this.userInput.pictureUrl[0];
-    //   const material = new Image();
-
-    //   material.src = image;
-    //   material.onload = () => {
-    //     const maxWidth = this.canvas.width * 0.8;
-    //     const maxHeight = this.canvas.height * 0.7;
-
-    //     let nowWidth = material.width;
-    //     let nowHeight = material.height;
-
-    //     const minWidth = 500;
-    //     const minHeight = 700;
-
-    //     if (nowWidth < minWidth) {
-    //       nowHeight = (nowHeight * minWidth) / nowWidth;
-    //       nowWidth = minWidth;
-    //     }
-    //     if (nowHeight < minHeight) {
-    //       nowWidth = (nowWidth * minHeight) / nowHeight;
-    //       nowHeight = minHeight;
-    //     }
-    //     if (nowWidth > maxWidth) {
-    //       nowHeight = (nowHeight * maxWidth) / nowWidth;
-    //       nowWidth = maxWidth;
-    //     }
-    //     if (nowHeight > maxHeight) {
-    //       nowWidth = (nowWidth * maxHeight) / nowHeight;
-    //       nowHeight = maxHeight;
-    //     }
-
-    //     this.context.drawImage(
-    //       material,
-    //       this.canvas.width * 0.075,
-    //       this.canvas.height * 0.12,
-    //       nowWidth,
-    //       nowHeight
-    //     );
-    //   };
-    // }
   },
 
   methods: {
-    // findCoord(event) {
-    //   const x = event.offsetX;
-    //   const y = event.offsetY;
-    // },
     initCanvas() {
       const canvas = document.querySelector("#pictureContainer");
       this.canvas = canvas;
@@ -251,6 +208,7 @@ export default {
       };
     },
     saveImg() {
+      console.log("saveImg");
       html2canvas(document.querySelector("#container")).then((canvas) => {
         var imgData = canvas.toDataURL("image/png", 1.0);
         var imgWidth = 210;
@@ -259,15 +217,19 @@ export default {
 
         doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
         doc.addPage();
-        doc.addImage(
-          this.canvas2.toDataURL("image/png", 1.0),
-          "PNG",
-          0,
-          0,
-          imgWidth,
-          imgHeight
+        doc.addImage(this.canvas2.toDataURL("image/png", 1.0), "PNG", 0, 0, imgWidth, imgHeight);
+        doc.save(
+          this.userInput.absentYear +
+            this.userInput.absentMonth +
+            this.userInput.absentDay +
+            "_출결확인서_" +
+            this.userInput.name +
+            "[" +
+            this.userInput.campus +
+            this.userInput.class +
+            "반]" +
+            ".pdf"
         );
-        doc.save("sample.pdf");
       });
     },
     uploadImg() {
