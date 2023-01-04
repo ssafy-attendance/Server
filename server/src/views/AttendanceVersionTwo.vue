@@ -199,7 +199,7 @@ export default {
       this.baseURL = this.canvas.toDataURL();
     },
     reset() {
-      this.context.clearRect(0, 0, 166, 90);
+      this.context.clearRect(0, 0, 248, 110);
     },
     down: function (event) {
       this.startX = event.offsetX;
