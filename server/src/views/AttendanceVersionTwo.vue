@@ -22,13 +22,13 @@
       />
     </div>
     <div class="user-input">
-      <label for="name" class="user-input-label">이름</label>
+      <label for="name" class="user-input-label">성명</label>
       <input
         type="text"
         id="name"
         class="user-input-value"
         v-model="userInput.name"
-        placeholder="예) 김OO"
+        placeholder="이름"
       />
     </div>
     <div class="user-input">
@@ -38,7 +38,7 @@
         id="birthday"
         class="user-input-value"
         v-model="userInput.birth"
-        placeholder="예) 900209"
+        placeholder="YY.MM.DD"
       />
     </div>
     <div class="user-input">
