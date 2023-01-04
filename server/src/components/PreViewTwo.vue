@@ -98,15 +98,25 @@ export default {
     const signatureImage = new Image();
     const checkSize = canvasFirst.width * 0.015;
     const reasonCoord = this.Reason[this.userInput.reason];
+    var signature_x = 0;
+    var signature_y = 0;
+    const signature_width = 100;
+    const signature_height = 80;
     signatureImage.src = this.userInput.signatureUrl;
     // 변경 사유 길어질 시 이미지 변경
     // 이미지 별 좌표 설정 필요
     if (this.userInput.detailReason.length < 28) {
       img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-1.png");
+      signature_x = 913;
+      signature_y = 1067;
     } else if (this.userInput.detailReason.length < 56) {
       img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-2.png");
+      signature_x = 913;
+      signature_y = 1120;
     } else if (this.userInput.detailReason.length < 84) {
       img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-3.png");
+      signature_x = 913;
+      signature_y = 1180;
     } else {
       img.src = require("@/assets/AttendVersion2_Image/체크.png");
     }
@@ -116,8 +126,10 @@ export default {
       contextFirst.drawImage(img, 0, 0, canvasFirst.width, canvasFirst.height);
       contextFirst.drawImage(
         signatureImage,
-        canvasFirst.width,
-        canvasFirst.height
+        signature_x,
+        signature_y,
+        signature_width,
+        signature_height
       );
       contextFirst.drawImage(
         imgCheck,
