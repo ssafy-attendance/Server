@@ -26,6 +26,15 @@ const AttendanceVersionOneStore = {
     getUserInput: (state) => {
       return state.userInput;
     },
+    getAttendanceYear: (state) => {
+      return state.userInput.attendanceYear;
+    },
+    getAttendanceMonth: (state) => {
+      return state.userInput.attendanceMonth;
+    },
+    getAttendanceDay: (state) => {
+      return state.userInput.attendanceDay;
+    },
   },
   mutations: {
     SET_USER_INFO(state, userInput) {
