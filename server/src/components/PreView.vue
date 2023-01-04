@@ -81,8 +81,7 @@ export default {
       const imageHeight = canvasFirst.height * 0.535;
       const checkSize = canvasFirst.width * 0.018;
       const absentTimeCoord = this.absentTime[this.userInput.absentTime];
-      const absentCategoryCoord =
-        this.absentCategory[this.userInput.absentCategory];
+      const absentCategoryCoord = this.absentCategory[this.userInput.absentCategory];
 
       contextFirst.drawImage(img, 0, 0, canvasFirst.width, canvasFirst.height);
       contextFirst.drawImage(signatureImage, imageWidth, imageHeight);
@@ -131,13 +130,7 @@ export default {
     const canvasImg2 = new Image();
     canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지-2.png");
     canvasImg2.onload = () => {
-      contextSecond.drawImage(
-        canvasImg2,
-        0,
-        0,
-        canvasSecond.width,
-        canvasSecond.height
-      );
+      contextSecond.drawImage(canvasImg2, 0, 0, canvasSecond.width, canvasSecond.height);
       this.drawMaterial();
     };
   },
@@ -205,8 +198,6 @@ export default {
     },
     saveImg() {
       console.log("saveImg");
-      console.log(this.userInput);
-      console.log(this.userInput.absentYear);
       html2canvas(document.querySelector("#container")).then((canvas) => {
         var imgData = canvas.toDataURL("image/png", 1.0);
         var imgWidth = 210;
@@ -215,14 +206,7 @@ export default {
 
         doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
         doc.addPage();
-        doc.addImage(
-          this.canvas2.toDataURL("image/png", 1.0),
-          "PNG",
-          0,
-          0,
-          imgWidth,
-          imgHeight
-        );
+        doc.addImage(this.canvas2.toDataURL("image/png", 1.0), "PNG", 0, 0, imgWidth, imgHeight);
         doc.save(
           this.userInput.absentYear +
             this.userInput.absentMonth +
@@ -230,8 +214,9 @@ export default {
             "_출결확인서_" +
             this.userInput.name +
             "[" +
-            "대전7반" +
-            "]" +
+            this.userInput.campus +
+            this.userInput.class +
+            "반]" +
             ".pdf"
         );
       });
