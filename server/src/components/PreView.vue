@@ -16,6 +16,7 @@ import html2canvas from "html2canvas";
 export default {
   created() {
     this.userInput = this.getUserInput;
+    console.log(this.userInput);
   },
 
   data() {
@@ -139,57 +140,9 @@ export default {
       );
       this.drawMaterial();
     };
-
-    // this.canvasSecond
-    // if (this.userInput.pictureUrl) {
-    //   this.initCanvas();
-    //   const image = this.userInput.pictureUrl[0];
-    //   const material = new Image();
-
-    //   material.src = image;
-    //   material.onload = () => {
-    //     const maxWidth = this.canvas.width * 0.8;
-    //     const maxHeight = this.canvas.height * 0.7;
-
-    //     let nowWidth = material.width;
-    //     let nowHeight = material.height;
-
-    //     const minWidth = 500;
-    //     const minHeight = 700;
-
-    //     if (nowWidth < minWidth) {
-    //       nowHeight = (nowHeight * minWidth) / nowWidth;
-    //       nowWidth = minWidth;
-    //     }
-    //     if (nowHeight < minHeight) {
-    //       nowWidth = (nowWidth * minHeight) / nowHeight;
-    //       nowHeight = minHeight;
-    //     }
-    //     if (nowWidth > maxWidth) {
-    //       nowHeight = (nowHeight * maxWidth) / nowWidth;
-    //       nowWidth = maxWidth;
-    //     }
-    //     if (nowHeight > maxHeight) {
-    //       nowWidth = (nowWidth * maxHeight) / nowHeight;
-    //       nowHeight = maxHeight;
-    //     }
-
-    //     this.context.drawImage(
-    //       material,
-    //       this.canvas.width * 0.075,
-    //       this.canvas.height * 0.12,
-    //       nowWidth,
-    //       nowHeight
-    //     );
-    //   };
-    // }
   },
 
   methods: {
-    // findCoord(event) {
-    //   const x = event.offsetX;
-    //   const y = event.offsetY;
-    // },
     initCanvas() {
       const canvas = document.querySelector("#pictureContainer");
       this.canvas = canvas;
@@ -251,6 +204,9 @@ export default {
       };
     },
     saveImg() {
+      console.log("saveImg");
+      console.log(this.userInput);
+      console.log(this.userInput.absentYear);
       html2canvas(document.querySelector("#container")).then((canvas) => {
         var imgData = canvas.toDataURL("image/png", 1.0);
         var imgWidth = 210;
@@ -267,7 +223,17 @@ export default {
           imgWidth,
           imgHeight
         );
-        doc.save("sample.pdf");
+        doc.save(
+          this.userInput.absentYear +
+            this.userInput.absentMonth +
+            this.userInput.absentDay +
+            "_출결확인서_" +
+            this.userInput.name +
+            "[" +
+            "대전7반" +
+            "]" +
+            ".pdf"
+        );
       });
     },
     uploadImg() {
