@@ -77,14 +77,25 @@ export default {
     img.src = require("@/assets/AttendVersion1_Image/출결이미지-1.png");
     signatureImage.src = this.userInput.signatureUrl;
     img.onload = () => {
-      const imageWidth = canvasFirst.width * 0.77;
-      const imageHeight = canvasFirst.height * 0.535;
+      // const imageWidth = canvasFirst.width * 0.77;
+      // const imageHeight = canvasFirst.height * 0.535;
       const checkSize = canvasFirst.width * 0.018;
+      var signature_x = canvasFirst.width * 0.84;
+      var signature_y = canvasFirst.height * 0.557;
+      const signature_width = 0.07 * window.innerWidth;
+      const signature_height = 0.035 * ((window.innerWidth * 4) / 3);
+
       const absentTimeCoord = this.absentTime[this.userInput.absentTime];
       const absentCategoryCoord = this.absentCategory[this.userInput.absentCategory];
 
       contextFirst.drawImage(img, 0, 0, canvasFirst.width, canvasFirst.height);
-      contextFirst.drawImage(signatureImage, imageWidth, imageHeight);
+      contextFirst.drawImage(
+        signatureImage,
+        signature_x,
+        signature_y,
+        signature_width,
+        signature_height
+      );
       contextFirst.drawImage(
         imgCheck,
         absentTimeCoord[0] * canvasFirst.width,
