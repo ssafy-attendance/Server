@@ -36,8 +36,8 @@ export default {
         absentDay: [0.53, 0.273],
         // absentReason: [0.296, 0.415],
         // absentDetail: [0.329, 0.513],
-        // absentPlace: [0.295, 0.545],
-        // signature: [0.295, 0.576],
+        absentPlace: [0.295, 0.5665],
+        signature: [0.295, 0.5975],
       },
       reasonCoordinate: {},
       canvas2: null,
@@ -48,8 +48,9 @@ export default {
       },
       absentCategory: {
         0: [0.205, 0.401],
-        1: [0.205, 0.423],
+        1: [0.205, 0.4335],
       },
+      lineCnt: 1,
     };
   },
 
@@ -74,13 +75,12 @@ export default {
 
     const img = new Image();
     const signatureImage = new Image();
-    // this.getSrc();
-    // img.src = require("@/assets/AttendVersion1_Image/출결이미지-1.png");
+
     img.src = this.getSrc();
     signatureImage.src = this.userInput.signatureUrl;
     img.onload = () => {
-      const imageWidth = canvasFirst.width * 0.77;
-      const imageHeight = canvasFirst.height * 0.535;
+      const imageWidth = canvasFirst.width * 0.8;
+      const imageHeight = canvasFirst.height * 0.574 + 75 * this.lineCnt;
       const checkSize = canvasFirst.width * 0.018;
       const absentTimeCoord = this.absentTime[this.userInput.absentTime];
       const absentCategoryCoord = this.absentCategory[this.userInput.absentCategory];
@@ -112,7 +112,6 @@ export default {
       }
 
       for (let key in this.reasonCoordinate) {
-        console.log(key);
         contextFirst.fillText(
           this.reasonCoordinate[key][0],
           this.reasonCoordinate[key][1] * canvasFirst.width,
@@ -200,11 +199,12 @@ export default {
       let reason = this.userInput.absentReason.split("\n");
       let isReasonEnter = reason.length > 1 ? true : false;
 
-      let sp = 26;
+      let sp = 23;
 
       let reasonX = 0.296;
-      let reasonY = category == 0 ? 0.415 : 0.425;
+      let reasonY = category == 0 ? 0.415 : 0.447;
       let addY = 0.031;
+      let blankY = 0.002;
 
       if (isReasonEnter) {
         //공가/사유에 enter가 있으면
@@ -213,9 +213,19 @@ export default {
 
         let detailLine = this.getDetailLine(addY);
 
-        this.fontStyleTwoCoordinate.currentYear[1] += 0.002 * detailLine;
-        this.fontStyleTwoCoordinate.currentMonth[1] += 0.002 * detailLine;
-        this.fontStyleTwoCoordinate.currentDay[1] += 0.002 * detailLine;
+        this.lineCnt = detailLine;
+        this.fontStyleOneCoordinate.absentPlace[1] += (addY + blankY) * detailLine;
+        this.fontStyleOneCoordinate.signature[1] += (addY + blankY) * detailLine;
+
+        if (detailLine == 3) {
+          this.fontStyleTwoCoordinate.currentYear[1] += blankY * detailLine + addY;
+          this.fontStyleTwoCoordinate.currentMonth[1] += blankY * detailLine + addY;
+          this.fontStyleTwoCoordinate.currentDay[1] += blankY * detailLine + addY;
+        } else {
+          this.fontStyleTwoCoordinate.currentYear[1] += blankY * detailLine;
+          this.fontStyleTwoCoordinate.currentMonth[1] += blankY * detailLine;
+          this.fontStyleTwoCoordinate.currentDay[1] += blankY * detailLine;
+        }
 
         if (category == 0) {
           return require(`@/assets/AttendVersion1_Image/공가-2-${detailLine}.png`);
@@ -224,7 +234,7 @@ export default {
         }
       } else {
         //공가/사유에 enter가 없으면
-        if (reason[0].length >= sp) {
+        if (reason[0].length > sp) {
           //2줄
           this.reasonCoordinate.reason1 = [reason[0].substring(0, sp), reasonX, reasonY];
           this.reasonCoordinate.reason2 = [
@@ -234,6 +244,14 @@ export default {
           ];
 
           let detailLine = this.getDetailLine(addY);
+
+          this.lineCnt = detailLine;
+          this.fontStyleOneCoordinate.absentPlace[1] += (addY + blankY) * detailLine;
+          this.fontStyleOneCoordinate.signature[1] += (addY + blankY) * detailLine;
+
+          this.fontStyleTwoCoordinate.currentYear[1] += blankY * (detailLine + 1);
+          this.fontStyleTwoCoordinate.currentMonth[1] += blankY * (detailLine + 1);
+          this.fontStyleTwoCoordinate.currentDay[1] += blankY * (detailLine + 1);
 
           if (category == 0) {
             return require(`@/assets/AttendVersion1_Image/공가-2-${detailLine}.png`);
@@ -246,9 +264,13 @@ export default {
 
           let detailLine = this.getDetailLine(0);
 
-          this.fontStyleTwoCoordinate.currentYear[1] += 0.002 * (detailLine - 1);
-          this.fontStyleTwoCoordinate.currentMonth[1] += 0.002 * (detailLine - 1);
-          this.fontStyleTwoCoordinate.currentDay[1] += 0.002 * (detailLine - 1);
+          this.lineCnt = detailLine - 1;
+          this.fontStyleOneCoordinate.absentPlace[1] += (addY + blankY) * (detailLine - 1);
+          this.fontStyleOneCoordinate.signature[1] += (addY + blankY) * (detailLine - 1);
+
+          this.fontStyleTwoCoordinate.currentYear[1] += blankY * (detailLine - 1);
+          this.fontStyleTwoCoordinate.currentMonth[1] += blankY * (detailLine - 1);
+          this.fontStyleTwoCoordinate.currentDay[1] += blankY * (detailLine - 1);
 
           return require(`@/assets/AttendVersion1_Image/세부-${detailLine}.png`);
         }
@@ -259,7 +281,7 @@ export default {
       let detailEnterSize = detail.length;
       let isDetailEnter = detailEnterSize > 1 ? true : false;
 
-      let sp = 26;
+      let sp = 23;
 
       let detailX = 0.329;
       let detailY = 0.535 + addLine;
@@ -267,7 +289,7 @@ export default {
 
       if (isDetailEnter) {
         //세부내용에 enter가 있으면
-        if (detail[0].length >= sp) {
+        if (detail[0].length > sp) {
           //첫째줄에 enter가 없이 개행이 있으면
           this.reasonCoordinate.detail1 = [detail[0].substring(0, sp), detailX, detailY];
           this.reasonCoordinate.detail2 = [
@@ -275,10 +297,10 @@ export default {
             detailX,
             detailY + addY,
           ];
-          this.reasonCoordinate.detail3 = [detail[1], detailX, 0.391];
+          this.reasonCoordinate.detail3 = [detail[1], detailX, detailY + 2 * addY];
 
           return 3;
-        } else if (detail[1].length >= sp) {
+        } else if (detail[1].length > sp) {
           //둘째줄에 enter가 없이 개행이 있으면
           this.reasonCoordinate.detail1 = [detail[0], detailX, detailY];
           this.reasonCoordinate.detail2 = [detail[1].substring(0, sp), detailX, detailY + addY];
@@ -299,16 +321,18 @@ export default {
         }
       } else {
         //세부내용에 enter가 없으면
-        if (detail[0].length > 52) {
+        if (detail[0].length > 46) {
           //3줄
           this.reasonCoordinate.detail1 = [detail[0].substring(0, sp), detailX, detailY];
-          this.reasonCoordinate.detail2 = [detail[0].substring(sp, 52), detailX, detailY + addY];
+          this.reasonCoordinate.detail2 = [detail[0].substring(sp, 46), detailX, detailY + addY];
           this.reasonCoordinate.detail3 = [
-            detail[0].substring(52, detail[0].length, detailX, detailY + 2 * addY),
+            detail[0].substring(46, detail[0].length),
+            detailX,
+            detailY + 2 * addY,
           ];
 
           return 3;
-        } else if (detail[0].length >= sp) {
+        } else if (detail[0].length > sp) {
           //2줄
           this.reasonCoordinate.detail1 = [detail[0].substring(0, sp), detailX, detailY];
           this.reasonCoordinate.detail2 = [
