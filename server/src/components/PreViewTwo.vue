@@ -84,11 +84,46 @@ export default {
         doc.save("sample.pdf");
       });
     },
+    getLength() {
+      const reasonList = this.userInput.detailReason.split("\n");
+      console.log(reasonList);
+      // 엔터 없이 세 줄 쓴 경우
+      if (reasonList[0].length > 46) {
+        reasonList[2] = reasonList[0].slice(46);
+        reasonList[1] = reasonList[0].slice(23, 46);
+        reasonList[0] = reasonList[0].slice(0, 23);
+      }
+      // 첫 줄만 길게 쓴 경우
+      else if (reasonList[0].length > 23) {
+        // 첫 줄 길고 엔터 쓴 경우
+        if (reasonList.length > 1) {
+          reasonList[2] = reasonList[1];
+          reasonList[1] = reasonList[0].slice(23);
+          reasonList[0] = reasonList[0].slice(0, 23);
+        }
+        // 첫 줄 길고 엔터 안 쓴 경우
+        else {
+          reasonList[1] = reasonList[0].slice(23);
+          reasonList[0] = reasonList[0].slice(0, 23);
+        }
+      }
+      // 첫 줄 짧고 뒤에 길게
+      else if (reasonList[1].length > 23) {
+        reasonList[2] = reasonList[1].slice(23);
+        reasonList[1] = reasonList[1].slice(0, 23);
+        console.log("in");
+      }
+      console.log(reasonList);
+      this.userInput.detailReason = reasonList[0];
+      this.userInput.detailReason2 = reasonList[1];
+      this.userInput.detailReason3 = reasonList[2];
+    },
   },
   mounted() {
     // const finalInnerWidth = window.innerWidth;
     // const finalInnerHeight = (window.innerWidth * 4) / 3;
-    console.log(this.userInput.detailReason.split('"\n"').length);
+    // console.log("??", this.userInput.detailReason.split("\n"));
+    this.getLength();
     const canvasFirst = document.querySelector("#container");
     const contextFirst = canvasFirst.getContext("2d");
     const imgCheck = new Image();
@@ -108,16 +143,22 @@ export default {
     const signature_height = 80;
     signatureImage.src = this.userInput.signatureUrl;
     // 변경 사유 길어질 시 이미지 변경
-    // 이미지 별 좌표 설정 필요
-    if (this.userInput.detailReason.length < 30) {
+    if (
+      this.userInput.detailReason &&
+      !(this.userInput.detailReason2 && this.userInput.detailReason3)
+    ) {
       img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-1.png");
       signature_x = 913;
       signature_y = 1067;
-    } else if (this.userInput.detailReason.length < 60) {
+    } else if (
+      this.userInput.detailReason &&
+      this.userInput.detailReason2 &&
+      !this.userInput.detailReason3
+    ) {
       img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-2.png");
       // 30자 넘으면 자르고 다음 줄로
-      this.userInput.detailReason2 = this.userInput.detailReason.slice(30);
-      this.userInput.detailReason = this.userInput.detailReason.slice(0, 30);
+      // this.userInput.detailReason2 = this.userInput.detailReason.slice(30);
+      // this.userInput.detailReason = this.userInput.detailReason.slice(0, 30);
       // 서명 옆 이름 위치 변경
       this.fontStyleOneCoordinate.signature = [826, 1170];
       // 날짜 위치 변경
@@ -126,11 +167,15 @@ export default {
       this.fontStyleTwoCoordinate.currentDay = [676, 1458];
       signature_x = 913;
       signature_y = 1120;
-    } else if (this.userInput.detailReason.length < 90) {
+    } else if (
+      this.userInput.detailReason &&
+      this.userInput.detailReason2 &&
+      this.userInput.detailReason3
+    ) {
       img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-3.png");
-      this.userInput.detailReason2 = this.userInput.detailReason.slice(30, 60);
-      this.userInput.detailReason3 = this.userInput.detailReason.slice(60);
-      this.userInput.detailReason = this.userInput.detailReason.slice(0, 30);
+      // this.userInput.detailReason2 = this.userInput.detailReason.slice(30, 60);
+      // this.userInput.detailReason3 = this.userInput.detailReason.slice(60);
+      // this.userInput.detailReason = this.userInput.detailReason.slice(0, 30);
       this.fontStyleOneCoordinate.signature = [826, 1226];
       // 날짜 위치 변경
       this.fontStyleTwoCoordinate.currentYear = [436, 1435];

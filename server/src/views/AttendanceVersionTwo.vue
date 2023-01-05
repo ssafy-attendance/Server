@@ -249,7 +249,7 @@ export default {
       ) {
         alert("모든 정보를 입력해주세요.");
       } else {
-        console.log(this.userInput.detailReason);
+        console.log("check", this.userInput.detailReason.slice("\n"));
         let attDate = this.attendanceDate.split("-");
         let chAttDate = this.chAttendanceDate.split("-");
         let attTime = this.attendanceTime.split(":");
