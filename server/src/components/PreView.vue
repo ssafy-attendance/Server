@@ -35,7 +35,6 @@ export default {
         absentYear: [0.352, 0.273],
         absentMonth: [0.45, 0.273],
         absentDay: [0.53, 0.273],
-        absentReason: [0.296, 0.415],
         absentDetail: [0.329, 0.513],
         absentPlace: [0.295, 0.545],
         signature: [0.295, 0.576],
@@ -49,6 +48,10 @@ export default {
       absentCategory: {
         0: [0.205, 0.401],
         1: [0.205, 0.423],
+      },
+      absentReason: {
+        0: [0.296, 0.415],
+        1: [0.296, 0.436],
       },
     };
   },
@@ -86,7 +89,12 @@ export default {
       const signature_height = 0.035 * ((window.innerWidth * 4) / 3);
 
       const absentTimeCoord = this.absentTime[this.userInput.absentTime];
-      const absentCategoryCoord = this.absentCategory[this.userInput.absentCategory];
+      const absentCategoryCoord =
+        this.absentCategory[this.userInput.absentCategory];
+      const absentReasonCoord =
+        this.absentReason[this.userInput.absentCategory];
+
+      console.log(this.userInput.absentReason);
 
       contextFirst.drawImage(img, 0, 0, canvasFirst.width, canvasFirst.height);
       contextFirst.drawImage(
@@ -119,6 +127,12 @@ export default {
           this.fontStyleOneCoordinate[key][1] * canvasFirst.height
         );
       }
+      // 공가사유 좌표설정
+      contextFirst.fillText(
+        this.userInput.absentReason,
+        absentReasonCoord[0] * canvasFirst.width,
+        absentReasonCoord[1] * canvasFirst.height
+      );
 
       contextFirst.font = this.fontStyleTwo;
 
@@ -141,7 +155,13 @@ export default {
     const canvasImg2 = new Image();
     canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지-2.png");
     canvasImg2.onload = () => {
-      contextSecond.drawImage(canvasImg2, 0, 0, canvasSecond.width, canvasSecond.height);
+      contextSecond.drawImage(
+        canvasImg2,
+        0,
+        0,
+        canvasSecond.width,
+        canvasSecond.height
+      );
       this.drawMaterial();
     };
   },
@@ -217,7 +237,14 @@ export default {
 
         doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
         doc.addPage();
-        doc.addImage(this.canvas2.toDataURL("image/png", 1.0), "PNG", 0, 0, imgWidth, imgHeight);
+        doc.addImage(
+          this.canvas2.toDataURL("image/png", 1.0),
+          "PNG",
+          0,
+          0,
+          imgWidth,
+          imgHeight
+        );
         doc.save(
           this.userInput.absentYear +
             this.userInput.absentMonth +

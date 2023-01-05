@@ -1,9 +1,10 @@
 <template>
-  <div>
+  <div class="file-container">
+    <label for="chooseFile"
+      >업로드
+      <i class="fa-solid fa-arrow-up-from-bracket"></i>
+    </label>
     <form method="post" enctype="multipart/form-data">
-      <!-- <div>
-        <label for="chooseFile"> 증빙서류를 업로드해주세요</label>
-      </div> -->
       <input
         ref="image"
         @change="uploadImg()"
@@ -13,8 +14,6 @@
         accept="image/*"
       />
     </form>
-    <!-- <canvas id="container" /> -->
-    <!-- <button @click="saveImg()">save</button> -->
   </div>
 </template>
 
@@ -70,7 +69,6 @@ export default {
     },
     uploadImg() {
       // this.initCanvas();
-      console.log("들어왔다");
       const image = this.$refs["image"].files[0];
       const url = URL.createObjectURL(image);
       // const canvas = document.querySelector("#container");
@@ -86,8 +84,39 @@ export default {
 };
 </script>
 
-<style>
-#container {
-  width: 90%;
+<style scoped>
+.file-container {
+  width: 100%;
+}
+
+.file-container label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0.5em 0;
+  color: #050505;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.file-container label i {
+  margin: 0 4px;
+}
+
+.file-container input[type="file"] {
+  /* 파일 필드 숨기기 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 </style>
