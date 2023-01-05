@@ -86,7 +86,8 @@ export default {
       const signature_height = 0.035 * ((window.innerWidth * 4) / 3);
 
       const absentTimeCoord = this.absentTime[this.userInput.absentTime];
-      const absentCategoryCoord = this.absentCategory[this.userInput.absentCategory];
+      const absentCategoryCoord =
+        this.absentCategory[this.userInput.absentCategory];
 
       contextFirst.drawImage(img, 0, 0, canvasFirst.width, canvasFirst.height);
       contextFirst.drawImage(
@@ -141,7 +142,13 @@ export default {
     const canvasImg2 = new Image();
     canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지-2.png");
     canvasImg2.onload = () => {
-      contextSecond.drawImage(canvasImg2, 0, 0, canvasSecond.width, canvasSecond.height);
+      contextSecond.drawImage(
+        canvasImg2,
+        0,
+        0,
+        canvasSecond.width,
+        canvasSecond.height
+      );
       this.drawMaterial();
     };
   },
@@ -217,7 +224,14 @@ export default {
 
         doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
         doc.addPage();
-        doc.addImage(this.canvas2.toDataURL("image/png", 1.0), "PNG", 0, 0, imgWidth, imgHeight);
+        doc.addImage(
+          this.canvas2.toDataURL("image/png", 1.0),
+          "PNG",
+          0,
+          0,
+          imgWidth,
+          imgHeight
+        );
         doc.save(
           this.userInput.absentYear +
             this.userInput.absentMonth +

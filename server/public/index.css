@@ -74,6 +74,8 @@ textarea {
   background: var(--input-background);
   padding: var(--input-padding);
   font-size: var(--input-font-size);
+  line-height: 15px;
+  overflow: hidden;
 }
 
 .user-input-value::placeholder,

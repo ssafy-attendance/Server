@@ -109,12 +109,19 @@
     <div class="user-input">
       <label for="absent-reason" class="user-input-label">변경사유</label>
       <textarea
+        ref="reason"
         id="absent-reason"
         class="user-input-textarea"
         v-model="userInput.detailReason"
         placeholder="예) 마우스 고장으로 인한 입실 미클릭"
-        rows="5"
+        rows="3"
+        maxlength="69"
+        @input="absentLimit"
+        @blur="absentLimit"
       />
+      <p style="color: red" v-if="checkForm == 1">
+        *변경 사유는 세 줄까지만 입력 가능합니다.
+      </p>
     </div>
     <div class="user-input">
       <label for="signature" class="user-input-label">서명</label>
@@ -182,6 +189,7 @@ export default {
         currentMonth: "", // 작성 날짜 월
         currentDay: "", // 작성 날짜 일
       },
+      checkForm: 0,
     };
   },
   methods: {
@@ -241,6 +249,7 @@ export default {
       ) {
         alert("모든 정보를 입력해주세요.");
       } else {
+        console.log(this.userInput.detailReason);
         let attDate = this.attendanceDate.split("-");
         let chAttDate = this.chAttendanceDate.split("-");
         let attTime = this.attendanceTime.split(":");
@@ -301,6 +310,20 @@ export default {
         signatureUrl: "",
       };
       this.reset();
+    },
+    absentLimit() {
+      let h = this.$refs.reason.scrollHeight;
+
+      if (h > 55) {
+        let lng = this.userInput.detailReason.length;
+        this.userInput.detailReason = this.userInput.detailReason.substring(
+          0,
+          lng - 1
+        );
+        this.checkForm = 1;
+      } else {
+        this.checkForm = 0;
+      }
     },
   },
   mounted() {

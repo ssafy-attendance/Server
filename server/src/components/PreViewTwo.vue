@@ -88,7 +88,7 @@ export default {
   mounted() {
     // const finalInnerWidth = window.innerWidth;
     // const finalInnerHeight = (window.innerWidth * 4) / 3;
-
+    console.log(this.userInput.detailReason.split('"\n"').length);
     const canvasFirst = document.querySelector("#container");
     const contextFirst = canvasFirst.getContext("2d");
     const imgCheck = new Image();
@@ -162,7 +162,6 @@ export default {
 
       contextFirst.font = this.fontStyleOne;
       for (let key in this.fontStyleOneCoordinate) {
-        console.log(this.userInput[key]);
         if (this.userInput[key]) {
           contextFirst.fillText(
             this.userInput[key],
