@@ -170,26 +170,31 @@
     <!-- Signature component -->
     <div class="user-input">
       <label for="signature" class="user-input-label">서명</label>
-      <canvas
-        id="signature"
-        width="248"
-        height="110"
-        v-on="{
-          mousemove: move,
-          mouseup: up,
-          mousedown: down,
-          mouseout: out,
-        }"
-      ></canvas>
-      <div class="reset-button-container">
-        <button class="reset-button" @click="reset">다시 그리기</button>
+      <div class="canvas-btn-container">
+        <canvas
+          id="signature"
+          width="166"
+          height="94"
+          v-on="{
+            mousemove: move,
+            mouseup: up,
+            mousedown: down,
+            mouseout: out,
+          }"
+        ></canvas>
+        <div class="reset-button-container">
+          <button class="reset-button" @click="reset">
+            다시 그리기
+            <i class="fa-solid fa-rotate-right"></i>
+          </button>
+        </div>
       </div>
     </div>
     <div class="user-input">
       <label for="absent-category" class="user-input-label">증빙서류</label>
       <FileUpload :pictureUrl="pictureUrl" @uploadPicture="uploadPicture" />
     </div>
-    <div class="button-container">
+    <div class="user-input button-container">
       <button class="submit-button" @click="verifyValidation">만들기</button>
       <button class="submit-button" @click="resetInput">리셋</button>
     </div>
@@ -374,7 +379,7 @@ export default {
     },
 
     reset() {
-      this.context.clearRect(0, 0, 248, 110);
+      this.context.clearRect(0, 0, 166, 94);
     },
   },
 };
