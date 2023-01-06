@@ -10,7 +10,6 @@
   --font: "NotoSansKRBold" Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue",
     "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", sans-serif;
-
   --font-weight: 800;
   --title: 1.6rem bold;
 
@@ -75,8 +74,6 @@ textarea {
   background: var(--input-background);
   padding: var(--input-padding);
   font-size: var(--input-font-size);
-  line-height: 15px;
-  overflow: hidden;
 }
 
 .user-input-value::placeholder,
