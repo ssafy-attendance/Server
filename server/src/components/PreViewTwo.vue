@@ -87,8 +87,9 @@ export default {
     getLength() {
       const reasonList = this.userInput.detailReason.split("\n");
       console.log(reasonList);
+
       // 엔터 없이 세 줄 쓴 경우
-      if (reasonList[0].length > 46) {
+      if (reasonList[0].length > 46 && reasonList.length == 1) {
         reasonList[2] = reasonList[0].slice(46);
         reasonList[1] = reasonList[0].slice(23, 46);
         reasonList[0] = reasonList[0].slice(0, 23);

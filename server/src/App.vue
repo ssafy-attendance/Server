@@ -42,9 +42,9 @@ export default {
   },
 
   watch: {
-    // $route(from, to) {
-    // if (to.name === undefined) this.$router.push("/");
-    // },
+    $route(from, to) {
+      if (to.name === undefined) this.$router.push("/");
+    },
   },
 
   methods: {
