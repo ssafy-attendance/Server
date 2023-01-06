@@ -1,6 +1,28 @@
 <template>
   <div class="input-container">
     <div class="user-input">
+      <label for="class" class="user-input-label">지역</label>
+      <input
+        type="text"
+        id="class"
+        class="user-input-value"
+        v-model="userInput.campus"
+        placeholder="예) 서울"
+      />
+    </div>
+
+    <div class="user-input">
+      <label for="class" class="user-input-label">반</label>
+      <input
+        type="number"
+        id="class"
+        class="user-input-value"
+        v-model="userInput.class"
+        placeholder="예) 7"
+      />
+    </div>
+
+    <div class="user-input">
       <label for="name" class="user-input-label">성명</label>
       <input
         type="text"
@@ -17,7 +39,7 @@
         id="birthday"
         class="user-input-value"
         v-model="userInput.birthday"
-        placeholder="YY/MM/DD"
+        placeholder="YY.MM.DD"
       />
     </div>
     <div class="user-input">
@@ -154,26 +176,31 @@
     <!-- Signature component -->
     <div class="user-input">
       <label for="signature" class="user-input-label">서명</label>
-      <canvas
-        id="signature"
-        width="248"
-        height="110"
-        v-on="{
-          mousemove: move,
-          mouseup: up,
-          mousedown: down,
-          mouseout: out,
-        }"
-      ></canvas>
-      <div class="reset-button-container">
-        <button class="reset-button" @click="reset">다시 그리기</button>
+      <div class="canvas-btn-container">
+        <canvas
+          id="signature"
+          width="166"
+          height="94"
+          v-on="{
+            mousemove: move,
+            mouseup: up,
+            mousedown: down,
+            mouseout: out,
+          }"
+        ></canvas>
+        <div class="reset-button-container">
+          <button class="reset-button" @click="reset">
+            다시 그리기
+            <i class="fa-solid fa-rotate-right"></i>
+          </button>
+        </div>
       </div>
     </div>
     <div class="user-input">
       <label for="absent-category" class="user-input-label">증빙서류</label>
       <FileUpload :pictureUrl="pictureUrl" @uploadPicture="uploadPicture" />
     </div>
-    <div class="button-container">
+    <div class="user-input button-container">
       <button class="submit-button" @click="verifyValidation">만들기</button>
       <button class="submit-button" @click="resetInput">리셋</button>
     </div>
@@ -192,6 +219,8 @@ export default {
   data() {
     return {
       userInput: {
+        campus: "",
+        class: "",
         name: "",
         birthday: "",
         absentYear: "",
@@ -264,6 +293,8 @@ export default {
     resetInput() {
       this.userInput = {
         name: "",
+        class: "",
+        campus: "",
         birthday: "",
         absentDate: "",
         absentMonth: "",
@@ -292,6 +323,8 @@ export default {
       this.userInput.signatureUrl = this.canvas.toDataURL();
       if (
         !(
+          this.userInput.class &&
+          this.userInput.campus &&
           this.userInput.name &&
           this.userInput.birthday &&
           this.absentDate &&
@@ -312,6 +345,8 @@ export default {
         let currentDay = currentDate.getDate();
 
         const userInput = {
+          campus: this.userInput.campus,
+          class: this.userInput.class,
           name: this.userInput.name,
           birthday: this.userInput.birthday,
           absentYear: absentDate[0].slice(2),
@@ -372,7 +407,7 @@ export default {
     },
 
     reset() {
-      this.context.clearRect(0, 0, 248, 110);
+      this.context.clearRect(0, 0, 166, 94);
     },
   },
 };
