@@ -43,9 +43,13 @@ SSAFY 기간동안 출결과 관련해서 결석을 소명하거나 상태를 �
 
 # 실행화면
 
-![스크린샷 2023-01-04 오후 4.32.54.png](https://user-images.githubusercontent.com/62539910/210582962-110629d3-d776-4415-a40f-7ffda89f03a2.png)
+![실행화면1.png](https://user-images.githubusercontent.com/62539910/210926077-e689836e-233f-4617-9160-91ecca5fcf4d.png)
 
-![스크린샷 2023-01-04 오후 4.32.47.png](https://user-images.githubusercontent.com/62539910/210582956-33c9b710-f671-4d84-b54c-476d94b79712.png)
+![실행화면2.png](https://user-images.githubusercontent.com/62539910/210926081-4b63f05c-78a8-4487-8948-749621fa3dad.png)
+
+![실행화면3.png](https://user-images.githubusercontent.com/62539910/210926082-f8d4bab7-f382-4ce6-8a72-7b18fb1cc2ef.png)
+
+![실행화면4.png](https://user-images.githubusercontent.com/62539910/210926086-46deadb8-b0f7-4266-a823-8caaad97ea3b.png)
 
 # 만든 사람
 
