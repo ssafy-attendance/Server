@@ -1,0 +1,23 @@
+.button-container-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0 1rem 0;
+  position: sticky;
+  top: 0;
+}
+
+.make-button {
+  background: var(--preview-button-background);
+  width: var(--preview-button-width);
+  height: var(--preview-button-height);
+  color: var(--preview-button-color);
+  border-radius: var(--preview-button-radius);
+  border: 0;
+}
+
+#canvas {
+  display: flex;
+  justify-content: center;
+  overflow: scroll;
+}
