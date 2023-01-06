@@ -1,5 +1,12 @@
 <template>
   <div class="file-container">
+    <input
+      type="text"
+      id="fileName"
+      class="user-input-value"
+      placeholder="파일을 선택해주세요."
+      readonly="readonly"
+    />
     <label for="chooseFile"
       >업로드
       <i class="fa-solid fa-arrow-up-from-bracket"></i>
@@ -79,44 +86,10 @@ export default {
       const material = new Image();
       material.src = this.image;
       this.$emit("uploadPicture", [this.image]);
+      document.getElementById("fileName").value = image.name;
     },
   },
 };
 </script>
 
-<style scoped>
-.file-container {
-  width: 100%;
-}
-
-.file-container label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: 0.5em 0;
-  color: #050505;
-  font-size: inherit;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: #f0f0f0;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-.file-container label i {
-  margin: 0 4px;
-}
-
-.file-container input[type="file"] {
-  /* 파일 필드 숨기기 */
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-</style>
+<style scoped></style>
