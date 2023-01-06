@@ -72,7 +72,7 @@ export default {
       console.log(`X 좌표 : ${x}  Y좌표 : ${y}`);
     },
     saveImg() {
-      html2canvas(document.querySelector("#container")).then(function (canvas) {
+      html2canvas(document.querySelector("#container")).then((canvas) => {
         var imgData = canvas.toDataURL("image/png", 1.0);
         var imgWidth = 210;
         var imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -81,7 +81,18 @@ export default {
 
         doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
 
-        doc.save("sample.pdf");
+        doc.save(
+          this.userInput.attendanceYear.substr(2, 2) +
+            this.userInput.attendanceMonth +
+            this.userInput.attendanceDay +
+            "_출결변경서_" +
+            this.userInput.name +
+            "[" +
+            this.userInput.campus +
+            this.userInput.class +
+            "반]" +
+            ".pdf"
+        );
       });
     },
   },
