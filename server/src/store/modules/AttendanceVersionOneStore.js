@@ -1,25 +1,25 @@
-const AttendanceVersionOneStore = {
+const AttendanceVersionOne = {
   namespaced: true,
   state: () => ({
     userInput: {
-      campus: "",
+      name: "",
       class: "",
-      name: "정도형",
-      birth: "",
-      reason: "",
-      attendanceYear: "",
-      attendanceMonth: "",
-      attendanceDay: "",
-      chAttendanceYear: "",
-      chAttendanceMonth: "",
-      chAttendanceDay: "",
-      attendanceHour: "",
-      attendanceMinute: "",
-      chAttendanceHour: "",
-      chAttendanceMinute: "",
-      currentDate: "",
-      detailReason: "",
+      campus: "",
+      birthday: "",
+      absentDate: "",
+      absentMonth: "",
+      absentDay: "",
+      absentTime: 0,
+      absentCategory: 0,
+      absentReason: "",
+      absentDetail: "",
+      absentPlace: "",
+      signature: "",
+      currentYear: "",
+      currentMonth: "",
+      currentDay: "",
       signatureUrl: "",
+      pictureUrl: "",
     },
   }),
   getters: {
@@ -35,4 +35,4 @@ const AttendanceVersionOneStore = {
   actions: {},
 };
 
-export default AttendanceVersionOneStore;
+export default AttendanceVersionOne;

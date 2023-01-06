@@ -1,6 +1,28 @@
 <template>
   <div class="input-container">
     <div class="user-input">
+      <label for="class" class="user-input-label">지역</label>
+      <input
+        type="text"
+        id="class"
+        class="user-input-value"
+        v-model="userInput.campus"
+        placeholder="예) 서울"
+      />
+    </div>
+
+    <div class="user-input">
+      <label for="class" class="user-input-label">반</label>
+      <input
+        type="number"
+        id="class"
+        class="user-input-value"
+        v-model="userInput.class"
+        placeholder="예) 7"
+      />
+    </div>
+
+    <div class="user-input">
       <label for="name" class="user-input-label">성명</label>
       <input
         type="text"
@@ -17,7 +39,7 @@
         id="birthday"
         class="user-input-value"
         v-model="userInput.birthday"
-        placeholder="YY/MM/DD"
+        placeholder="YY.MM.DD"
       />
     </div>
     <div class="user-input">
@@ -117,28 +139,22 @@
     <div class="user-input">
       <label for="absent-reason" class="user-input-label">사유</label>
       <textarea
-        ref="reason"
         id="absent-reason"
         class="user-input-textarea"
         v-model="userInput.absentReason"
         placeholder="예) SSAFY 면접으로 인한 결석"
-        rows="2"
-        maxlength="46"
-        @input="absentLimit"
+        rows="3"
       />
     </div>
     <div class="user-input">
       <label for="absent-detail" class="user-input-label">세부내용</label>
       <textarea
-        ref="reasonDetail"
         type="text"
         id="absent-detail"
         class="user-input-textarea"
         v-model="userInput.absentDetail"
         placeholder="예) 멀티캠퍼스 서울에서 진행된 SSAFY 면접으로 인하여 결석 소명 제출합니다."
-        rows="3"
-        maxlength="69"
-        @input="absentDetailLimit"
+        rows="5"
       />
     </div>
     <div class="user-input">
@@ -154,26 +170,31 @@
     <!-- Signature component -->
     <div class="user-input">
       <label for="signature" class="user-input-label">서명</label>
-      <canvas
-        id="signature"
-        width="248"
-        height="110"
-        v-on="{
-          mousemove: move,
-          mouseup: up,
-          mousedown: down,
-          mouseout: out,
-        }"
-      ></canvas>
-      <div class="reset-button-container">
-        <button class="reset-button" @click="reset">다시 그리기</button>
+      <div class="canvas-btn-container">
+        <canvas
+          id="signature"
+          width="166"
+          height="94"
+          v-on="{
+            mousemove: move,
+            mouseup: up,
+            mousedown: down,
+            mouseout: out,
+          }"
+        ></canvas>
+        <div class="reset-button-container">
+          <button class="reset-button" @click="reset">
+            다시 그리기
+            <i class="fa-solid fa-rotate-right"></i>
+          </button>
+        </div>
       </div>
     </div>
     <div class="user-input">
       <label for="absent-category" class="user-input-label">증빙서류</label>
       <FileUpload :pictureUrl="pictureUrl" @uploadPicture="uploadPicture" />
     </div>
-    <div class="button-container">
+    <div class="user-input button-container">
       <button class="submit-button" @click="verifyValidation">만들기</button>
       <button class="submit-button" @click="resetInput">리셋</button>
     </div>
@@ -192,6 +213,8 @@ export default {
   data() {
     return {
       userInput: {
+        campus: "",
+        class: "",
         name: "",
         birthday: "",
         absentYear: "",
@@ -233,28 +256,6 @@ export default {
 
   methods: {
     ...mapMutations("AttendanceVersionOneStore", ["SET_USER_INFO"]),
-    absentLimit() {
-      let h = this.$refs.reason.scrollHeight;
-
-      if (h > 40) {
-        let lng = this.userInput.absentReason.length;
-        this.userInput.absentReason = this.userInput.absentReason.substring(
-          0,
-          lng - 1
-        );
-      }
-    },
-    absentDetailLimit() {
-      let h = this.$refs.reasonDetail.scrollHeight;
-
-      if (h > 55) {
-        let lng = this.userInput.absentDetail.length;
-        this.userInput.absentDetail = this.userInput.absentDetail.substring(
-          0,
-          lng - 1
-        );
-      }
-    },
     changeTime(radio) {
       this.selectTime = radio;
     },
@@ -264,6 +265,8 @@ export default {
     resetInput() {
       this.userInput = {
         name: "",
+        class: "",
+        campus: "",
         birthday: "",
         absentDate: "",
         absentMonth: "",
@@ -292,6 +295,8 @@ export default {
       this.userInput.signatureUrl = this.canvas.toDataURL();
       if (
         !(
+          this.userInput.class &&
+          this.userInput.campus &&
           this.userInput.name &&
           this.userInput.birthday &&
           this.absentDate &&
@@ -312,6 +317,8 @@ export default {
         let currentDay = currentDate.getDate();
 
         const userInput = {
+          campus: this.userInput.campus,
+          class: this.userInput.class,
           name: this.userInput.name,
           birthday: this.userInput.birthday,
           absentYear: absentDate[0].slice(2),
@@ -372,7 +379,7 @@ export default {
     },
 
     reset() {
-      this.context.clearRect(0, 0, 248, 110);
+      this.context.clearRect(0, 0, 166, 94);
     },
   },
 };

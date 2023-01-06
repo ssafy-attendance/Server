@@ -6,10 +6,10 @@
 }
 
 :root {
-  --background-color: #efefef;
-  --font: "NotoSansKRBold" Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
-    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  --background-color: #f5f5f5;
+  --font: "NotoSansKRBold" Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue",
+    "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", sans-serif;
   --font-weight: 800;
   --title: 1.6rem bold;
 
@@ -74,8 +74,6 @@ textarea {
   background: var(--input-background);
   padding: var(--input-padding);
   font-size: var(--input-font-size);
-  line-height: 15px;
-  overflow: hidden;
 }
 
 .user-input-value::placeholder,
@@ -143,7 +141,6 @@ textarea {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: var(--input-textarea-width);
 }
 
 input[type="radio"] {
@@ -176,4 +173,58 @@ input[type="radio"] {
   align-items: center;
   margin-right: 0.2rem;
   font-size: 0.8rem;
+}
+
+.reset-button-container {
+  width: 15rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.reset-button {
+  margin-top: 10px;
+  background: #f0f0f0;
+  width: 120px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  font: 18px;
+  font: #050505;
+}
+
+/* fileUpload */
+.file-container {
+  width: 100%;
+}
+
+.file-container label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0.5em 0;
+  color: #050505;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.file-container label i {
+  margin: 0 4px;
+}
+
+.file-container input[type="file"] {
+  /* 파일 필드 숨기기 */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
