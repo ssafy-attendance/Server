@@ -2,11 +2,16 @@
 
 [싸피 출결 소명 생성기](http://ssafy-attendance.site/) - 출결소명확인서 생성, 출결변경요청서 생성
 
-![Group 39](https://user-images.githubusercontent.com/62539910/210582869-62da9a51-24b2-485f-bcbc-9e700bb9031e.png)
+![MacBook Air - 1 (2)](https://user-images.githubusercontent.com/62539910/210925795-d957ecef-832a-4c4f-ba98-4686d341dfb6.png)
+
+
 
 
 
 # 프로젝트 개요
+
+![Group 39](https://user-images.githubusercontent.com/62539910/210582869-62da9a51-24b2-485f-bcbc-9e700bb9031e.png)
+
 
 SSAFY 기간동안 출결과 관련해서 결석을 소명하거나 상태를 변경해야 하는 경우가 있다. 기존의 방식은 워드 파일에 내용을 작성하고 서명한 뒤, 이를 PDF로 변경하여 제출해야 했다. 이 과정들을 모두 수행해야 했기에, 하나의 서류를 작성하는데 많은 시간이 필요했다. 
 
