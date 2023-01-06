@@ -87,6 +87,7 @@ export default {
 <style scoped>
 .file-container {
   width: 100%;
+  height: 300px;
 }
 
 .file-container label {
@@ -109,14 +110,16 @@ export default {
 }
 
 .file-container input[type="file"] {
+  position: relative;
+  top: 100px;
   /* 파일 필드 숨기기 */
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  /* position: absolute; */
+  /* width: 1px; */
+  /* height: 1px; */
+  /* padding: 0; */
+  /* margin: -1px; */
+  /* overflow: hidden; */
+  /* clip: rect(0, 0, 0, 0); */
   border: 0;
 }
 </style>

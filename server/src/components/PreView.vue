@@ -126,8 +126,8 @@ export default {
       // 공가사유 좌표설정
       contextFirst.fillText(
         this.userInput.absentReason,
-        absentReasonCoord[0] * canvasFirst.width,
-        absentReasonCoord[1] * canvasFirst.height
+        this.absentReason[0] * canvasFirst.width,
+        this.absentReason[1] * canvasFirst.height
       );
 
       contextFirst.font = this.fontStyleTwo;
