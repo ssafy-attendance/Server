@@ -80,10 +80,11 @@ export default {
     signatureImage.src = this.userInput.signatureUrl;
     img.onload = () => {
       const imageWidth = canvasFirst.width * 0.8;
-      const imageHeight = canvasFirst.height * 0.574 + 75 * this.lineCnt;
+      const imageHeight = canvasFirst.height * 0.574 + 60 * this.lineCnt;
       const checkSize = canvasFirst.width * 0.018;
       const absentTimeCoord = this.absentTime[this.userInput.absentTime];
-      const absentCategoryCoord = this.absentCategory[this.userInput.absentCategory];
+      const absentCategoryCoord =
+        this.absentCategory[this.userInput.absentCategory];
 
       contextFirst.drawImage(img, 0, 0, canvasFirst.width, canvasFirst.height);
       contextFirst.drawImage(signatureImage, imageWidth, imageHeight);
@@ -140,7 +141,13 @@ export default {
     const canvasImg2 = new Image();
     canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지-2.png");
     canvasImg2.onload = () => {
-      contextSecond.drawImage(canvasImg2, 0, 0, canvasSecond.width, canvasSecond.height);
+      contextSecond.drawImage(
+        canvasImg2,
+        0,
+        0,
+        canvasSecond.width,
+        canvasSecond.height
+      );
       this.drawMaterial();
     };
 
@@ -214,13 +221,18 @@ export default {
         let detailLine = this.getDetailLine(addY);
 
         this.lineCnt = detailLine;
-        this.fontStyleOneCoordinate.absentPlace[1] += (addY + blankY) * detailLine;
-        this.fontStyleOneCoordinate.signature[1] += (addY + blankY) * detailLine;
+        this.fontStyleOneCoordinate.absentPlace[1] +=
+          (addY + blankY) * detailLine;
+        this.fontStyleOneCoordinate.signature[1] +=
+          (addY + blankY) * detailLine;
 
         if (detailLine == 3) {
-          this.fontStyleTwoCoordinate.currentYear[1] += blankY * detailLine + addY;
-          this.fontStyleTwoCoordinate.currentMonth[1] += blankY * detailLine + addY;
-          this.fontStyleTwoCoordinate.currentDay[1] += blankY * detailLine + addY;
+          this.fontStyleTwoCoordinate.currentYear[1] +=
+            blankY * detailLine + addY;
+          this.fontStyleTwoCoordinate.currentMonth[1] +=
+            blankY * detailLine + addY;
+          this.fontStyleTwoCoordinate.currentDay[1] +=
+            blankY * detailLine + addY;
         } else {
           this.fontStyleTwoCoordinate.currentYear[1] += blankY * detailLine;
           this.fontStyleTwoCoordinate.currentMonth[1] += blankY * detailLine;
@@ -236,7 +248,11 @@ export default {
         //공가/사유에 enter가 없으면
         if (reason[0].length > sp) {
           //2줄
-          this.reasonCoordinate.reason1 = [reason[0].substring(0, sp), reasonX, reasonY];
+          this.reasonCoordinate.reason1 = [
+            reason[0].substring(0, sp),
+            reasonX,
+            reasonY,
+          ];
           this.reasonCoordinate.reason2 = [
             reason[0].substring(sp, reason[0].length),
             reasonX,
@@ -246,12 +262,17 @@ export default {
           let detailLine = this.getDetailLine(addY);
 
           this.lineCnt = detailLine;
-          this.fontStyleOneCoordinate.absentPlace[1] += (addY + blankY) * detailLine;
-          this.fontStyleOneCoordinate.signature[1] += (addY + blankY) * detailLine;
+          this.fontStyleOneCoordinate.absentPlace[1] +=
+            (addY + blankY) * detailLine;
+          this.fontStyleOneCoordinate.signature[1] +=
+            (addY + blankY) * detailLine;
 
-          this.fontStyleTwoCoordinate.currentYear[1] += blankY * (detailLine + 1);
-          this.fontStyleTwoCoordinate.currentMonth[1] += blankY * (detailLine + 1);
-          this.fontStyleTwoCoordinate.currentDay[1] += blankY * (detailLine + 1);
+          this.fontStyleTwoCoordinate.currentYear[1] +=
+            blankY * (detailLine + 1);
+          this.fontStyleTwoCoordinate.currentMonth[1] +=
+            blankY * (detailLine + 1);
+          this.fontStyleTwoCoordinate.currentDay[1] +=
+            blankY * (detailLine + 1);
 
           if (category == 0) {
             return require(`@/assets/AttendVersion1_Image/공가-2-${detailLine}.png`);
@@ -265,12 +286,17 @@ export default {
           let detailLine = this.getDetailLine(0);
 
           this.lineCnt = detailLine - 1;
-          this.fontStyleOneCoordinate.absentPlace[1] += (addY + blankY) * (detailLine - 1);
-          this.fontStyleOneCoordinate.signature[1] += (addY + blankY) * (detailLine - 1);
+          this.fontStyleOneCoordinate.absentPlace[1] +=
+            (addY + blankY) * (detailLine - 1);
+          this.fontStyleOneCoordinate.signature[1] +=
+            (addY + blankY) * (detailLine - 1);
 
-          this.fontStyleTwoCoordinate.currentYear[1] += blankY * (detailLine - 1);
-          this.fontStyleTwoCoordinate.currentMonth[1] += blankY * (detailLine - 1);
-          this.fontStyleTwoCoordinate.currentDay[1] += blankY * (detailLine - 1);
+          this.fontStyleTwoCoordinate.currentYear[1] +=
+            blankY * (detailLine - 1);
+          this.fontStyleTwoCoordinate.currentMonth[1] +=
+            blankY * (detailLine - 1);
+          this.fontStyleTwoCoordinate.currentDay[1] +=
+            blankY * (detailLine - 1);
 
           return require(`@/assets/AttendVersion1_Image/세부-${detailLine}.png`);
         }
@@ -291,19 +317,31 @@ export default {
         //세부내용에 enter가 있으면
         if (detail[0].length > sp) {
           //첫째줄에 enter가 없이 개행이 있으면
-          this.reasonCoordinate.detail1 = [detail[0].substring(0, sp), detailX, detailY];
+          this.reasonCoordinate.detail1 = [
+            detail[0].substring(0, sp),
+            detailX,
+            detailY,
+          ];
           this.reasonCoordinate.detail2 = [
             detail[0].substring(sp, detail[0].length),
             detailX,
             detailY + addY,
           ];
-          this.reasonCoordinate.detail3 = [detail[1], detailX, detailY + 2 * addY];
+          this.reasonCoordinate.detail3 = [
+            detail[1],
+            detailX,
+            detailY + 2 * addY,
+          ];
 
           return 3;
         } else if (detail[1].length > sp) {
           //둘째줄에 enter가 없이 개행이 있으면
           this.reasonCoordinate.detail1 = [detail[0], detailX, detailY];
-          this.reasonCoordinate.detail2 = [detail[1].substring(0, sp), detailX, detailY + addY];
+          this.reasonCoordinate.detail2 = [
+            detail[1].substring(0, sp),
+            detailX,
+            detailY + addY,
+          ];
           this.reasonCoordinate.detail3 = [
             detail[1].substring(sp, detail[1].length),
             detailX,
@@ -314,7 +352,11 @@ export default {
         } else {
           //글자 초과없이 enter만 있으면
           detail.forEach((value, index) => {
-            this.reasonCoordinate[`detail${index + 1}`] = [value, detailX, detailY + addY * index];
+            this.reasonCoordinate[`detail${index + 1}`] = [
+              value,
+              detailX,
+              detailY + addY * index,
+            ];
           });
 
           return detail.length;
@@ -323,8 +365,16 @@ export default {
         //세부내용에 enter가 없으면
         if (detail[0].length > 46) {
           //3줄
-          this.reasonCoordinate.detail1 = [detail[0].substring(0, sp), detailX, detailY];
-          this.reasonCoordinate.detail2 = [detail[0].substring(sp, 46), detailX, detailY + addY];
+          this.reasonCoordinate.detail1 = [
+            detail[0].substring(0, sp),
+            detailX,
+            detailY,
+          ];
+          this.reasonCoordinate.detail2 = [
+            detail[0].substring(sp, 46),
+            detailX,
+            detailY + addY,
+          ];
           this.reasonCoordinate.detail3 = [
             detail[0].substring(46, detail[0].length),
             detailX,
@@ -334,7 +384,11 @@ export default {
           return 3;
         } else if (detail[0].length > sp) {
           //2줄
-          this.reasonCoordinate.detail1 = [detail[0].substring(0, sp), detailX, detailY];
+          this.reasonCoordinate.detail1 = [
+            detail[0].substring(0, sp),
+            detailX,
+            detailY,
+          ];
           this.reasonCoordinate.detail2 = [
             detail[0].substring(sp, detail[0].length),
             detailX,
@@ -419,7 +473,14 @@ export default {
 
         doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
         doc.addPage();
-        doc.addImage(this.canvas2.toDataURL("image/png", 1.0), "PNG", 0, 0, imgWidth, imgHeight);
+        doc.addImage(
+          this.canvas2.toDataURL("image/png", 1.0),
+          "PNG",
+          0,
+          0,
+          imgWidth,
+          imgHeight
+        );
         doc.save("sample.pdf");
       });
     },
