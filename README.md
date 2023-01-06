@@ -41,6 +41,10 @@ SSAFY 기간동안 출결과 관련해서 결석을 소명하거나 상태를 �
 
 ![MacBook Air - 1 (1)](https://user-images.githubusercontent.com/62539910/210582865-74efea0e-5e2c-4ef3-bd2d-5e43aaebb7d3.png)
 
+# 디자인
+
+[디자인 및 와이어프레임](https://www.figma.com/file/RgprEu4VFnMOyQkcfp3WVk/ssafy-attendance-prod-version?node-id=0%3A1&t=1MnAxBN7iqFwSZ3r-1)
+
 # 실행화면
 
 ![실행화면1.png](https://user-images.githubusercontent.com/62539910/210926077-e689836e-233f-4617-9160-91ecca5fcf4d.png)
@@ -50,6 +54,7 @@ SSAFY 기간동안 출결과 관련해서 결석을 소명하거나 상태를 �
 ![실행화면3.png](https://user-images.githubusercontent.com/62539910/210926082-f8d4bab7-f382-4ce6-8a72-7b18fb1cc2ef.png)
 
 ![실행화면4.png](https://user-images.githubusercontent.com/62539910/210926086-46deadb8-b0f7-4266-a823-8caaad97ea3b.png)
+
 
 # 만든 사람
 
