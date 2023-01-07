@@ -128,7 +128,7 @@
             mousemove: move,
             mouseup: up,
             mousedown: down,
-            mouseout: out,
+            mouseout: out
           }"
         ></canvas>
         <div class="reset-button-container">
@@ -147,17 +147,17 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations } from 'vuex';
 
 export default {
   data() {
     return {
-      areas: ["서울", "대전", "구미", "광주", "부울경"],
-      reasons: ["입실 미클릭", "입실 오클릭", "퇴실 미클릭", "퇴실 오클릭"],
-      attendanceDate: "",
-      chAttendanceDate: "",
-      attendanceTime: "",
-      chAttendanceTime: "",
+      areas: ['서울', '대전', '구미', '광주', '부울경'],
+      reasons: ['입실 미클릭', '입실 오클릭', '퇴실 미클릭', '퇴실 오클릭'],
+      attendanceDate: '',
+      chAttendanceDate: '',
+      attendanceTime: '',
+      chAttendanceTime: '',
       // signature
       canvas: null,
       context: null,
@@ -167,31 +167,31 @@ export default {
       drawing: false, // 드로깅 여부를 판단하는 변수
       selected: 0,
       userInput: {
-        campus: "", // 캠퍼스 명
-        class: "", // 반
-        name: "", // 이름
-        birth: "", // 생년월일(yyMMdd)
+        campus: '', // 캠퍼스 명
+        class: '', // 반
+        name: '', // 이름
+        birth: '', // 생년월일(yyMMdd)
         reason: 0, // 시스템 변경 요청 사유 [0, 1, 2, 3]
-        attendanceYear: "", // 출결 일시 년
-        attendanceMonth: "", // 출결 일시 월
-        attendanceDay: "", // 출결 일시 일
-        attendanceHour: "", // 출결 일시 시
-        attendanceMinute: "", // 출결 일시 분
-        chAttendanceYear: "", // 변경 일시 년
-        chAttendanceMonth: "", // 변경 일시 월
-        chAttendanceDay: "", // 변경 일시 일
-        chAttendanceHour: "", // 변경 일시 시
-        chAttendanceMinute: "", // 변경 일실 분
-        detailReason: "", // 변경 사유 상세
-        signatureUrl: "", // 서명 url
-        currentYear: "", // 작성 날짜 년(뒤 2자리)
-        currentMonth: "", // 작성 날짜 월
-        currentDay: "", // 작성 날짜 일
-      },
+        attendanceYear: '', // 출결 일시 년
+        attendanceMonth: '', // 출결 일시 월
+        attendanceDay: '', // 출결 일시 일
+        attendanceHour: '', // 출결 일시 시
+        attendanceMinute: '', // 출결 일시 분
+        chAttendanceYear: '', // 변경 일시 년
+        chAttendanceMonth: '', // 변경 일시 월
+        chAttendanceDay: '', // 변경 일시 일
+        chAttendanceHour: '', // 변경 일시 시
+        chAttendanceMinute: '', // 변경 일실 분
+        detailReason: '', // 변경 사유 상세
+        signatureUrl: '', // 서명 url
+        currentYear: '', // 작성 날짜 년(뒤 2자리)
+        currentMonth: '', // 작성 날짜 월
+        currentDay: '' // 작성 날짜 일
+      }
     };
   },
   methods: {
-    ...mapMutations("AttendanceVersionTwoStore", ["SET_USER_INFO"]),
+    ...mapMutations('AttendanceVersionTwoStore', ['SET_USER_INFO']),
     change(radio) {
       this.selected = radio; //리셋 처리 해야합니다.
     },
@@ -245,16 +245,16 @@ export default {
           this.chAttendanceTime
         )
       ) {
-        alert("모든 정보를 입력해주세요.");
+        alert('모든 정보를 입력해주세요.');
       } else {
-        let attDate = this.attendanceDate.split("-");
-        let chAttDate = this.chAttendanceDate.split("-");
-        let attTime = this.attendanceTime.split(":");
-        let chAttTime = this.chAttendanceTime.split(":");
+        let attDate = this.attendanceDate.split('-');
+        let chAttDate = this.chAttendanceDate.split('-');
+        let attTime = this.attendanceTime.split(':');
+        let chAttTime = this.chAttendanceTime.split(':');
 
         let currentDate = new Date();
 
-        let currentYear = currentDate.getFullYear() + "";
+        let currentYear = currentDate.getFullYear() + '';
         let currentMonth = currentDate.getMonth() + 1;
         let currentDay = currentDate.getDate();
 
@@ -274,52 +274,52 @@ export default {
 
         this.SET_USER_INFO(this.userInput);
         this.$router.push({
-          name: "previewTwo",
+          name: 'previewTwo'
         });
       }
     },
     resetInput() {
-      this.attendanceDate = "";
-      this.chAttendanceDate = "";
-      this.attendanceTime = "";
-      this.chAttendanceTime = "";
+      this.attendanceDate = '';
+      this.chAttendanceDate = '';
+      this.attendanceTime = '';
+      this.chAttendanceTime = '';
       this.selected = 0;
       this.userInput = {
-        campus: "",
-        class: "",
-        name: "",
-        birth: "",
+        campus: '',
+        class: '',
+        name: '',
+        birth: '',
         reason: 0,
-        attendanceYear: "",
-        attendanceMonth: "",
-        attendanceDay: "",
-        chAttendanceYear: "",
-        chAttendanceMonth: "",
-        chAttendanceDay: "",
-        attendanceHour: "",
-        attendanceMinute: "",
-        chAttendanceHour: "",
-        chAttendanceMinute: "",
-        currentYear: "",
-        currentMonth: "",
-        currentDay: "",
-        detailReason: "",
-        signatureUrl: "",
+        attendanceYear: '',
+        attendanceMonth: '',
+        attendanceDay: '',
+        chAttendanceYear: '',
+        chAttendanceMonth: '',
+        chAttendanceDay: '',
+        attendanceHour: '',
+        attendanceMinute: '',
+        chAttendanceHour: '',
+        chAttendanceMinute: '',
+        currentYear: '',
+        currentMonth: '',
+        currentDay: '',
+        detailReason: '',
+        signatureUrl: ''
       };
       this.reset();
-    },
+    }
   },
   mounted() {
-    const canvas = document.querySelector("#signature");
+    const canvas = document.querySelector('#signature');
     this.canvas = canvas;
-    this.context = this.canvas.getContext("2d");
+    this.context = this.canvas.getContext('2d');
     // 선 굵기를 2로 설정, 색깔은 검정색
     this.context.lineWidth = 2;
-    this.context.strokeStyle = "black";
-  },
+    this.context.strokeStyle = 'black';
+  }
 };
 </script>
 
 <style scoped>
-@import "@/assets/css/canvas.css";
+@import '@/assets/css/canvas.css';
 </style>

@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import { mapGetters } from 'vuex';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 export default {
   created() {
     this.userInput = this.getUserInput;
@@ -19,14 +19,14 @@ export default {
   },
   data() {
     return {
-      img: "",
+      img: '',
       userInput: {
-        signature: "",
-        detailReason2: " ",
-        detailReason3: "1",
+        signature: '',
+        detailReason2: ' ',
+        detailReason3: '1'
       },
-      fontStyleOne: "",
-      fontStyleTow: "",
+      fontStyleOne: '',
+      fontStyleTow: '',
       fontStyleOneCoordinate: {
         campus: [400, 375],
         birth: [780, 446],
@@ -45,25 +45,25 @@ export default {
         detailReason: [266, 1061],
         detailReason2: [266, 1116],
         detailReason3: [266, 1161],
-        signature: [821, 1116],
+        signature: [821, 1116]
       },
       fontStyleTwoCoordinate: {
         currentYear: [436, 1453],
         currentMonth: [558, 1453],
-        currentDay: [676, 1453],
+        currentDay: [676, 1453]
       },
       canvas2: null,
       Reason: {
         0: [256, 674.2],
         1: [449, 674.2],
         2: [643, 674.2],
-        3: [836, 674.2],
-      },
+        3: [836, 674.2]
+      }
     };
   },
 
   computed: {
-    ...mapGetters("AttendanceVersionTwoStore", ["getUserInput"]),
+    ...mapGetters('AttendanceVersionTwoStore', ['getUserInput'])
   },
   methods: {
     findCoord(event) {
@@ -72,38 +72,38 @@ export default {
       console.log(`X 좌표 : ${x}  Y좌표 : ${y}`);
     },
     saveImg() {
-      html2canvas(document.querySelector("#container")).then((canvas) => {
-        var imgData = canvas.toDataURL("image/png", 1.0);
+      html2canvas(document.querySelector('#container')).then((canvas) => {
+        var imgData = canvas.toDataURL('image/png', 1.0);
         var imgWidth = 210;
         var imgHeight = (canvas.height * imgWidth) / canvas.width;
         console.log(imgData);
-        var doc = new jsPDF("p", "mm", "a4");
+        var doc = new jsPDF('p', 'mm', 'a4');
 
-        doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+        doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
 
         doc.save(
           this.userInput.attendanceYear.substr(2, 2) +
             this.userInput.attendanceMonth +
             this.userInput.attendanceDay +
-            "_출결변경서_" +
+            '_출결변경서_' +
             this.userInput.name +
-            "[" +
+            '[' +
             this.userInput.campus +
             this.userInput.class +
-            "반]" +
-            ".pdf"
+            '반]' +
+            '.pdf'
         );
       });
-    },
+    }
   },
   mounted() {
     // const finalInnerWidth = window.innerWidth;
     // const finalInnerHeight = (window.innerWidth * 4) / 3;
 
-    const canvasFirst = document.querySelector("#container");
-    const contextFirst = canvasFirst.getContext("2d");
+    const canvasFirst = document.querySelector('#container');
+    const contextFirst = canvasFirst.getContext('2d');
     const imgCheck = new Image();
-    imgCheck.src = require("@/assets/AttendVersion2_Image/체크.png");
+    imgCheck.src = require('@/assets/AttendVersion2_Image/체크.png');
     canvasFirst.width = 1654 * 0.7;
     canvasFirst.height = 2339 * 0.7;
     this.fontStyleOne = `25px san-serif`;
@@ -121,11 +121,11 @@ export default {
     // 변경 사유 길어질 시 이미지 변경
     // 이미지 별 좌표 설정 필요
     if (this.userInput.detailReason.length < 30) {
-      img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-1.png");
+      img.src = require('@/assets/AttendVersion2_Image/출결변경요청서-1.png');
       signature_x = 913;
       signature_y = 1067;
     } else if (this.userInput.detailReason.length < 60) {
-      img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-2.png");
+      img.src = require('@/assets/AttendVersion2_Image/출결변경요청서-2.png');
       // 30자 넘으면 자르고 다음 줄로
       this.userInput.detailReason2 = this.userInput.detailReason.slice(30);
       this.userInput.detailReason = this.userInput.detailReason.slice(0, 30);
@@ -138,7 +138,7 @@ export default {
       signature_x = 913;
       signature_y = 1120;
     } else if (this.userInput.detailReason.length < 90) {
-      img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-3.png");
+      img.src = require('@/assets/AttendVersion2_Image/출결변경요청서-3.png');
       this.userInput.detailReason2 = this.userInput.detailReason.slice(30, 60);
       this.userInput.detailReason3 = this.userInput.detailReason.slice(60);
       this.userInput.detailReason = this.userInput.detailReason.slice(0, 30);
@@ -150,7 +150,7 @@ export default {
       signature_x = 913;
       signature_y = 1180;
     } else {
-      img.src = require("@/assets/AttendVersion2_Image/체크.png");
+      img.src = require('@/assets/AttendVersion2_Image/체크.png');
     }
     img.onload = () => {
       //   const imageWidth = canvasFirst.width;
@@ -192,7 +192,7 @@ export default {
         );
       }
     };
-  },
+  }
 };
 </script>
 

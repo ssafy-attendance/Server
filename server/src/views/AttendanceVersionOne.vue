@@ -179,7 +179,7 @@
             mousemove: move,
             mouseup: up,
             mousedown: down,
-            mouseout: out,
+            mouseout: out
           }"
         ></canvas>
         <div class="reset-button-container">
@@ -202,33 +202,33 @@
 </template>
 
 <script>
-import FileUpload from "@/components/FileUploadOnCanvas";
+import FileUpload from '@/components/FileUploadOnCanvas';
 
-import { mapMutations } from "vuex";
+import { mapMutations } from 'vuex';
 
 export default {
   components: {
-    FileUpload,
+    FileUpload
   },
   data() {
     return {
       userInput: {
-        campus: "",
-        class: "",
-        name: "",
-        birthday: "",
-        absentYear: "",
-        absentMonth: "",
-        absentDay: "",
+        campus: '',
+        class: '',
+        name: '',
+        birthday: '',
+        absentYear: '',
+        absentMonth: '',
+        absentDay: '',
         absentTime: 0,
         absentCategory: 0,
-        absentReason: "",
-        absentDetail: "",
-        absentPlace: "",
-        currentYear: "",
-        currentMonth: "",
-        currentDay: "",
-        signatureUrl: "",
+        absentReason: '',
+        absentDetail: '',
+        absentPlace: '',
+        currentYear: '',
+        currentMonth: '',
+        currentDay: '',
+        signatureUrl: ''
       },
       selectTime: 0,
       selectCategory: 0,
@@ -241,21 +241,21 @@ export default {
       baseURL: null,
       startX: 0,
       startY: 0,
-      drawing: false, // 드로깅 여부를 판단하는 변수
+      drawing: false // 드로깅 여부를 판단하는 변수
     };
   },
 
   mounted() {
-    const canvas = document.querySelector("#signature");
+    const canvas = document.querySelector('#signature');
     this.canvas = canvas;
-    this.context = this.canvas.getContext("2d");
+    this.context = this.canvas.getContext('2d');
     // 선 굵기를 2로 설정, 색깔은 검정색
     this.context.lineWidth = 2;
-    this.context.strokeStyle = "black";
+    this.context.strokeStyle = 'black';
   },
 
   methods: {
-    ...mapMutations("AttendanceVersionOneStore", ["SET_USER_INFO"]),
+    ...mapMutations('AttendanceVersionOneStore', ['SET_USER_INFO']),
     changeTime(radio) {
       this.selectTime = radio;
     },
@@ -264,22 +264,22 @@ export default {
     },
     resetInput() {
       this.userInput = {
-        name: "",
-        class: "",
-        campus: "",
-        birthday: "",
-        absentDate: "",
-        absentMonth: "",
-        absentDay: "",
+        name: '',
+        class: '',
+        campus: '',
+        birthday: '',
+        absentDate: '',
+        absentMonth: '',
+        absentDay: '',
         absentTime: 0,
         absentCategory: 0,
-        absentReason: "",
-        absentDetail: "",
-        absentPlace: "",
-        currentYear: "",
-        currentMonth: "",
-        currentDay: "",
-        signatureUrl: "",
+        absentReason: '',
+        absentDetail: '',
+        absentPlace: '',
+        currentYear: '',
+        currentMonth: '',
+        currentDay: '',
+        signatureUrl: ''
       };
       this.selectTime = 0;
       this.selectCategory = 0;
@@ -307,12 +307,12 @@ export default {
           this.pictureUrl
         )
       ) {
-        alert("모든 정보를 입력해주세요.");
+        alert('모든 정보를 입력해주세요.');
       } else {
-        let absentDate = this.absentDate.split("-");
+        let absentDate = this.absentDate.split('-');
         let currentDate = new Date();
 
-        let currentYear = currentDate.getFullYear() + "";
+        let currentYear = currentDate.getFullYear() + '';
         let currentMonth = currentDate.getMonth() + 1;
         let currentDay = currentDate.getDate();
 
@@ -334,11 +334,11 @@ export default {
           currentMonth: currentMonth,
           currentDay: currentDay,
           signatureUrl: this.userInput.signatureUrl,
-          pictureUrl: this.pictureUrl,
+          pictureUrl: this.pictureUrl
         };
         this.SET_USER_INFO(userInput);
         this.$router.push({
-          name: "preview",
+          name: 'preview'
         });
       }
     },
@@ -380,11 +380,11 @@ export default {
 
     reset() {
       this.context.clearRect(0, 0, 166, 94);
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
-@import "@/assets/css/canvas.css";
+@import '@/assets/css/canvas.css';
 </style>
