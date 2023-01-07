@@ -2,25 +2,25 @@ const AttendanceVersionTwoStore = {
   namespaced: true,
   state: () => ({
     userInput: {
-      campus: "",
-      class: "",
-      name: "",
-      birth: "",
-      reason: "",
-      attendanceYear: "",
-      attendanceMonth: "",
-      attendanceDay: "",
-      chAttendanceYear: "",
-      chAttendanceMonth: "",
-      chAttendanceDay: "",
-      attendanceHour: "",
-      attendanceMinute: "",
-      chAttendanceHour: "",
-      chAttendanceMinute: "",
-      currentDate: "",
-      detailReason: "",
-      signatureUrl: "",
-    },
+      campus: '',
+      class: '',
+      name: '',
+      birth: '',
+      reason: '',
+      attendanceYear: '',
+      attendanceMonth: '',
+      attendanceDay: '',
+      chAttendanceYear: '',
+      chAttendanceMonth: '',
+      chAttendanceDay: '',
+      attendanceHour: '',
+      attendanceMinute: '',
+      chAttendanceHour: '',
+      chAttendanceMinute: '',
+      currentDate: '',
+      detailReason: '',
+      signatureUrl: ''
+    }
   }),
   getters: {
     getUserInput: (state) => {
@@ -34,14 +34,14 @@ const AttendanceVersionTwoStore = {
     },
     getAttendanceDay: (state) => {
       return state.userInput.attendanceDay;
-    },
+    }
   },
   mutations: {
     SET_USER_INFO(state, userInput) {
       state.userInput = userInput;
-    },
+    }
   },
-  actions: {},
+  actions: {}
 };
 
 export default AttendanceVersionTwoStore;
