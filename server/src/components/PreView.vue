@@ -443,8 +443,8 @@ export default {
         doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
         doc.addPage();
         doc.addImage(
-          this.canvas2.toDataURL('image/png', 1.0),
-          'PNG',
+          this.canvas2.toDataURL("image/png", 1.0),
+          "PNG",
           0,
           0,
           imgWidth,
