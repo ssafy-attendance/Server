@@ -20,7 +20,7 @@ export default {};
 
 <style scoped>
 footer {
-  height: 120px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: center;
