@@ -1,6 +1,6 @@
 <template>
   <div class="button-container-preview">
-    <button class="make-button" @click="saveImg()">만들기</button>
+    <button class="make-button" @click="saveImg()">PDF로 저장</button>
   </div>
 
   <div id="canvas">
