@@ -84,7 +84,7 @@ export default {
       // const imageWidth = canvasFirst.width * 0.77;
       // const imageHeight = canvasFirst.height * 0.535;
       const checkSize = canvasFirst.width * 0.018;
-      const line_y = 44 * this.lineCnt;
+      const line_y = 46 * this.lineCnt;
       const signature_x = canvasFirst.width * 0.84;
       const signature_y = canvasFirst.height * 0.565 + line_y;
       console.log(signature_y);
