@@ -148,7 +148,9 @@
         maxlength="46"
         @input="absentLimit"
       />
+      <label class="line-font-info">*46자/2줄 까지만 작성가능합니다.</label>
     </div>
+
     <div class="user-input">
       <label for="absent-detail" class="user-input-label">세부내용</label>
       <textarea
@@ -162,6 +164,7 @@
         maxlength="69"
         @input="absentDetailLimit"
       />
+      <label class="line-font-info">*69자/3줄 까지만 작성가능합니다.</label>
     </div>
     <div class="user-input">
       <label for="absent-place" class="user-input-label">장소</label>

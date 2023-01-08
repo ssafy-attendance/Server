@@ -24,9 +24,9 @@ export default {
       fontStyleOne: '',
       fontStyleTwo: '',
       fontStyleTwoCoordinate: {
-        currentYear: [0.38, 0.835],
-        currentMonth: [0.485, 0.835],
-        currentDay: [0.585, 0.835]
+        currentYear: [0.38, 0.836],
+        currentMonth: [0.485, 0.836],
+        currentDay: [0.585, 0.836]
       },
       fontStyleOneCoordinate: {
         name: [0.32, 0.2293],
@@ -84,8 +84,10 @@ export default {
       // const imageWidth = canvasFirst.width * 0.77;
       // const imageHeight = canvasFirst.height * 0.535;
       const checkSize = canvasFirst.width * 0.018;
-      var signature_x = canvasFirst.width * 0.84;
-      var signature_y = canvasFirst.height * 0.557;
+      const line_y = 44 * this.lineCnt;
+      const signature_x = canvasFirst.width * 0.84;
+      const signature_y = canvasFirst.height * 0.565 + line_y;
+      console.log(signature_y);
       const signature_width = 0.07 * window.innerWidth;
       const signature_height = 0.035 * ((window.innerWidth * 4) / 3);
 
