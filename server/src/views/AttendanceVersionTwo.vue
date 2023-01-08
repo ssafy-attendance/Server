@@ -119,9 +119,7 @@
         @input="absentLimit"
         @blur="absentLimit"
       />
-      <p style="color: red" v-if="checkForm == 1">
-        *변경 사유는 세 줄까지만 입력 가능합니다.
-      </p>
+      <label class="line-font-info">*69자/3줄 까지만 작성가능합니다.</label>
     </div>
     <!-- Signature component -->
     <div class="user-input">
