@@ -3,6 +3,7 @@
     <div class="button-container-preview">
       <button class="make-button" @click="saveImg()">PDF로 저장</button>
     </div>
+
     <canvas id="container" @click="findCoord" />
     <canvas id="pictureContainer" @click="findCoord" />
   </div>
