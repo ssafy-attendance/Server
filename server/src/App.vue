@@ -26,39 +26,39 @@
 </template>
 
 <script>
-import HeaderVue from "@/components/HeaderVue";
-import FooterVue from "@/components/FooterVue";
+import HeaderVue from '@/components/HeaderVue';
+import FooterVue from '@/components/FooterVue';
 
 export default {
   data() {
     return {
-      selected: 0,
+      selected: 0
     };
   },
 
   components: {
     HeaderVue,
-    FooterVue,
+    FooterVue
   },
 
   watch: {
-    // $route(from, to) {
-    // if (to.name === undefined) this.$router.push("/");
-    // },
+    $route(from, to) {
+      if (to.name === undefined) this.$router.push('/');
+    }
   },
 
   methods: {
     leftClick() {
-      const btn = document.getElementById("btn");
-      btn.style.left = "0";
+      const btn = document.getElementById('btn');
+      btn.style.left = '0';
       this.selected = 0;
     },
     rightClick() {
-      const btn = document.getElementById("btn");
-      btn.style.left = "150px";
+      const btn = document.getElementById('btn');
+      btn.style.left = '150px';
       this.selected = 1;
-    },
-  },
+    }
+  }
 };
 </script>
 
