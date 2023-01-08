@@ -143,7 +143,9 @@
         class="user-input-textarea"
         v-model="userInput.absentReason"
         placeholder="예) SSAFY 면접으로 인한 결석"
-        rows="3"
+        rows="2"
+        maxlength="46"
+        @input="absentLimit"
       />
     </div>
     <div class="user-input">
@@ -154,7 +156,9 @@
         class="user-input-textarea"
         v-model="userInput.absentDetail"
         placeholder="예) 멀티캠퍼스 서울에서 진행된 SSAFY 면접으로 인하여 결석 소명 제출합니다."
-        rows="5"
+        rows="3"
+        maxlength="69"
+        @input="absentDetailLimit"
       />
     </div>
     <div class="user-input">
@@ -256,6 +260,28 @@ export default {
 
   methods: {
     ...mapMutations('AttendanceVersionOneStore', ['SET_USER_INFO']),
+    absentLimit() {
+      let h = this.$refs.reason.scrollHeight;
+
+      if (h > 40) {
+        let lng = this.userInput.absentReason.length;
+        this.userInput.absentReason = this.userInput.absentReason.substring(
+          0,
+          lng - 1
+        );
+      }
+    },
+    absentDetailLimit() {
+      let h = this.$refs.reasonDetail.scrollHeight;
+
+      if (h > 55) {
+        let lng = this.userInput.absentDetail.length;
+        this.userInput.absentDetail = this.userInput.absentDetail.substring(
+          0,
+          lng - 1
+        );
+      }
+    },
     changeTime(radio) {
       this.selectTime = radio;
     },

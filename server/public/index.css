@@ -75,6 +75,8 @@ textarea {
   background: var(--input-background);
   padding: var(--input-padding);
   font-size: var(--input-font-size);
+  line-height: 15px;
+  overflow: hidden;
 }
 
 .user-input-value::placeholder,
@@ -229,10 +231,4 @@ input[type='radio'] {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-}
-
-.preview-pages {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

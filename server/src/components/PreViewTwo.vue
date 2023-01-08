@@ -197,24 +197,5 @@ export default {
 </script>
 
 <style>
-#canvas {
-  display: flex;
-  justify-content: center;
-}
-
-.button-container-preview {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 0 1.5rem 0;
-}
-
-.make-button {
-  background: var(--preview-button-background);
-  width: var(--preview-button-width);
-  height: var(--preview-button-height);
-  color: var(--preview-button-color);
-  border-radius: var(--preview-button-radius);
-  border: 0;
-}
+@import '@/assets/css/preview.css';
 </style>

@@ -3,10 +3,8 @@
     <div class="button-container-preview">
       <button class="make-button" @click="saveImg()">PDF로 저장</button>
     </div>
-    <div class="preview-pages">
-      <canvas id="container" @click="findCoord" />
-      <canvas id="pictureContainer" @click="findCoord" />
-    </div>
+    <canvas id="container" @click="findCoord" />
+    <canvas id="pictureContainer" @click="findCoord" />
   </div>
 </template>
 <script>
@@ -26,9 +24,9 @@ export default {
       fontStyleOne: '',
       fontStyleTwo: '',
       fontStyleTwoCoordinate: {
-        currentYear: [0.38, 0.844],
-        currentMonth: [0.485, 0.844],
-        currentDay: [0.585, 0.844]
+        currentYear: [0.38, 0.835],
+        currentMonth: [0.485, 0.835],
+        currentDay: [0.585, 0.835]
       },
       fontStyleOneCoordinate: {
         name: [0.32, 0.2293],
@@ -36,10 +34,12 @@ export default {
         absentYear: [0.352, 0.273],
         absentMonth: [0.45, 0.273],
         absentDay: [0.53, 0.273],
-        absentDetail: [0.329, 0.513],
-        absentPlace: [0.295, 0.545],
-        signature: [0.295, 0.576]
+        // absentReason: [0.296, 0.415],
+        // absentDetail: [0.329, 0.513],
+        absentPlace: [0.295, 0.5665],
+        signature: [0.295, 0.5975]
       },
+      reasonCoordinate: {},
       canvas2: null,
       absentTime: {
         0: [0.6075, 0.26],
@@ -48,12 +48,9 @@ export default {
       },
       absentCategory: {
         0: [0.205, 0.401],
-        1: [0.205, 0.423]
+        1: [0.205, 0.4335]
       },
-      absentReason: {
-        0: [0.296, 0.415],
-        1: [0.296, 0.436]
-      }
+      lineCnt: 1
     };
   },
 
@@ -62,8 +59,8 @@ export default {
   },
 
   mounted() {
-    const finalInnerWidth = window.innerWidth * 0.45;
-    const finalInnerHeight = ((window.innerWidth * 4) / 3) * 0.45;
+    const finalInnerWidth = window.innerWidth;
+    const finalInnerHeight = (window.innerWidth * 4) / 3;
     // document.querySelector('.preview-pages').style.width =
     // window.innerWdith * 0.9;
 
@@ -71,16 +68,18 @@ export default {
     const contextFirst = canvasFirst.getContext('2d');
     canvasFirst.width = finalInnerWidth;
     canvasFirst.height = finalInnerHeight;
-    this.fontStyleOne = `${(window.innerWidth / 46) * 0.45}px san-serif`;
-    this.fontStyleTwo = `bold ${(window.innerWidth / 32) * 0.45}px san-serif`;
+    this.fontStyleOne = `${window.innerWidth / 46}px san-serif`;
+    this.fontStyleTwo = `bold ${window.innerWidth / 32}px san-serif`;
 
     const imgCheck = new Image();
     imgCheck.src = require('@/assets/AttendVersion1_Image/체크.png');
 
     const img = new Image();
     const signatureImage = new Image();
-    img.src = require('@/assets/AttendVersion1_Image/출결이미지-1.png');
+
+    img.src = this.getSrc();
     signatureImage.src = this.userInput.signatureUrl;
+
     img.onload = () => {
       // const imageWidth = canvasFirst.width * 0.77;
       // const imageHeight = canvasFirst.height * 0.535;
@@ -125,13 +124,14 @@ export default {
           this.fontStyleOneCoordinate[key][1] * canvasFirst.height
         );
       }
-      // 공가사유 좌표설정
-      contextFirst.fillText(
-        this.userInput.absentReason,
-        this.absentReason[0] * canvasFirst.width,
-        this.absentReason[1] * canvasFirst.height
-      );
 
+      for (let key in this.reasonCoordinate) {
+        contextFirst.fillText(
+          this.reasonCoordinate[key][0],
+          this.reasonCoordinate[key][1] * canvasFirst.width,
+          this.reasonCoordinate[key][2] * canvasFirst.height
+        );
+      }
       contextFirst.font = this.fontStyleTwo;
 
       for (let key in this.fontStyleTwoCoordinate) {
@@ -516,22 +516,5 @@ export default {
 </script>
 
 <style scoped>
-.button-container-preview {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 0 1.5rem 0;
-}
-
-.make-button {
-  background: var(--preview-button-background);
-  width: var(--preview-button-width);
-  height: var(--preview-button-height);
-  color: var(--preview-button-color);
-  border-radius: var(--preview-button-radius);
-  border: 0;
-}
-#pictureContainer {
-  margin-left: 5px;
-}
+@import '@/assets/css/preview.css';
 </style>
