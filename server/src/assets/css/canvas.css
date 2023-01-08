@@ -1,0 +1,12 @@
+canvas {
+  margin-top: 10px;
+  background: white;
+  border: var(--input-border);
+  border-radius: 6px;
+}
+
+.canvas-btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

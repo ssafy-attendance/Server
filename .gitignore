@@ -8,6 +8,7 @@ https://www.toptal.com/developers/gitignore?templates=macos,windows,vue,vuejs
 .DS_Store
 .AppleDouble
 .LSOverride
+.idea/
 
 # Icon must end with two \r
 Icon
