@@ -7,6 +7,10 @@
     <a href="https://github.com/ssafy-attendance/Server"
       ><img src="@/assets/github.png" alt="github"
     /></a>
+    <img
+      id="hits"
+      src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fssafy-attendance.site&count_bg=%231BB0E7&title_bg=%231BB0E7&icon=&icon_color=%23E7E7E7&title=%EC%98%A4%EB%8A%98+%2F+%EC%A0%84%EC%B2%B4&edge_flat=false"
+    />
   </footer>
 </template>
 
@@ -31,6 +35,11 @@ a {
 h2 {
   font-size: 1.2rem;
   font-weight: 800;
+}
+
+#hits {
+  width: 150px;
+  padding: 1.5rem;
 }
 
 img {
