@@ -179,23 +179,23 @@ export default {
         name: '', // 이름
         birth: '', // 생년월일(yyMMdd)
         reason: 0, // 시스템 변경 요청 사유 [0, 1, 2, 3]
-        attendanceYear: "", // 출결 일시 년
-        attendanceMonth: "", // 출결 일시 월
-        attendanceDay: "", // 출결 일시 일
-        attendanceHour: "", // 출결 일시 시
-        attendanceMinute: "", // 출결 일시 분
-        chAttendanceYear: "", // 변경 일시 년
-        chAttendanceMonth: "", // 변경 일시 월
-        chAttendanceDay: "", // 변경 일시 일
-        chAttendanceHour: "", // 변경 일시 시
-        chAttendanceMinute: "", // 변경 일실 분
-        detailReason: "", // 변경 사유 상세
-        signatureUrl: "", // 서명 url
-        currentYear: "", // 작성 날짜 년(뒤 2자리)
-        currentMonth: "", // 작성 날짜 월
-        currentDay: "", // 작성 날짜 일
+        attendanceYear: '', // 출결 일시 년
+        attendanceMonth: '', // 출결 일시 월
+        attendanceDay: '', // 출결 일시 일
+        attendanceHour: '', // 출결 일시 시
+        attendanceMinute: '', // 출결 일시 분
+        chAttendanceYear: '', // 변경 일시 년
+        chAttendanceMonth: '', // 변경 일시 월
+        chAttendanceDay: '', // 변경 일시 일
+        chAttendanceHour: '', // 변경 일시 시
+        chAttendanceMinute: '', // 변경 일실 분
+        detailReason: '', // 변경 사유 상세
+        signatureUrl: '', // 서명 url
+        currentYear: '', // 작성 날짜 년(뒤 2자리)
+        currentMonth: '', // 작성 날짜 월
+        currentDay: '' // 작성 날짜 일
       },
-      checkForm: 0,
+      checkForm: 0
     };
   },
   methods: {
@@ -329,7 +329,7 @@ export default {
       } else {
         this.checkForm = 0;
       }
-    },
+    }
   },
   mounted() {
     const canvas = document.querySelector('#signature');

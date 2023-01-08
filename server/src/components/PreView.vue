@@ -235,12 +235,18 @@ export default {
           this.fontStyleOneCoordinate.signature[1] +=
             (addY + blankY) * detailLine;
 
-          this.fontStyleTwoCoordinate.currentYear[1] +=
-            blankY * (detailLine + 1);
-          this.fontStyleTwoCoordinate.currentMonth[1] +=
-            blankY * (detailLine + 1);
-          this.fontStyleTwoCoordinate.currentDay[1] +=
-            blankY * (detailLine + 1);
+          if (detailLine == 3) {
+            this.fontStyleTwoCoordinate.currentYear[1] +=
+              blankY * detailLine + addY;
+            this.fontStyleTwoCoordinate.currentMonth[1] +=
+              blankY * detailLine + addY;
+            this.fontStyleTwoCoordinate.currentDay[1] +=
+              blankY * detailLine + addY;
+          } else {
+            this.fontStyleTwoCoordinate.currentYear[1] += blankY * detailLine;
+            this.fontStyleTwoCoordinate.currentMonth[1] += blankY * detailLine;
+            this.fontStyleTwoCoordinate.currentDay[1] += blankY * detailLine;
+          }
 
           if (category == 0) {
             return require(`@/assets/AttendVersion1_Image/공가-2-${detailLine}.png`);
@@ -443,8 +449,8 @@ export default {
         doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
         doc.addPage();
         doc.addImage(
-          this.canvas2.toDataURL("image/png", 1.0),
-          "PNG",
+          this.canvas2.toDataURL('image/png', 1.0),
+          'PNG',
           0,
           0,
           imgWidth,

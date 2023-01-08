@@ -96,7 +96,7 @@ export default {
       });
     },
     getLength() {
-      const reasonList = this.userInput.detailReason.split("\n");
+      const reasonList = this.userInput.detailReason.split('\n');
       console.log(reasonList);
       // 엔터 없이 세 줄 쓴 경우
       if (reasonList[0].length > 46) {
@@ -122,13 +122,13 @@ export default {
       else if (reasonList[1].length > 23) {
         reasonList[2] = reasonList[1].slice(23);
         reasonList[1] = reasonList[1].slice(0, 23);
-        console.log("in");
+        console.log('in');
       }
       console.log(reasonList);
       this.userInput.detailReason = reasonList[0];
       this.userInput.detailReason2 = reasonList[1];
       this.userInput.detailReason3 = reasonList[2];
-    },
+    }
   },
   mounted() {
     // const finalInnerWidth = window.innerWidth;
@@ -157,7 +157,7 @@ export default {
       this.userInput.detailReason &&
       !(this.userInput.detailReason2 && this.userInput.detailReason3)
     ) {
-      img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-1.png");
+      img.src = require('@/assets/AttendVersion2_Image/출결변경요청서-1.png');
       signature_x = 913;
       signature_y = 1067;
     } else if (
@@ -165,7 +165,7 @@ export default {
       this.userInput.detailReason2 &&
       !this.userInput.detailReason3
     ) {
-      img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-2.png");
+      img.src = require('@/assets/AttendVersion2_Image/출결변경요청서-2.png');
       // 30자 넘으면 자르고 다음 줄로
       // this.userInput.detailReason2 = this.userInput.detailReason.slice(30);
       // this.userInput.detailReason = this.userInput.detailReason.slice(0, 30);
@@ -182,7 +182,7 @@ export default {
       this.userInput.detailReason2 &&
       this.userInput.detailReason3
     ) {
-      img.src = require("@/assets/AttendVersion2_Image/출결변경요청서-3.png");
+      img.src = require('@/assets/AttendVersion2_Image/출결변경요청서-3.png');
       // this.userInput.detailReason2 = this.userInput.detailReason.slice(30, 60);
       // this.userInput.detailReason3 = this.userInput.detailReason.slice(60);
       // this.userInput.detailReason = this.userInput.detailReason.slice(0, 30);

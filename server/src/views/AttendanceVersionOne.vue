@@ -139,6 +139,7 @@
     <div class="user-input">
       <label for="absent-reason" class="user-input-label">사유</label>
       <textarea
+        ref="reason"
         id="absent-reason"
         class="user-input-textarea"
         v-model="userInput.absentReason"
@@ -151,6 +152,7 @@
     <div class="user-input">
       <label for="absent-detail" class="user-input-label">세부내용</label>
       <textarea
+        ref="reasonDetail"
         type="text"
         id="absent-detail"
         class="user-input-textarea"
