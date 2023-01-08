@@ -97,15 +97,14 @@ export default {
     },
     getLength() {
       const reasonList = this.userInput.detailReason.split('\n');
-      console.log(reasonList);
       // 엔터 없이 세 줄 쓴 경우
-      if (reasonList[0].length > 46) {
+      if (reasonList[0] && reasonList[0].length > 46) {
         reasonList[2] = reasonList[0].slice(46);
         reasonList[1] = reasonList[0].slice(23, 46);
         reasonList[0] = reasonList[0].slice(0, 23);
       }
       // 첫 줄만 길게 쓴 경우
-      else if (reasonList[0].length > 23) {
+      else if (reasonList[0] && reasonList[0].length > 23) {
         // 첫 줄 길고 엔터 쓴 경우
         if (reasonList.length > 1) {
           reasonList[2] = reasonList[1];
@@ -119,12 +118,10 @@ export default {
         }
       }
       // 첫 줄 짧고 뒤에 길게
-      else if (reasonList[1].length > 23) {
+      else if (reasonList[1] && reasonList[1].length > 23) {
         reasonList[2] = reasonList[1].slice(23);
         reasonList[1] = reasonList[1].slice(0, 23);
-        console.log('in');
       }
-      console.log(reasonList);
       this.userInput.detailReason = reasonList[0];
       this.userInput.detailReason2 = reasonList[1];
       this.userInput.detailReason3 = reasonList[2];
@@ -155,7 +152,8 @@ export default {
     // 변경 사유 길어질 시 이미지 변경
     if (
       this.userInput.detailReason &&
-      !(this.userInput.detailReason2 && this.userInput.detailReason3)
+      !this.userInput.detailReason2 &&
+      !this.userInput.detailReason3
     ) {
       img.src = require('@/assets/AttendVersion2_Image/출결변경요청서-1.png');
       signature_x = 913;
