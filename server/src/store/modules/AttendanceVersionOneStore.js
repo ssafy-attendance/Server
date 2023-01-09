@@ -1,47 +1,38 @@
-const AttendanceVersionOneStore = {
+const AttendanceVersionOne = {
   namespaced: true,
   state: () => ({
     userInput: {
-      campus: "",
-      class: "",
-      name: "정도형",
-      birth: "",
-      reason: "",
-      attendanceYear: "",
-      attendanceMonth: "",
-      attendanceDay: "",
-      chAttendanceYear: "",
-      chAttendanceMonth: "",
-      chAttendanceDay: "",
-      attendanceHour: "",
-      attendanceMinute: "",
-      chAttendanceHour: "",
-      chAttendanceMinute: "",
-      currentDate: "",
-      detailReason: "",
-      signatureUrl: "",
-    },
+      name: '',
+      class: '',
+      campus: '',
+      birthday: '',
+      absentDate: '',
+      absentMonth: '',
+      absentDay: '',
+      absentTime: 0,
+      absentCategory: 0,
+      absentReason: '',
+      absentDetail: '',
+      absentPlace: '',
+      signature: '',
+      currentYear: '',
+      currentMonth: '',
+      currentDay: '',
+      signatureUrl: '',
+      pictureUrl: ''
+    }
   }),
   getters: {
     getUserInput: (state) => {
       return state.userInput;
-    },
-    getAttendanceYear: (state) => {
-      return state.userInput.attendanceYear;
-    },
-    getAttendanceMonth: (state) => {
-      return state.userInput.attendanceMonth;
-    },
-    getAttendanceDay: (state) => {
-      return state.userInput.attendanceDay;
-    },
+    }
   },
   mutations: {
     SET_USER_INFO(state, userInput) {
       state.userInput = userInput;
-    },
+    }
   },
-  actions: {},
+  actions: {}
 };
 
-export default AttendanceVersionOneStore;
+export default AttendanceVersionOne;

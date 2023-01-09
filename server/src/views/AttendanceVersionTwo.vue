@@ -44,16 +44,10 @@
     <div class="user-input">
       <label for="reasonRadio" class="user-input-label">사유</label>
       <div class="user-input-radio">
-        <span
-          id="reasonRadio"
-          v-for="(item, index) in reasons"
-          :key="item + index"
-        >
+        <span id="reasonRadio" v-for="(item, index) in reasons" :key="item + index">
           <label
             :class="
-              selected == index
-                ? 'radio-label-button-checked'
-                : 'radio-label-button'
+              selected == index ? 'radio-label-button-checked' : 'radio-label-button'
             "
           >
             <input
@@ -123,24 +117,30 @@
         *변경 사유는 세 줄까지만 입력 가능합니다.
       </p>
     </div>
+    <!-- Signature component -->
     <div class="user-input">
       <label for="signature" class="user-input-label">서명</label>
-      <canvas
-        id="signature"
-        width="248"
-        height="110"
-        v-on="{
-          mousemove: move,
-          mouseup: up,
-          mousedown: down,
-          mouseout: out,
-        }"
-      ></canvas>
-      <div class="reset-button-container">
-        <button class="reset-button" @click="reset">다시 그리기</button>
+      <div class="canvas-btn-container">
+        <canvas
+          id="signature"
+          width="166"
+          height="94"
+          v-on="{
+            mousemove: move,
+            mouseup: up,
+            mousedown: down,
+            mouseout: out,
+          }"
+        ></canvas>
+        <div class="reset-button-container">
+          <button class="reset-button" @click="reset">
+            다시 그리기
+            <i class="fa-solid fa-rotate-right"></i>
+          </button>
+        </div>
       </div>
     </div>
-    <div class="button-container">
+    <div class="user-input button-container">
       <button class="submit-button" @click="verifyValidation">만들기</button>
       <button class="submit-button" @click="resetInput">리셋</button>
     </div>
@@ -207,7 +207,7 @@ export default {
       this.baseURL = this.canvas.toDataURL();
     },
     reset() {
-      this.context.clearRect(0, 0, 248, 110);
+      this.context.clearRect(0, 0, 166, 94);
     },
     down: function (event) {
       this.startX = event.offsetX;
@@ -315,10 +315,7 @@ export default {
 
       if (h > 55) {
         let lng = this.userInput.detailReason.length;
-        this.userInput.detailReason = this.userInput.detailReason.substring(
-          0,
-          lng - 1
-        );
+        this.userInput.detailReason = this.userInput.detailReason.substring(0, lng - 1);
         this.checkForm = 1;
       } else {
         this.checkForm = 0;

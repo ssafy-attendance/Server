@@ -1,17 +1,16 @@
 <template>
-  <div>
+  <div id="preview">
     <div class="button-container-preview">
-      <button class="make-button" @click="saveImg()">만들기</button>
+      <button class="make-button" @click="saveImg()">PDF로 저장</button>
     </div>
-
     <canvas id="container" @click="findCoord" />
     <canvas id="pictureContainer" @click="findCoord" />
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import { mapGetters } from 'vuex';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 export default {
   created() {
@@ -22,12 +21,12 @@ export default {
   data() {
     return {
       userInput: {},
-      fontStyleOne: "",
-      fontStyleTwo: "",
+      fontStyleOne: '',
+      fontStyleTwo: '',
       fontStyleTwoCoordinate: {
-        currentYear: [0.38, 0.844],
-        currentMonth: [0.485, 0.844],
-        currentDay: [0.585, 0.844],
+        currentYear: [0.38, 0.835],
+        currentMonth: [0.485, 0.835],
+        currentDay: [0.585, 0.835]
       },
       fontStyleOneCoordinate: {
         name: [0.32, 0.2293],
@@ -35,47 +34,52 @@ export default {
         absentYear: [0.352, 0.273],
         absentMonth: [0.45, 0.273],
         absentDay: [0.53, 0.273],
-        absentReason: [0.296, 0.415],
-        absentDetail: [0.329, 0.513],
-        absentPlace: [0.295, 0.545],
-        signature: [0.295, 0.576],
+        // absentReason: [0.296, 0.415],
+        // absentDetail: [0.329, 0.513],
+        absentPlace: [0.295, 0.5665],
+        signature: [0.295, 0.5975]
       },
+      reasonCoordinate: {},
       canvas2: null,
       absentTime: {
         0: [0.6075, 0.26],
         1: [0.7, 0.26],
-        2: [0.7915, 0.26],
+        2: [0.7915, 0.26]
       },
       absentCategory: {
         0: [0.205, 0.401],
-        1: [0.205, 0.423],
+        1: [0.205, 0.4335]
       },
+      lineCnt: 1
     };
   },
 
   computed: {
-    ...mapGetters("AttendanceVersionOneStore", ["getUserInput"]),
+    ...mapGetters('AttendanceVersionOneStore', ['getUserInput'])
   },
 
   mounted() {
     const finalInnerWidth = window.innerWidth;
     const finalInnerHeight = (window.innerWidth * 4) / 3;
+    // document.querySelector('.preview-pages').style.width =
+    // window.innerWdith * 0.9;
 
-    const canvasFirst = document.querySelector("#container");
-    const contextFirst = canvasFirst.getContext("2d");
+    const canvasFirst = document.querySelector('#container');
+    const contextFirst = canvasFirst.getContext('2d');
     canvasFirst.width = finalInnerWidth;
     canvasFirst.height = finalInnerHeight;
-
     this.fontStyleOne = `${window.innerWidth / 46}px san-serif`;
     this.fontStyleTwo = `bold ${window.innerWidth / 32}px san-serif`;
 
     const imgCheck = new Image();
-    imgCheck.src = require("@/assets/AttendVersion1_Image/체크.png");
+    imgCheck.src = require('@/assets/AttendVersion1_Image/체크.png');
 
     const img = new Image();
     const signatureImage = new Image();
-    img.src = require("@/assets/AttendVersion1_Image/출결이미지-1.png");
+
+    img.src = this.getSrc();
     signatureImage.src = this.userInput.signatureUrl;
+
     img.onload = () => {
       // const imageWidth = canvasFirst.width * 0.77;
       // const imageHeight = canvasFirst.height * 0.535;
@@ -121,6 +125,13 @@ export default {
         );
       }
 
+      for (let key in this.reasonCoordinate) {
+        contextFirst.fillText(
+          this.reasonCoordinate[key][0],
+          this.reasonCoordinate[key][1] * canvasFirst.width,
+          this.reasonCoordinate[key][2] * canvasFirst.height
+        );
+      }
       contextFirst.font = this.fontStyleTwo;
 
       for (let key in this.fontStyleTwoCoordinate) {
@@ -133,14 +144,14 @@ export default {
     };
 
     //두 번째 장
-    const canvasSecond = document.querySelector("#pictureContainer");
+    const canvasSecond = document.querySelector('#pictureContainer');
     this.canvas2 = canvasSecond;
-    const contextSecond = canvasSecond.getContext("2d");
+    const contextSecond = canvasSecond.getContext('2d');
     canvasSecond.width = finalInnerWidth;
     canvasSecond.height = finalInnerHeight;
 
     const canvasImg2 = new Image();
-    canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지-2.png");
+    canvasImg2.src = require('@/assets/AttendVersion1_Image/출결이미지-2.png');
     canvasImg2.onload = () => {
       contextSecond.drawImage(
         canvasImg2,
@@ -154,18 +165,225 @@ export default {
   },
 
   methods: {
+    // findCoord(event) {
+    //   const x = event.offsetX;
+    //   const y = event.offsetY;
+    // },
+    getSrc() {
+      let category = this.userInput.absentCategory;
+      let reason = this.userInput.absentReason.split('\n');
+      let isReasonEnter = reason.length > 1 ? true : false;
+
+      let sp = 23;
+
+      let reasonX = 0.296;
+      let reasonY = category == 0 ? 0.415 : 0.447;
+      let addY = 0.031;
+      let blankY = 0.002;
+
+      if (isReasonEnter) {
+        //공가/사유에 enter가 있으면
+        this.reasonCoordinate.reason1 = [reason[0], reasonX, reasonY];
+        this.reasonCoordinate.reason2 = [reason[1], reasonX, reasonY + addY];
+
+        let detailLine = this.getDetailLine(addY);
+
+        this.lineCnt = detailLine;
+        this.fontStyleOneCoordinate.absentPlace[1] +=
+          (addY + blankY) * detailLine;
+        this.fontStyleOneCoordinate.signature[1] +=
+          (addY + blankY) * detailLine;
+
+        if (detailLine == 3) {
+          this.fontStyleTwoCoordinate.currentYear[1] +=
+            blankY * detailLine + addY;
+          this.fontStyleTwoCoordinate.currentMonth[1] +=
+            blankY * detailLine + addY;
+          this.fontStyleTwoCoordinate.currentDay[1] +=
+            blankY * detailLine + addY;
+        } else {
+          this.fontStyleTwoCoordinate.currentYear[1] += blankY * detailLine;
+          this.fontStyleTwoCoordinate.currentMonth[1] += blankY * detailLine;
+          this.fontStyleTwoCoordinate.currentDay[1] += blankY * detailLine;
+        }
+
+        if (category == 0) {
+          return require(`@/assets/AttendVersion1_Image/공가-2-${detailLine}.png`);
+        } else {
+          return require(`@/assets/AttendVersion1_Image/사유-2-${detailLine}.png`);
+        }
+      } else {
+        //공가/사유에 enter가 없으면
+        if (reason[0].length > sp) {
+          //2줄
+          this.reasonCoordinate.reason1 = [
+            reason[0].substring(0, sp),
+            reasonX,
+            reasonY
+          ];
+          this.reasonCoordinate.reason2 = [
+            reason[0].substring(sp, reason[0].length),
+            reasonX,
+            reasonY + addY
+          ];
+
+          let detailLine = this.getDetailLine(addY);
+
+          this.lineCnt = detailLine;
+          this.fontStyleOneCoordinate.absentPlace[1] +=
+            (addY + blankY) * detailLine;
+          this.fontStyleOneCoordinate.signature[1] +=
+            (addY + blankY) * detailLine;
+
+          this.fontStyleTwoCoordinate.currentYear[1] +=
+            blankY * (detailLine + 1);
+          this.fontStyleTwoCoordinate.currentMonth[1] +=
+            blankY * (detailLine + 1);
+          this.fontStyleTwoCoordinate.currentDay[1] +=
+            blankY * (detailLine + 1);
+
+          if (category == 0) {
+            return require(`@/assets/AttendVersion1_Image/공가-2-${detailLine}.png`);
+          } else {
+            return require(`@/assets/AttendVersion1_Image/사유-2-${detailLine}.png`);
+          }
+        } else {
+          //1줄
+          this.reasonCoordinate.reason1 = [reason[0], reasonX, reasonY];
+
+          let detailLine = this.getDetailLine(0);
+
+          this.lineCnt = detailLine - 1;
+          this.fontStyleOneCoordinate.absentPlace[1] +=
+            (addY + blankY) * (detailLine - 1);
+          this.fontStyleOneCoordinate.signature[1] +=
+            (addY + blankY) * (detailLine - 1);
+
+          this.fontStyleTwoCoordinate.currentYear[1] +=
+            blankY * (detailLine - 1);
+          this.fontStyleTwoCoordinate.currentMonth[1] +=
+            blankY * (detailLine - 1);
+          this.fontStyleTwoCoordinate.currentDay[1] +=
+            blankY * (detailLine - 1);
+
+          return require(`@/assets/AttendVersion1_Image/세부-${detailLine}.png`);
+        }
+      }
+    },
+    getDetailLine(addLine) {
+      let detail = this.userInput.absentDetail.split('\n');
+      let detailEnterSize = detail.length;
+      let isDetailEnter = detailEnterSize > 1 ? true : false;
+
+      let sp = 23;
+
+      let detailX = 0.329;
+      let detailY = 0.535 + addLine;
+      let addY = 0.031;
+
+      if (isDetailEnter) {
+        //세부내용에 enter가 있으면
+        if (detail[0].length > sp) {
+          //첫째줄에 enter가 없이 개행이 있으면
+          this.reasonCoordinate.detail1 = [
+            detail[0].substring(0, sp),
+            detailX,
+            detailY
+          ];
+          this.reasonCoordinate.detail2 = [
+            detail[0].substring(sp, detail[0].length),
+            detailX,
+            detailY + addY
+          ];
+          this.reasonCoordinate.detail3 = [
+            detail[1],
+            detailX,
+            detailY + 2 * addY
+          ];
+
+          return 3;
+        } else if (detail[1].length > sp) {
+          //둘째줄에 enter가 없이 개행이 있으면
+          this.reasonCoordinate.detail1 = [detail[0], detailX, detailY];
+          this.reasonCoordinate.detail2 = [
+            detail[1].substring(0, sp),
+            detailX,
+            detailY + addY
+          ];
+          this.reasonCoordinate.detail3 = [
+            detail[1].substring(sp, detail[1].length),
+            detailX,
+            detailY + 2 * addY
+          ];
+
+          return 2;
+        } else {
+          //글자 초과없이 enter만 있으면
+          detail.forEach((value, index) => {
+            this.reasonCoordinate[`detail${index + 1}`] = [
+              value,
+              detailX,
+              detailY + addY * index
+            ];
+          });
+
+          return detail.length;
+        }
+      } else {
+        //세부내용에 enter가 없으면
+        if (detail[0].length > 46) {
+          //3줄
+          this.reasonCoordinate.detail1 = [
+            detail[0].substring(0, sp),
+            detailX,
+            detailY
+          ];
+          this.reasonCoordinate.detail2 = [
+            detail[0].substring(sp, 46),
+            detailX,
+            detailY + addY
+          ];
+          this.reasonCoordinate.detail3 = [
+            detail[0].substring(46, detail[0].length),
+            detailX,
+            detailY + 2 * addY
+          ];
+
+          return 3;
+        } else if (detail[0].length > sp) {
+          //2줄
+          this.reasonCoordinate.detail1 = [
+            detail[0].substring(0, sp),
+            detailX,
+            detailY
+          ];
+          this.reasonCoordinate.detail2 = [
+            detail[0].substring(sp, detail[0].length),
+            detailX,
+            detailY + addY
+          ];
+
+          return 2;
+        } else {
+          //1줄
+          this.reasonCoordinate.detail1 = [detail, detailX, detailY];
+
+          return 1;
+        }
+      }
+    },
     initCanvas() {
-      const canvas = document.querySelector("#pictureContainer");
+      const canvas = document.querySelector('#pictureContainer');
       this.canvas = canvas;
-      const context = canvas.getContext("2d");
+      const context = canvas.getContext('2d');
       this.context = context;
-      canvas.width = window.innerWidth;
-      canvas.height = (window.innerWidth * 4) / 3;
+      // canvas.width = window.innerWidth;
+      // canvas.height = (window.innerWidth * 4) / 3;
       this.canvasWidth = canvas.width;
       this.canvasHeight = canvas.height;
 
       const canvasImg2 = new Image();
-      canvasImg2.src = require("@/assets/AttendVersion1_Image/출결이미지3.svg");
+      canvasImg2.src = require('@/assets/AttendVersion1_Image/출결이미지3.svg');
 
       canvasImg2.onload = function () {
         context.drawImage(canvasImg2, 0, 0, canvas.width, canvas.height);
@@ -215,14 +433,14 @@ export default {
       };
     },
     saveImg() {
-      console.log("saveImg");
-      html2canvas(document.querySelector("#container")).then((canvas) => {
-        var imgData = canvas.toDataURL("image/png", 1.0);
+      console.log('saveImg');
+      html2canvas(document.querySelector('#container')).then((canvas) => {
+        var imgData = canvas.toDataURL('image/png', 1.0);
         var imgWidth = 210;
         var imgHeight = 297;
-        var doc = new jsPDF("p", "mm", "a4");
+        var doc = new jsPDF('p', 'mm', 'a4');
 
-        doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+        doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
         doc.addPage();
         doc.addImage(
           this.canvas2.toDataURL("image/png", 1.0),
@@ -236,20 +454,20 @@ export default {
           this.userInput.absentYear +
             this.userInput.absentMonth +
             this.userInput.absentDay +
-            "_출결확인서_" +
+            '_출결확인서_' +
             this.userInput.name +
-            "[" +
+            '[' +
             this.userInput.campus +
             this.userInput.class +
-            "반]" +
-            ".pdf"
+            '반]' +
+            '.pdf'
         );
       });
     },
     uploadImg() {
       this.initCanvas();
 
-      const image = this.$refs["image"].files[0];
+      const image = this.$refs['image'].files[0];
       const url = URL.createObjectURL(image);
 
       this.image = url;
@@ -291,26 +509,12 @@ export default {
         );
       };
 
-      this.$emit("uploadPicture", [this.image]);
-    },
-  },
+      this.$emit('uploadPicture', [this.image]);
+    }
+  }
 };
 </script>
 
 <style scoped>
-.button-container-preview {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 0 1.5rem 0;
-}
-
-.make-button {
-  background: var(--preview-button-background);
-  width: var(--preview-button-width);
-  height: var(--preview-button-height);
-  color: var(--preview-button-color);
-  border-radius: var(--preview-button-radius);
-  border: 0;
-}
+@import '@/assets/css/preview.css';
 </style>
