@@ -442,12 +442,11 @@ export default {
       };
     },
     saveImg() {
-      console.log('saveImg');
       html2canvas(document.querySelector('#container')).then((canvas) => {
         var imgData = canvas.toDataURL('image/png', 1.0);
         var imgWidth = 210;
         var imgHeight = 297;
-        var doc = new jsPDF('p', 'mm', 'a4');
+        var doc = new jsPDF('p', 'mm', 'a4', true);
 
         doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
         doc.addPage();
