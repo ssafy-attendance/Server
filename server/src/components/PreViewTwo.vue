@@ -77,7 +77,7 @@ export default {
         var imgWidth = 210;
         var imgHeight = (canvas.height * imgWidth) / canvas.width;
         console.log(imgData);
-        var doc = new jsPDF('p', 'mm', 'a4');
+        var doc = new jsPDF('p', 'mm', 'a4', true);
 
         doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
 
