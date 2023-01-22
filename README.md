@@ -67,3 +67,4 @@ SSAFY 기간동안 출결과 관련해서 결석을 소명하거나 상태를 �
 | [KIMJUSUNG1011](https://github.com/KIMJUSUNG1011) | dlrtls12345@naver.com | SSAFY 8기 대전캠퍼스 1학기 7반 / 2학기 3반 |
 | [tsFile](https://github.com/tsFile) | sxott94@gmail.com | SSAFY 8기 대전캠퍼스 1학기 7반 / 2학기 1반 |
 | [DHelloper](https://github.com/DHelloper) | wjdehgud5769@naver.com | SSAFY 8기 대전캠퍼스 1학기 7반 / 2학기 3반 |
+| qkrsj1 | qkrsj1@gmail.co.kr  | Design Director |
