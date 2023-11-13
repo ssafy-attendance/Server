@@ -341,5 +341,15 @@ export default {
 </script>
 
 <style scoped>
+#reasonRadio {
+  cursor: pointer;
+
+  /* 추가하여 텍스트 선택효과 방지 */
+  user-select: none;
+}
+
+.reset-button {
+  user-select: none;
+}
 @import '@/assets/css/canvas.css';
 </style>

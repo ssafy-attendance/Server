@@ -31,12 +31,12 @@ export default {
         campus: [400, 375],
         birth: [780, 446],
         class: [665, 375],
-        attendanceYear: [440, 903],
+        attendanceYear: [435, 903],
         attendanceMonth: [593, 903],
         attendanceDay: [711, 903],
         attendanceHour: [846, 903],
         attendanceMinute: [979, 903],
-        chAttendanceYear: [440, 957],
+        chAttendanceYear: [435, 957],
         chAttendanceMonth: [593, 957],
         chAttendanceDay: [711, 957],
         chAttendanceHour: [846, 957],
@@ -138,8 +138,8 @@ export default {
     imgCheck.src = require('@/assets/AttendVersion2_Image/체크.png');
     canvasFirst.width = 1654 * 0.7;
     canvasFirst.height = 2339 * 0.7;
-    this.fontStyleOne = `25px san-serif`;
-    this.fontStyleTwo = `bold 37px serif`;
+    this.fontStyleOne = `bold 1.7rem serif`;
+    this.fontStyleTwo = `bold 2.33rem serif`;
     const img = new Image();
 
     const signatureImage = new Image();

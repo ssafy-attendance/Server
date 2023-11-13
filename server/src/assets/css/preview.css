@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'BareunBatangBold';
-    src: url('@/assets/fonts/Bareun_Batang/BareunBatangOTFB.otf');
-}
-
 .button-container-preview {
     display: flex;
     justify-content: center;
