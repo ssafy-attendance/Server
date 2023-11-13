@@ -89,6 +89,7 @@ export default {
             this.userInput.name +
             '[' +
             this.userInput.campus +
+            '_' +
             this.userInput.class +
             '반]' +
             '.pdf'

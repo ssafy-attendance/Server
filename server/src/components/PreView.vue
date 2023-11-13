@@ -37,8 +37,8 @@ export default {
         absentDay: [0.53, 0.273],
         // absentReason: [0.296, 0.415],
         // absentDetail: [0.329, 0.513],
-        absentPlace: [0.295, 0.5665],
-        signature: [0.295, 0.5975]
+        absentPlace: [0.295, 0.5655],
+        signature: [0.295, 0.5965]
       },
       reasonCoordinate: {},
       canvas2: null,
@@ -69,11 +69,11 @@ export default {
     const contextFirst = canvasFirst.getContext('2d');
     canvasFirst.width = finalInnerWidth;
     canvasFirst.height = finalInnerHeight;
-    this.fontStyleOne = `${window.innerWidth / 46}px san-serif`;
-    this.fontStyleTwo = `bold ${window.innerWidth / 32}px san-serif`;
+    this.fontStyleOne = `bold ${window.innerWidth / 46}px serif`;
+    this.fontStyleTwo = `bold ${window.innerWidth / 32}px serif`;
 
     const imgCheck = new Image();
-    imgCheck.src = require('@/assets/AttendVersion1_Image/체크.png');
+    imgCheck.src = require('@/assets/AttendVersion2_Image/체크.png');
 
     const img = new Image();
     const signatureImage = new Image();
@@ -178,9 +178,12 @@ export default {
       let isReasonEnter = reason.length > 1 ? true : false;
 
       let sp = 23;
+      let sp2 = 17; // 사유 시 첫 라인 제한 글자
 
+      let reasonXR = 0.5035; // 사유 시 첫 글자 x좌표
+      let reasonXSecond = 0.235; // 사유 시 두 번째라인 x좌표
       let reasonX = 0.296;
-      let reasonY = category == 0 ? 0.415 : 0.447;
+      let reasonY = category == 0 ? 0.415 : 0.446;
       let addY = 0.031;
       let blankY = 0.002;
 
@@ -211,71 +214,129 @@ export default {
         }
 
         if (category == 0) {
-          return require(`@/assets/AttendVersion1_Image/공가-2-${detailLine}.png`);
+          return require(`@/assets/AttendRefactVer1_Image/공가-2-${detailLine}.png`);
         } else {
-          return require(`@/assets/AttendVersion1_Image/사유-2-${detailLine}.png`);
+          return require(`@/assets/AttendRefactVer1_Image/사유-2-${detailLine}.png`);
         }
       } else {
-        //공가/사유에 enter가 없으면
-        if (reason[0].length > sp) {
-          //2줄
-          this.reasonCoordinate.reason1 = [
-            reason[0].substring(0, sp),
-            reasonX,
-            reasonY
-          ];
-          this.reasonCoordinate.reason2 = [
-            reason[0].substring(sp, reason[0].length),
-            reasonX,
-            reasonY + addY
-          ];
+        if (category == 0) {
+          // 공가 인 경우
+          if (reason[0].length > sp) {
+            //2줄
+            this.reasonCoordinate.reason1 = [
+              reason[0].substring(0, sp),
+              reasonX,
+              reasonY
+            ];
+            this.reasonCoordinate.reason2 = [
+              reason[0].substring(sp, reason[0].length),
+              reasonXSecond,
+              reasonY + addY
+            ];
 
-          let detailLine = this.getDetailLine(addY);
+            let detailLine = this.getDetailLine(addY);
 
-          this.lineCnt = detailLine;
-          this.fontStyleOneCoordinate.absentPlace[1] +=
-            (addY + blankY) * detailLine;
-          this.fontStyleOneCoordinate.signature[1] +=
-            (addY + blankY) * detailLine;
+            this.lineCnt = detailLine;
+            this.fontStyleOneCoordinate.absentPlace[1] +=
+              (addY + blankY) * detailLine;
+            this.fontStyleOneCoordinate.signature[1] +=
+              (addY + blankY) * detailLine;
 
-          if (detailLine == 3) {
+            if (detailLine == 3) {
+              this.fontStyleTwoCoordinate.currentYear[1] +=
+                blankY * detailLine + addY;
+              this.fontStyleTwoCoordinate.currentMonth[1] +=
+                blankY * detailLine + addY;
+              this.fontStyleTwoCoordinate.currentDay[1] +=
+                blankY * detailLine + addY;
+            } else {
+              this.fontStyleTwoCoordinate.currentYear[1] += blankY * detailLine;
+              this.fontStyleTwoCoordinate.currentMonth[1] +=
+                blankY * detailLine;
+              this.fontStyleTwoCoordinate.currentDay[1] += blankY * detailLine;
+            }
+
+            return require(`@/assets/AttendRefactVer1_Image/공가-2-${detailLine}.png`);
+          } else {
+            // 공가가 한 줄 인 경우
+            this.reasonCoordinate.reason1 = [reason[0], reasonX, reasonY];
+
+            let detailLine = this.getDetailLine(0);
+
+            this.lineCnt = detailLine - 1;
+            this.fontStyleOneCoordinate.absentPlace[1] +=
+              (addY + blankY) * (detailLine - 1);
+            this.fontStyleOneCoordinate.signature[1] +=
+              (addY + blankY) * (detailLine - 1);
+
             this.fontStyleTwoCoordinate.currentYear[1] +=
-              blankY * detailLine + addY;
+              blankY * (detailLine - 1);
             this.fontStyleTwoCoordinate.currentMonth[1] +=
-              blankY * detailLine + addY;
+              blankY * (detailLine - 1);
             this.fontStyleTwoCoordinate.currentDay[1] +=
-              blankY * detailLine + addY;
-          } else {
-            this.fontStyleTwoCoordinate.currentYear[1] += blankY * detailLine;
-            this.fontStyleTwoCoordinate.currentMonth[1] += blankY * detailLine;
-            this.fontStyleTwoCoordinate.currentDay[1] += blankY * detailLine;
-          }
+              blankY * (detailLine - 1);
 
-          if (category == 0) {
-            return require(`@/assets/AttendVersion1_Image/공가-2-${detailLine}.png`);
-          } else {
-            return require(`@/assets/AttendVersion1_Image/사유-2-${detailLine}.png`);
+            return require(`@/assets/AttendRefactVer1_Image/세부-${detailLine}.png`);
           }
         } else {
-          //1줄
-          this.reasonCoordinate.reason1 = [reason[0], reasonX, reasonY];
+          // 사유 인 경우
+          if (reason[0].length > sp2) {
+            // 사유가 2줄 인 경우
+            this.reasonCoordinate.reason1 = [
+              reason[0].substring(0, sp2),
+              reasonXR,
+              reasonY
+            ];
+            this.reasonCoordinate.reason2 = [
+              reason[0].substring(sp2, reason[0].length),
+              reasonXSecond,
+              reasonY + addY
+            ];
 
-          let detailLine = this.getDetailLine(0);
+            let detailLine = this.getDetailLine(addY);
 
-          this.lineCnt = detailLine - 1;
-          this.fontStyleOneCoordinate.absentPlace[1] +=
-            (addY + blankY) * (detailLine - 1);
-          this.fontStyleOneCoordinate.signature[1] +=
-            (addY + blankY) * (detailLine - 1);
+            this.lineCnt = detailLine;
+            this.fontStyleOneCoordinate.absentPlace[1] +=
+              (addY + blankY) * detailLine;
+            this.fontStyleOneCoordinate.signature[1] +=
+              (addY + blankY) * detailLine;
 
-          this.fontStyleTwoCoordinate.currentYear[1] +=
-            blankY * (detailLine - 1);
-          this.fontStyleTwoCoordinate.currentMonth[1] +=
-            blankY * (detailLine - 1);
-          this.fontStyleTwoCoordinate.currentDay[1] +=
-            blankY * (detailLine - 1);
+            if (detailLine == 3) {
+              this.fontStyleTwoCoordinate.currentYear[1] +=
+                blankY * detailLine + addY;
+              this.fontStyleTwoCoordinate.currentMonth[1] +=
+                blankY * detailLine + addY;
+              this.fontStyleTwoCoordinate.currentDay[1] +=
+                blankY * detailLine + addY;
+            } else {
+              this.fontStyleTwoCoordinate.currentYear[1] += blankY * detailLine;
+              this.fontStyleTwoCoordinate.currentMonth[1] +=
+                blankY * detailLine;
+              this.fontStyleTwoCoordinate.currentDay[1] += blankY * detailLine;
+            }
 
-          return require(`@/assets/AttendVersion1_Image/세부-${detailLine}.png`);
+            return require(`@/assets/AttendRefactVer1_Image/사유-2-${detailLine}.png`);
+          } else {
+            // 사유가 한 줄 인 경우
+            this.reasonCoordinate.reason1 = [reason[0], reasonXR, reasonY];
+
+            let detailLine = this.getDetailLine(0);
+
+            this.lineCnt = detailLine - 1;
+            this.fontStyleOneCoordinate.absentPlace[1] +=
+              (addY + blankY) * (detailLine - 1);
+            this.fontStyleOneCoordinate.signature[1] +=
+              (addY + blankY) * (detailLine - 1);
+
+            this.fontStyleTwoCoordinate.currentYear[1] +=
+              blankY * (detailLine - 1);
+            this.fontStyleTwoCoordinate.currentMonth[1] +=
+              blankY * (detailLine - 1);
+            this.fontStyleTwoCoordinate.currentDay[1] +=
+              blankY * (detailLine - 1);
+
+            return require(`@/assets/AttendRefactVer1_Image/세부-${detailLine}.png`);
+          }
         }
       }
     },
@@ -287,7 +348,7 @@ export default {
       let sp = 23;
 
       let detailX = 0.329;
-      let detailY = 0.535 + addLine;
+      let detailY = 0.533 + addLine;
       let addY = 0.031;
 
       if (isDetailEnter) {
@@ -466,6 +527,7 @@ export default {
             this.userInput.name +
             '[' +
             this.userInput.campus +
+            '_' +
             this.userInput.class +
             '반]' +
             '.pdf'
