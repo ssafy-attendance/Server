@@ -181,7 +181,7 @@ export default {
       let sp2 = 17; // 사유 시 첫 라인 제한 글자
 
       let reasonXR = 0.5035; // 사유 시 첫 글자 x좌표
-      let reasonXSecond = 0.235; // 사유 시 두 번째라인 x좌표
+      let reasonXSecond = 0.204; // 사유 시 두 번째라인 x좌표
       let reasonX = 0.296;
       let reasonY = category == 0 ? 0.415 : 0.446;
       let addY = 0.031;
