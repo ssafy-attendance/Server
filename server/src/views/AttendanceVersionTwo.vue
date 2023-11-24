@@ -38,7 +38,7 @@
         id="birthday"
         class="user-input-value"
         v-model="userInput.birth"
-        placeholder="YY.MM.DD"
+        placeholder="YYMMDD"
       />
     </div>
     <div class="user-input">
