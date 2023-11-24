@@ -39,6 +39,7 @@
         class="user-input-value"
         v-model="userInput.birth"
         placeholder="YYMMDD"
+        maxlength="6"
       />
     </div>
     <div class="user-input">
